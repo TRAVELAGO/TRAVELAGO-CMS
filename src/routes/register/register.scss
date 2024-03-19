@@ -1,6 +1,9 @@
 .register {
   height: 100vh;
   background-color: #b6b3eb;
+  background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+    url("https://www.desktopbackground.org/download/2000x1500/2014/05/29/770082_page-4-ultra-hd-4k-city-wallpapers-desktop-backgrounds-hd_3840x2400_h.jpg")
+      center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,9 +52,10 @@
     }
     .right {
       flex: 1;
-      background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
-        url("https://vn-live-01.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg")
-          center;
+      background: 
+      // -gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+        url("https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D")
+        center;
       background-size: cover;
       padding: 50px;
       display: flex;

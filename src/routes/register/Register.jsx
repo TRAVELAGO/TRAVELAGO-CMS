@@ -69,7 +69,7 @@ const Register = () => {
         </div>
         <div className="right">
           <h1>Hello World.</h1>
-          <p>This is my new project</p>
+          <p>Let find your dream place</p>
           <span>Do you have an account?</span>
           <Link to="/login">
             <button>Login</button>
