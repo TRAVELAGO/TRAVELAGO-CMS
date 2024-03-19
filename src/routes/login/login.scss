@@ -1,6 +1,9 @@
 .login {
   height: 100vh;
   background-color: #b6b3eb;
+  background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+    url("https://www.desktopbackground.org/download/2000x1500/2014/05/29/770082_page-4-ultra-hd-4k-city-wallpapers-desktop-backgrounds-hd_3840x2400_h.jpg")
+      center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,9 +16,10 @@
 
     .left {
       flex: 1;
-      background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
-        url("https://vn-live-01.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg")
-          center;
+      background:
+      // linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+        url("https://i.pinimg.com/originals/6f/af/25/6faf2533f516ece41230ee3c852d0cab.jpg")
+        center;
       background-size: cover;
       padding: 50px;
       display: flex;
