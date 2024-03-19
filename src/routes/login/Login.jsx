@@ -7,7 +7,6 @@ import { loginFailure } from "../../redux/userRedux";
 
 const Login = () => {
   const { currentUser, error } = useSelector((state) => state.user);
-  console.log(currentUser);
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -42,7 +41,7 @@ const Login = () => {
       <div className="card">
         <div className="left">
           <h1>Hello World.</h1>
-          <p>This is my new project</p>
+          <p>Find your hotel right now</p>
           <span>Don't you have an account?</span>
           <Link to="/register">
             <button>Register</button>
