@@ -1,9 +1,21 @@
 import { useState } from "react";
 import "./searchBar.scss";
+import { useNavigate } from "react-router-dom";
 
 const types = ["buy", "rent"];
 
 function SearchBar() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+    const location = formData.get("location");
+    const queryParams = new URLSearchParams();
+    queryParams.append("location", location);
+    navigate(`/list?${queryParams.toString()}`);
+  };
   const [query, setQuery] = useState({
     type: "buy",
     location: "",
@@ -28,7 +40,7 @@ function SearchBar() {
           </button>
         ))}
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input type="text" name="location" placeholder="City Location" />
         <input
           type="number"
