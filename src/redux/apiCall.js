@@ -11,6 +11,8 @@ export const login = async (dispatch, user) => {
     dispatch(loginStart());
     try {
         const res = await makeRequest.post("auth/login", user);
+        const accessToken = res.data.accessToken;
+        makeRequest.defaults.headers.common = { 'Authorization': `bearer ${accessToken}` }
         dispatch(loginSuccess(res.data));
         document.cookie = `session=${JSON.stringify(res.data)}; path=/;`;
     } catch (error) {
