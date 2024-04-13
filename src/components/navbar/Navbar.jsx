@@ -1,11 +1,15 @@
 import { useState } from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/apiCall";
 function Navbar() {
   const [open, setOpen] = useState(false);
-
-  const user = false;
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.currentUser);
+  const handleLogout = () => {
+    logout(dispatch);
+  };
   return (
     <nav>
       <div className="left">
@@ -29,6 +33,11 @@ function Navbar() {
             <Link to="/profile" className="profile">
               <div className="notification">3</div>
               <span>Profile</span>
+            </Link>
+            <Link to="/login">
+              <span className="logout" onClick={handleLogout}>
+                Log out
+              </span>
             </Link>
           </div>
         ) : (

@@ -8,7 +8,7 @@ import { loginFailure } from "../../redux/userRedux";
 const Login = () => {
   const { currentUser, error } = useSelector((state) => state.user);
   const [inputs, setInputs] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const navigate = useNavigate();
@@ -19,14 +19,14 @@ const Login = () => {
   };
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (inputs.username && inputs.password) {
+    if (inputs.email && inputs.password) {
       try {
         await login(dispatch, inputs);
       } catch (error) {
         console.log(error);
       }
     } else {
-      dispatch(loginFailure("Please enter a username and password"));
+      dispatch(loginFailure("Please enter a email and password"));
     }
   };
 
@@ -52,9 +52,9 @@ const Login = () => {
           <form>
             <input
               type="text"
-              placeholder="Username"
+              placeholder="Email"
               onChange={handleChange}
-              name="username"
+              name="email"
             />
             <input
               type="password"

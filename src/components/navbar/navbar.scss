@@ -5,6 +5,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 100;
 
   a {
     transition: all 0.4s ease;
@@ -81,7 +82,14 @@ nav {
           display: none;
         }
       }
-
+      .logout {
+        padding: 12px 24px;
+        background-color: rgb(255, 128, 0);
+        color: #fcf5f3;
+        cursor: pointer;
+        border: none;
+        position: relative;
+      }
       .profile {
         padding: 12px 24px;
         background-color: #fece51;

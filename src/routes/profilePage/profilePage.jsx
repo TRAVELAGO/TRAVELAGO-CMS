@@ -1,8 +1,17 @@
+import { makeRequest } from "../../axios";
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import "./profilePage.scss";
 
 function ProfilePage() {
+  const handleCreateRoom = async () => {
+    const res = await makeRequest.post("room-types", {
+      bedType1: "giường to",
+      numberBedType1: 3,
+      guestNumber: 7,
+      description: "hihi",
+    });
+  };
   return (
     <div className="profilePage">
       <div className="details">
@@ -28,7 +37,7 @@ function ProfilePage() {
           </div>
           <div className="title">
             <h1>My List</h1>
-            <button>Create New Post</button>
+            <button onClick={handleCreateRoom}>Create New Room</button>
           </div>
           <List />
           <div className="title">
@@ -39,7 +48,7 @@ function ProfilePage() {
       </div>
       <div className="chatContainer">
         <div className="wrapper">
-          <Chat/>
+          <Chat />
         </div>
       </div>
     </div>

@@ -2,17 +2,17 @@ import { useState } from "react";
 import "./register.scss";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { makeRequest } from "../../axios";
 
 const Register = () => {
   const [inputs, setInputs] = useState({
-    username: "",
     email: "",
     password: "",
-    name: "",
-    profilePic:
-      "https://nhadepso.com/wp-content/uploads/2023/03/tron-bo-nhung-hinh-nen-dien-thoai-galaxy-dep-chat-luong-nhat_2.jpg",
-    coverPic:
-      "https://nhadepso.com/wp-content/uploads/2023/03/tron-bo-nhung-hinh-nen-dien-thoai-galaxy-dep-chat-luong-nhat_2.jpg",
+    passwordConfirm: "",
+    phoneNumber: "",
+    fullName: "",
+    role: "USER",
+    hotelName: "test",
   });
   const [err, setErr] = useState(null);
   const navigate = useNavigate();
@@ -22,12 +22,13 @@ const Register = () => {
   };
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (inputs.username && inputs.email && inputs.name && inputs.password) {
+    if (inputs.email && inputs.fullName && inputs.password) {
       try {
-        await axios.post("http://localhost:8800/api/auth/register", inputs);
+        const res = await makeRequest.post("auth/register", inputs);
+        console.log(res);
         navigate("/login");
       } catch (error) {
-        setErr(error.response.data);
+        setErr(error.response.data.message[0]);
       }
     } else {
       setErr("Please fill all fields!");
@@ -40,10 +41,10 @@ const Register = () => {
           <h1>Register</h1>
           <form>
             <input
-              type="text"
-              placeholder="Username"
+              type="email"
+              placeholder="Email"
               onChange={handleChange}
-              name="username"
+              name="email"
             />
             <input
               type="password"
@@ -52,16 +53,24 @@ const Register = () => {
               name="password"
             />
             <input
-              type="email"
-              placeholder="Email"
+              type="password"
+              placeholder="PasswordConfirm"
               onChange={handleChange}
-              name="email"
+              name="passwordConfirm"
             />
+
             <input
               type="text"
-              placeholder="Name"
+              placeholder="FullName"
               onChange={handleChange}
-              name="name"
+              name="fullName"
+            />
+
+            <input
+              type="text"
+              placeholder="Phone Number"
+              onChange={handleChange}
+              name="phoneNumber"
             />
             {err && <p>{err}</p>}
             <button onClick={handleRegister}>Register</button>
