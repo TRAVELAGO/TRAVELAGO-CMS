@@ -2,29 +2,39 @@ import "./singlePage.scss";
 import Slider from "../../components/slider/Slider";
 import Map from "../../components/map/Map";
 import { singlePostData, userData } from "../../lib/dummydata";
-
+import { useLoaderData } from "react-router-dom";
+import DOMPurify from "dompurify";
 function SinglePage() {
+  const room = useLoaderData();
+  console.log(room);
   return (
     <div className="singlePage">
       <div className="details">
         <div className="wrapper">
-          <Slider images={singlePostData.images} />
+          <Slider images={room.images} />
           <div className="info">
             <div className="top">
               <div className="post">
-                <h1>{singlePostData.title}</h1>
+                <h1>{room.name}</h1>
                 <div className="address">
                   <img src="/pin.png" alt="" />
-                  <span>{singlePostData.address}</span>
+                  <span>{room.hotel.address}</span>
                 </div>
-                <div className="price">$ {singlePostData.price}</div>
+                <div className="price">$ {room.price}</div>
               </div>
               <div className="user">
                 <img src={userData.img} alt="" />
                 <span>{userData.name}</span>
               </div>
             </div>
-            <div className="bottom">{singlePostData.description}</div>
+            <div
+              className="bottom"
+              style={{ lineHeight: "1.5" }}
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(room.description),
+              }}
+            ></div>
+            <button className="booking">Booking now</button>
           </div>
         </div>
       </div>
@@ -58,15 +68,17 @@ function SinglePage() {
           <div className="sizes">
             <div className="size">
               <img src="/size.png" alt="" />
-              <span>80 sqft</span>
+              <span>80 mét vuông</span>
             </div>
             <div className="size">
               <img src="/bed.png" alt="" />
-              <span>2 beds</span>
+              <span>
+                {room.roomType.numberBedType1} {room.roomType.bedType1}
+              </span>
             </div>
             <div className="size">
               <img src="/bath.png" alt="" />
-              <span>1 bathroom</span>
+              <span>1 phòng tắm</span>
             </div>
           </div>
           <p className="title">Nearby Places</p>

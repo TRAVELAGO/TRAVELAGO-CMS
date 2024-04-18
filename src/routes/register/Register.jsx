@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./register.scss";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { makeRequest } from "../../axios";
+import { makeRequest } from "../../utils/axios";
 
 const Register = () => {
   const [inputs, setInputs] = useState({

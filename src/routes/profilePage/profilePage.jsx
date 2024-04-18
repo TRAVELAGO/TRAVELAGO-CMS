@@ -1,16 +1,16 @@
-import { makeRequest } from "../../axios";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
+import { makeRequest } from "../../utils/axios";
 import "./profilePage.scss";
 
 function ProfilePage() {
+  const navigate = useNavigate();
+  const room = useLoaderData();
+  console.log(room);
+  const data = [room, room];
   const handleCreateRoom = async () => {
-    const res = await makeRequest.post("room-types", {
-      bedType1: "giường to",
-      numberBedType1: 3,
-      guestNumber: 7,
-      description: "hihi",
-    });
+    navigate("/newPost");
   };
   return (
     <div className="profilePage">
@@ -39,7 +39,7 @@ function ProfilePage() {
             <h1>My List</h1>
             <button onClick={handleCreateRoom}>Create New Room</button>
           </div>
-          <List />
+          <List data={data} />
           <div className="title">
             <h1>Saved List</h1>
           </div>
