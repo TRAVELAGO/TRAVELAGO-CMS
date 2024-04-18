@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-import { fetchLogin } from "../../redux/apiCall";
+import { fetchForgotPassword } from "../../redux/apiCall";
 import { PATH_URL, passwordRegex } from "../../utils/const/common";
-import "./login.scss";
+import "./forgotPassword.scss";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -18,9 +18,13 @@ const validationSchema = Yup.object().shape({
     .min(8, "Password minimum 8 characters")
     .matches(passwordRegex, "Password minimum 8 characters")
     .required("Password required!"),
+  passwordConfirm: Yup.string()
+    .label("Confirm password")
+    .oneOf([Yup.ref("password")], "Password's not match")
+    .required("Confirm password required!"),
 });
 
-const Login = () => {
+const ForgotPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
@@ -30,13 +34,14 @@ const Login = () => {
     initialValues: {
       email: "",
       password: "",
+      passwordConfirm: "",
     },
     validationSchema,
     onSubmit: async (values) => {
       setError("");
       try {
-        await fetchLogin(dispatch, values);
-        navigate(PATH_URL.HOME);
+        await fetchForgotPassword(dispatch, values);
+        navigate(PATH_URL.LOGIN);
       } catch (error) {
         setError(error.message);
       }
@@ -50,18 +55,10 @@ const Login = () => {
   }, [currentUser]);
 
   return (
-    <div className="login">
+    <div className="fotgot-password">
       <div className="card">
         <div className="left">
-          <h1>Hello World.</h1>
-          <p>Find your hotel right now</p>
-          <span>{`Don't you have an account?`}</span>
-          <Link to={PATH_URL.REGISTER}>
-            <button>Register</button>
-          </Link>
-        </div>
-        <div className="right">
-          <h1>Login</h1>
+          <h1>Forgot Password</h1>
           <form onSubmit={formik.handleSubmit}>
             {error && <p className="error-message">{error}</p>}
             <label htmlFor="email">
@@ -77,6 +74,7 @@ const Login = () => {
                 <p className="error-message">{formik.errors?.email}</p>
               )}
             </label>
+
             <label htmlFor="password">
               <input
                 id="password"
@@ -90,13 +88,36 @@ const Login = () => {
                 <p className="error-message">{formik.errors?.password}</p>
               )}
             </label>
-            <Link to={PATH_URL.FORGOT_PASSWORD}>Forgot your password?</Link>
-            <button type="submit">Login</button>
+            <label htmlFor="passwordConfirm">
+              <input
+                id="passwordConfirm"
+                name="passwordConfirm"
+                type="password"
+                placeholder="Password"
+                value={formik.values.passwordConfirm}
+                onChange={formik.handleChange}
+              />
+              {formik.errors?.passwordConfirm &&
+                formik.touched.passwordConfirm && (
+                  <p className="error-message">
+                    {formik.errors?.passwordConfirm}
+                  </p>
+                )}
+            </label>
+            <button type="submit">Submit</button>
           </form>
+        </div>
+        <div className="right">
+          <h1>Hello World.</h1>
+          <p>Let find your dream place</p>
+          <span>Do you have an account?</span>
+          <Link to={PATH_URL.LOGIN}>
+            <button>Login</button>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default ForgotPassword;

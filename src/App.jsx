@@ -1,17 +1,19 @@
-import HomePage from "./routes/homePage/homePage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ListPage from "./routes/listPage/listPage";
-import Layout from "./routes/layout/layout";
-import SinglePage from "./routes/singlePage/singlePage";
-import ProfilePage from "./routes/profilePage/profilePage";
-import Login from "./routes/login/Login";
-import Register from "./routes/register/Register";
-import NewPostPage from "./routes/newPostPage/NewPostPage";
+
 import {
   listPageLoader,
   profilePageLoader,
   singlePageLoader,
 } from "./lib/loader";
+import ForgotPassword from "./routes/forgotPassword/ForgotPassword";
+import HomePage from "./routes/homePage/homePage";
+import Layout from "./routes/layout/layout";
+import ListPage from "./routes/listPage/listPage";
+import Login from "./routes/login/Login";
+import NewPostPage from "./routes/newPostPage/NewPostPage";
+import ProfilePage from "./routes/profilePage/profilePage";
+import Register from "./routes/register/Register";
+import SinglePage from "./routes/singlePage/singlePage";
 
 function App() {
   const router = createBrowserRouter([
@@ -51,6 +53,10 @@ function App() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/forgot-password",
+      element: <ForgotPassword />,
     },
   ]);
 
