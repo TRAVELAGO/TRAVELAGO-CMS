@@ -1,4 +1,4 @@
-import { makeRequest } from "../axios";
+import { makeRequest } from "../utils/axios";
 import {
     loginFailure,
     loginStart,

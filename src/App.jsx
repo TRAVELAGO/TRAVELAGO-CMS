@@ -6,6 +6,12 @@ import SinglePage from "./routes/singlePage/singlePage";
 import ProfilePage from "./routes/profilePage/profilePage";
 import Login from "./routes/login/Login";
 import Register from "./routes/register/Register";
+import NewPostPage from "./routes/newPostPage/NewPostPage";
+import {
+  listPageLoader,
+  profilePageLoader,
+  singlePageLoader,
+} from "./lib/loader";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,14 +26,21 @@ function App() {
         {
           path: "/list",
           element: <ListPage />,
+          loader: listPageLoader,
         },
         {
           path: "/:id",
           element: <SinglePage />,
+          loader: singlePageLoader,
         },
         {
           path: "/profile",
           element: <ProfilePage />,
+          loader: profilePageLoader,
+        },
+        {
+          path: "/newPost",
+          element: <NewPostPage />,
         },
       ],
     },
