@@ -1,15 +1,22 @@
 import { useState } from "react";
-import "./navbar.scss";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/apiCall";
+import { Link, useNavigate } from "react-router-dom";
+
+import { fetchLogout } from "../../redux/apiCall";
+import { PATH_URL } from "../../utils/const/common";
+import "./navbar.scss";
+
 function Navbar() {
-  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
+  const [open, setOpen] = useState(false);
+
   const handleLogout = () => {
-    logout(dispatch);
+    fetchLogout(dispatch);
+    navigate(PATH_URL.LOGIN);
   };
+
   return (
     <nav>
       <div className="left">
@@ -34,10 +41,8 @@ function Navbar() {
               <div className="notification">3</div>
               <span>Profile</span>
             </Link>
-            <Link to="/login">
-              <span className="logout" onClick={handleLogout}>
-                Log out
-              </span>
+            <Link to="" className="logout" onClick={handleLogout}>
+              Log out
             </Link>
           </div>
         ) : (
