@@ -7,14 +7,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  .card {
+
+  & .card {
     display: flex;
     background-color: #fff;
     border-radius: 10px;
     min-height: 600px;
     overflow: hidden;
 
-    .left {
+    & .left {
       flex: 1;
       padding: 50px;
       display: flex;
@@ -22,25 +23,31 @@
       gap: 50px;
       justify-content: center;
 
-      h1 {
+      & h1 {
         color: #555;
       }
-      form {
+
+      & form {
         display: flex;
         flex-direction: column;
         gap: 30px;
-        input {
+
+        & input {
+          width: 100%;
           border: none;
           border-bottom: 1px solid lightgray;
           padding: 20px 10px;
         }
-        p {
+        & .error-message {
+          margin-top: 4px;
+          font-size: 14px;
           color: red;
-          font-weight: bold;
         }
-        button {
+
+        & button {
           width: 50%;
           padding: 10px;
+          margin: auto;
           border: none;
           background-color: rebeccapurple;
           color: #fff;
@@ -50,7 +57,8 @@
         }
       }
     }
-    .right {
+
+    & .right {
       flex: 1;
       background: 
       // -gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
@@ -63,23 +71,25 @@
       gap: 30px;
       color: #fff;
 
-      h1 {
+      & h1 {
         font-size: 100px;
         line-height: 100px;
       }
 
-      span {
+      & span {
         font-size: 14px;
       }
-      button {
+
+      & button {
         width: 50%;
         padding: 10px;
+        margin: auto;
         border: none;
-        cursor: pointer;
         background-color: #fff;
         color: rebeccapurple;
         border-radius: 5px;
         font-weight: bold;
+        cursor: pointer;
       }
     }
   }
