@@ -32,10 +32,6 @@ nav {
       align-items: center;
       gap: 10px;
 
-      & img {
-        width: 28px;
-      }
-
       & span {
         @include md {
           display: none;

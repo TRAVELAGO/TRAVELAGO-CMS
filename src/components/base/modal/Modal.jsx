@@ -2,7 +2,7 @@ import { Transition } from "@headlessui/react";
 import React, { useRef } from "react";
 import ReactDOM from "react-dom";
 
-import { useClickOutside } from "../../hook/useClickOutside";
+import { useClickOutside } from "../../../hook/useClickOutside";
 import "./modal.scss";
 
 const Modal = ({ isOpen, onClose, children }) => {
