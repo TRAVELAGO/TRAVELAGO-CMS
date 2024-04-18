@@ -1,8 +1,17 @@
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
+import { makeRequest } from "../../utils/axios";
 import "./profilePage.scss";
 
 function ProfilePage() {
+  const navigate = useNavigate();
+  const room = useLoaderData();
+  console.log(room);
+  const data = [room, room];
+  const handleCreateRoom = async () => {
+    navigate("/newPost");
+  };
   return (
     <div className="profilePage">
       <div className="details">
@@ -28,9 +37,9 @@ function ProfilePage() {
           </div>
           <div className="title">
             <h1>My List</h1>
-            <button>Create New Post</button>
+            <button onClick={handleCreateRoom}>Create New Room</button>
           </div>
-          <List />
+          <List data={data} />
           <div className="title">
             <h1>Saved List</h1>
           </div>
@@ -39,7 +48,7 @@ function ProfilePage() {
       </div>
       <div className="chatContainer">
         <div className="wrapper">
-          <Chat/>
+          <Chat />
         </div>
       </div>
     </div>
