@@ -1,5 +1,7 @@
+import { Transition } from "@headlessui/react";
 import React, { useRef } from "react";
 import ReactDOM from "react-dom";
+
 import { useClickOutside } from "../../hook/useClickOutside";
 import "./modal.scss";
 
@@ -12,18 +14,29 @@ const Modal = ({ isOpen, onClose, children }) => {
     isOpen &&
     ReactDOM.createPortal(
       <React.Fragment>
-        <div className="modal-overlay" />
-        <div
-          className="modal-wrapper"
-          aria-modal
-          aria-hidden
-          tabIndex={-1}
-          role="dialog"
+        <Transition
+          show={isOpen}
+          enter="transition-opacity duration-30000"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition-opacity duration-30000"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
         >
-          <div ref={modalRef} className="modal">
-            {children}
+          <div className="modal-overlay" />
+
+          <div
+            className="modal-wrapper"
+            aria-modal
+            aria-hidden
+            tabIndex={-1}
+            role="dialog"
+          >
+            <div ref={modalRef} className="modal">
+              {children}
+            </div>
           </div>
-        </div>
+        </Transition>
       </React.Fragment>,
       document.body
     )
