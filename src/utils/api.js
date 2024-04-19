@@ -38,7 +38,7 @@ export const getRoomById = async (id) => {
     return res
 }
 export const getRoomByFilter = async (filter) => {
-    const res = await makeRequest.get("rooms/" + id);
+    const res = await makeRequest.get("rooms");
     return res
 }
 export const getRoomByHotelId = async (id) => {
@@ -81,5 +81,37 @@ export const updateRoomType = async (id, data) => {
 }
 export const deleteRoomType = async (id) => {
     const res = await makeRequest.delete("room-types/" + id);
+    return res
+}
+
+
+// booking
+
+export const getBookingById = async (id) => {
+    const res = await makeRequest.get("bookings/" + id);
+    return res
+}
+export const getBooking = async () => {
+    const res = await makeRequest.get("bookings");
+    return res
+}
+export const updateBooking = async (id, data) => {
+    const res = await makeRequest.patch("bookings/" + id, data);
+    return res
+}
+export const createBookingOnline = async (data) => {
+    const res = await makeRequest.post("bookings/online", data);
+    return res
+}
+export const createBookingDirectly = async (data) => {
+    const res = await makeRequest.post("bookings/directly", data);
+    return res
+}
+export const updateBookingCheckIn = async (id) => {
+    const res = await makeRequest.patch("bookings/" + id + "/check-in");
+    return res
+}
+export const updateBookingCancel = async (id) => {
+    const res = await makeRequest.patch("bookings/" + id + "/cancel");
     return res
 }

@@ -1,24 +1,24 @@
-import "./singlePage.scss";
+import "./bookingDetail.scss";
 import Slider from "../../components/slider/Slider";
 import Map from "../../components/map/Map";
 import { singlePostData, userData } from "../../lib/dummydata";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { DateRange } from "react-date-range";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
-import { createBookingOnline } from "../../utils/api";
+import { createBookingOnline, getBookingById } from "../../utils/api";
 import { useSelector } from "react-redux";
 import { makeRequest } from "../../utils/axios";
 
-function SinglePage() {
+function BookingDetail() {
   const { currentUser, error } = useSelector((state) => state.user);
   const role = currentUser.user.role;
+  const location = useLocation();
   const navigate = useNavigate();
-  const room = useLoaderData();
-  console.log(room);
+
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
     {
@@ -27,62 +27,81 @@ function SinglePage() {
       key: "selection",
     },
   ]);
-  const handleBooking = async () => {
-    try {
-      console.log(format(date[0].startDate, "yyyy-MM-dd"));
-      const newBooking = {
-        dateFrom: format(date[0].startDate, "yyyy-MM-dd"),
-        dateTo: format(date[0].endDate, "yyyy-MM-dd"),
-        roomId: room.id,
-      };
-      const accessToken = currentUser.accessToken;
-      makeRequest.defaults.headers.common = {
-        Authorization: `bearer ${accessToken}`,
-      };
-      const res = await createBookingOnline(newBooking);
-      console.log(res.data);
-      const paymentUrl = res.data.paymentUrl;
-      if (paymentUrl) {
-        window.open(paymentUrl, "_blank"); // Mở một cửa sổ mới với URL được trả về từ API
+  const [booking, setBooking] = useState();
+
+  const bookingId = location.pathname.split("/")[2];
+  console.log(bookingId);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const accessToken = currentUser.accessToken;
+        makeRequest.defaults.headers.common = {
+          Authorization: `bearer ${accessToken}`,
+        };
+        const res = await getBookingById(bookingId);
+        setBooking(res.data);
+      } catch (error) {
+        console.log(error);
       }
-      navigate("/profile");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+    getData();
+  }, [bookingId]);
+  let status = 0;
+  switch (booking?.status) {
+    case 0:
+      status = "Chưa thanh toán";
+      break;
+    case 3:
+      status = "Đã thanh toán";
+      break;
+    case 4:
+      status = "Đã hủy";
+      break;
+    default:
+      break;
+  }
   return (
-    <div className="singlePage">
+    <div className="bookingDetail">
       <div className="details">
         <div className="wrapper">
-          <Slider images={room.images} />
           <div className="info">
             <div className="top">
               <div className="post">
-                <h1>{room.name}</h1>
+                <h2>ID: {booking?.id}</h2>
                 <div className="address">
                   <img src="/pin.png" alt="" />
-                  <span>{room.hotel.address}</span>
+                  <span>Hotel: {booking?.room.hotel.address}</span>
                 </div>
-                <div className="price">$ {room.price}</div>
+                <div className="address">
+                  <img src="/bed.png" alt="" />
+                  <span>
+                    Room: {booking?.room.roomType.numberBedType1}{" "}
+                    {booking?.room.roomType.bedType1}
+                  </span>
+                </div>
+                <div className="price">
+                  Tổng thanh toán: {booking?.room.price} vnd
+                </div>
+                <div className="price">Trạng thái: {status}</div>
               </div>
               <div className="user">
                 <img src={userData.img} alt="" />
                 <span>{userData.name}</span>
               </div>
             </div>
-            <div
+            {/* <div
               className="bottom"
               style={{ lineHeight: "1.5" }}
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(room.description),
               }}
-            ></div>
+            ></div> */}
             {role === "USER" && (
               <div className="booking">
-                <h3>Chọn ngày đặt phòng:</h3>
-                <span onClick={() => setOpenDate(!openDate)} className="date">
-                  {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
-                    date[0].endDate,
+                <h3>Ngày đã chọn đặt phòng:</h3>
+                <span className="date">
+                  {`${format(booking?.dateFrom, "MM/dd/yyyy")} to ${format(
+                    booking?.dateTo,
                     "MM/dd/yyyy"
                   )}`}
                   {openDate && (
@@ -96,12 +115,22 @@ function SinglePage() {
                     />
                   )}
                 </span>
-                <button className="booking-btn" onClick={handleBooking}>
-                  Booking now
-                </button>
+                {booking?.status === 0 ? (
+                  <button className="booking-btn">Thanh toán</button>
+                ) : booking?.status === 3 ? (
+                  <button className="booking-btn success">
+                    Đã thanh toán thành công
+                  </button>
+                ) : (
+                  booking?.status === 4 && (
+                    <button className="booking-btn cancel">Đã hủy</button>
+                  )
+                )}
               </div>
             )}
           </div>
+          <h3>Preview Phòng</h3>
+          {booking && <Slider images={booking?.room?.images} />}
         </div>
       </div>
       <div className="features">
@@ -139,7 +168,8 @@ function SinglePage() {
             <div className="size">
               <img src="/bed.png" alt="" />
               <span>
-                {room.roomType.numberBedType1} {room.roomType.bedType1}
+                {booking?.room.roomType.numberBedType1}{" "}
+                {booking?.room.roomType.bedType1}
               </span>
             </div>
             <div className="size">
@@ -191,4 +221,4 @@ function SinglePage() {
   );
 }
 
-export default SinglePage;
+export default BookingDetail;
