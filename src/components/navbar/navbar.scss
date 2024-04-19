@@ -7,7 +7,7 @@ nav {
   align-items: center;
   z-index: 100;
 
-  a {
+  & a {
     transition: all 0.4s ease;
 
     @include sm {
@@ -19,24 +19,20 @@ nav {
     }
   }
 
-  .left {
+  & .left {
     flex: 3;
     display: flex;
     align-items: center;
     gap: 50px;
 
-    .logo {
+    & .logo {
       font-weight: bold;
       font-size: 20px;
       display: flex;
       align-items: center;
       gap: 10px;
 
-      img {
-        width: 28px;
-      }
-
-      span {
+      & span {
         @include md {
           display: none;
         }
@@ -47,7 +43,8 @@ nav {
       }
     }
   }
-  .right {
+
+  & .right {
     flex: 2;
     display: flex;
     align-items: center;
@@ -59,17 +56,17 @@ nav {
       background-color: transparent;
     }
 
-    a {
+    & a {
       padding: 12px 24px;
       margin: 20px;
     }
 
-    .user {
+    & .user {
       display: flex;
       align-items: center;
       font-weight: bold;
 
-      img {
+      & img {
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -77,12 +74,13 @@ nav {
         margin-right: 20px;
       }
 
-      span {
+      & span {
         @include sm {
           display: none;
         }
       }
-      .logout {
+
+      & .logout {
         padding: 12px 24px;
         background-color: rgb(255, 128, 0);
         color: #fcf5f3;
@@ -90,14 +88,15 @@ nav {
         border: none;
         position: relative;
       }
-      .profile {
+
+      & .profile {
         padding: 12px 24px;
         background-color: #fece51;
         cursor: pointer;
         border: none;
         position: relative;
 
-        .notification {
+        & .notification {
           position: absolute;
           top: -8px;
           right: -8px;
@@ -113,7 +112,7 @@ nav {
       }
     }
 
-    .register-btn {
+    & .register-btn {
       background-color: #fece51;
       height: 50px;
       width: 100px;
@@ -124,11 +123,11 @@ nav {
       justify-content: center;
     }
 
-    .menuIcon {
+    & .menuIcon {
       display: none;
       z-index: 999;
 
-      img {
+      & img {
         width: 36px;
         height: 36px;
         cursor: pointer;
@@ -139,7 +138,7 @@ nav {
       }
     }
 
-    .menu {
+    & .menu {
       position: absolute;
       top: 0;
       right: -50%;

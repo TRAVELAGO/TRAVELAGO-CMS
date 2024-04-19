@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import "./card.scss";
 
 function Card({ item }) {
+  if (!item) return <></>;
   console.log(item);
   return (
     <div className="card">
       <Link to={`/${item.id}`} className="imageContainer">
-        <img src={item.images[0]?.url} alt="" />
+        {item.images?.length && <img src={item.images[0]?.url} alt="" />}
       </Link>
       <div className="textContainer">
         <h2 className="title">
@@ -14,7 +15,7 @@ function Card({ item }) {
         </h2>
         <p className="address">
           <img src="/pin.png" alt="" />
-          <span>{item.hotel.address}</span>
+          <span>{item.hotel?.address}</span>
         </p>
         <p className="price">$ {item.price}</p>
         <div className="bottom">
