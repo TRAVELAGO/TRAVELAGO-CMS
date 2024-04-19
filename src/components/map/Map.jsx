@@ -1,7 +1,8 @@
-import { MapContainer, TileLayer } from "react-leaflet";
-import "./map.scss";
 import "leaflet/dist/leaflet.css";
-import Pin from "../pin/Pin";
+import { MapContainer, Marker, TileLayer, Popup, Tooltip } from "react-leaflet";
+import { Link } from "react-router-dom";
+
+import "./map.scss";
 
 function Map({ items }) {
   return (
@@ -16,7 +17,28 @@ function Map({ items }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {items.map((item) => (
-        <Pin item={item} key={item.id} />
+        <Marker position={[item.latitude, item.longitude]} key={item.id}>
+          <Popup>
+            <div className="popupContainer">
+              <img src={item.img} alt="" />
+              <div className="textContainer">
+                <Link to={`/${item.id}`}>{item.title}</Link>
+                <span>{item.bedroom} bedroom</span>
+                <b>$ {item.price}</b>
+              </div>
+            </div>
+          </Popup>
+          <Tooltip>
+            <div className="popupContainer">
+              <img src={item.img} alt="" />
+              <div className="textContainer">
+                <Link to={`/${item.id}`}>{item.title}</Link>
+                <span>{item.bedroom} bedroom</span>
+                <b>$ {item.price}</b>
+              </div>
+            </div>
+          </Tooltip>
+        </Marker>
       ))}
     </MapContainer>
   );

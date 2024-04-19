@@ -5,6 +5,8 @@ import {
   profilePageLoader,
   singlePageLoader,
 } from "./lib/loader";
+import BookingDetail from "./routes/bookingDetail/BookingDetail";
+import PaymentPage from "./routes/paymentPage/PaymentPage";
 import ForgotPassword from "./routes/forgotPassword/ForgotPassword";
 import HomePage from "./routes/homePage/homePage";
 import Layout from "./routes/layout/layout";
@@ -28,12 +30,16 @@ function App() {
         {
           path: "/list",
           element: <ListPage />,
-          loader: listPageLoader,
+          // loader: listPageLoader,
         },
         {
           path: "/:id",
           element: <SinglePage />,
           loader: singlePageLoader,
+        },
+        {
+          path: "/bookingDetail/:id",
+          element: <BookingDetail />,
         },
         {
           path: "/profile",
@@ -53,6 +59,10 @@ function App() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/return_url",
+      element: <PaymentPage />,
     },
     {
       path: "/forgot-password",
