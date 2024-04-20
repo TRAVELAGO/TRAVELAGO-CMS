@@ -1,22 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import {
-  listPageLoader,
-  profilePageLoader,
-  singlePageLoader,
-} from "./lib/loader";
+import BlankLayout from "./components/layout/blankLayout/BlankLayout";
+import Layout from "./components/layout/userLayout/Layout";
+import { singlePageLoader } from "./lib/loader";
 import BookingDetail from "./routes/bookingDetail/BookingDetail";
-import PaymentPage from "./routes/paymentPage/PaymentPage";
 import ForgotPassword from "./routes/forgotPassword/ForgotPassword";
 import HomePage from "./routes/homePage/homePage";
-import Layout from "./components/layout/userLayout/Layout";
-import BlankLayout from "./components/layout/blankLayout/BlankLayout";
-import ListPage from "./routes/listPage/listPage";
+import HotelList from "./routes/hotelList/HotelList";
 import Login from "./routes/login/Login";
-import NewPostPage from "./routes/newPostPage/NewPostPage";
-import ProfilePage from "./routes/profilePage/profilePage";
+import MyBooking from "./routes/myBooking/MyBooking";
+import HotelCreate from "./routes/hotelCreate/HotelCreate";
+import PaymentPage from "./routes/paymentPage/PaymentPage";
+import Profile from "./routes/profile/Profile";
 import Register from "./routes/register/Register";
-import SinglePage from "./routes/singlePage/singlePage";
+import HotelDetail from "./routes/hotelDetail/HotelDetail";
 
 function App() {
   const router = createBrowserRouter([
@@ -29,27 +26,52 @@ function App() {
           element: <HomePage />,
         },
         {
-          path: "/list",
-          element: <ListPage />,
-          // loader: listPageLoader,
+          path: "/about",
+          element: <HomePage />,
         },
         {
-          path: "/:id",
-          element: <SinglePage />,
-          loader: singlePageLoader,
+          path: "/contact",
+          element: <HomePage />,
         },
         {
-          path: "/bookingDetail/:id",
+          path: "/booking/:id",
           element: <BookingDetail />,
         },
         {
-          path: "/profile",
-          element: <ProfilePage />,
-          loader: profilePageLoader,
+          path: "/hotel",
+          children: [
+            {
+              path: "/hotel",
+              element: <HotelList />,
+            },
+            {
+              path: "/hotel/:id",
+              element: <HotelDetail />,
+              loader: singlePageLoader,
+            },
+            {
+              path: "/hotel/new",
+              element: <HotelCreate />,
+            },
+          ],
         },
         {
-          path: "/newPost",
-          element: <NewPostPage />,
+          path: "/profile",
+          children: [
+            {
+              path: "/profile",
+              element: <Profile />,
+            },
+            {
+              path: "/profile/update",
+              element: <Profile />,
+              // element: <ProfileUpdate />,
+            },
+            {
+              path: "/profile/booking",
+              element: <MyBooking />,
+            },
+          ],
         },
       ],
     },

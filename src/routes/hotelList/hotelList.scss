@@ -1,14 +1,14 @@
 @import "../../responsive.scss";
 
-.listPage {
+.hotelList {
   display: flex;
   height: 100%;
 
-  .listContainer {
+  & .listContainer {
     flex: 3;
     height: 100%;
 
-    .wrapper{
+    & .wrapper {
       height: 100%;
       padding-right: 50px;
       display: flex;
@@ -18,12 +18,13 @@
       padding-bottom: 50px;
     }
   }
-  .mapContainer {
+
+  & .mapContainer {
     flex: 2;
     height: 100%;
     background-color: #fcf5f3;
 
-    @include md{
+    @include md {
       display: none;
     }
   }

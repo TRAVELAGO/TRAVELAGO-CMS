@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const userSlice = createSlice({
     name: "user",
     initialState: {
+        token: null,
         currentUser: null,
         isFetching: false,
         error: "",
@@ -14,7 +15,8 @@ const userSlice = createSlice({
         },
         loginSuccess: (state, action) => {
             state.isFetching = false;
-            state.currentUser = action.payload;
+            state.token = action.payload.token;
+            state.currentUser = action.payload.user;
             state.error = "";
         },
         loginFailure: (state, action) => {
@@ -27,7 +29,8 @@ const userSlice = createSlice({
         },
         registerSuccess: (state, action) => {
             state.isFetching = false;
-            state.currentUser = action.payload;
+            state.token = action.payload.token;
+            state.currentUser = action.payload.user;
             state.error = "";
         },
         registerFailure: (state, action) => {
@@ -36,11 +39,13 @@ const userSlice = createSlice({
         },
         updateSuccess: (state, action) => {
             state.isFetching = true;
-            state.currentUser = action.payload
+            state.token = action.payload.token;
+            state.currentUser = action.payload.user;
             state.error = "";
         },
         logoutSuccess: (state) => {
             state.isFetching = false;
+            state.token = null;
             state.currentUser = null;
             state.error = "";
         },

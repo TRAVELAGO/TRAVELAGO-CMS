@@ -1,6 +1,6 @@
 @import "../../responsive.scss";
 
-.singlePage {
+.hotelDetail {
   display: flex;
   height: 100%;
 
@@ -9,7 +9,7 @@
     overflow: scroll;
   }
 
-  .details {
+  & .details {
     flex: 3;
     height: 100%;
     overflow-y: scroll;
@@ -20,7 +20,7 @@
       margin-bottom: 50px;
     }
 
-    .wrapper {
+    & .wrapper {
       padding-right: 50px;
 
       @include lg {
@@ -30,9 +30,10 @@
         padding-right: 0px;
       }
 
-      .info {
+      & .info {
         margin-top: 50px;
-        .top {
+
+        & .top {
           display: flex;
           justify-content: space-between;
 
@@ -41,26 +42,29 @@
             gap: 20px;
           }
 
-          .post {
+          & .post {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            h1 {
+
+            & h1 {
               font-weight: 400;
             }
-            .address {
+
+            & .address {
               display: flex;
               gap: 5px;
               align-items: center;
               color: #888;
               font-size: 14px;
 
-              img {
+              & img {
                 width: 16px;
                 height: 16px;
               }
             }
-            .price {
+
+            & .price {
               padding: 5px;
               background-color: rgba(254, 205, 81, 0.438);
               border-radius: 5px;
@@ -69,7 +73,8 @@
               font-weight: 300;
             }
           }
-          .user {
+
+          & .user {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -84,7 +89,7 @@
               padding: 20px 50px;
             }
 
-            img {
+            & img {
               width: 50px;
               height: 50px;
               border-radius: 50%;
@@ -92,12 +97,14 @@
             }
           }
         }
-        .bottom {
+
+        & .bottom {
           margin-top: 50px;
           color: #555;
           line-height: 20px;
         }
-        .booking {
+
+        & .booking {
           margin-top: 20px;
           border-top: 1px solid #000;
           display: flex;
@@ -106,13 +113,15 @@
           gap: 30px;
           position: relative;
           padding-top: 20px;
-          .date {
+
+          & .date {
             border: 1px solid #000;
             border-radius: 5px;
             padding: 20px;
             position: relative;
             cursor: pointer;
-            .date-calendar {
+
+            & .date-calendar {
               position: absolute;
               bottom: 70px;
               left: -50px;
@@ -120,7 +129,8 @@
             }
           }
         }
-        .booking-btn {
+
+        & .booking-btn {
           height: 60px;
           width: 150px;
           border-radius: 5px;
@@ -134,7 +144,8 @@
       }
     }
   }
-  .features {
+
+  & .features {
     flex: 2;
     background-color: #fcf5f3;
     height: 100%;
@@ -146,7 +157,7 @@
       margin-bottom: 50px;
     }
 
-    .wrapper {
+    & .wrapper {
       padding: 0px 20px;
       display: flex;
       flex-direction: column;
@@ -156,37 +167,38 @@
         padding: 20px;
       }
 
-      img {
+      & img {
         width: 24px;
         height: 24px;
       }
 
-      .title {
+      & .title {
         font-weight: bold;
         font-size: 18px;
         margin-bottom: 10px;
       }
 
-      .feature {
+      & .feature {
         display: flex;
         align-items: center;
         gap: 10px;
 
-        img {
+        & img {
           background-color: rgba(254, 205, 81, 0.209);
         }
 
-        .featureText {
-          span {
+        & .featureText {
+          & span {
             font-weight: bold;
           }
-          p {
+
+          & p {
             font-size: 14px;
           }
         }
       }
 
-      .listVertical {
+      & .listVertical {
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -194,7 +206,8 @@
         background-color: white;
         border-radius: 10px;
       }
-      .listHorizontal {
+
+      & .listHorizontal {
         display: flex;
         justify-content: space-between;
         padding: 20px 10px;
@@ -202,7 +215,7 @@
         border-radius: 10px;
       }
 
-      .sizes {
+      & .sizes {
         display: flex;
         justify-content: space-between;
 
@@ -210,7 +223,7 @@
           font-size: 12px;
         }
 
-        .size {
+        & .size {
           display: flex;
           align-items: center;
           gap: 10px;
@@ -220,16 +233,16 @@
         }
       }
 
-      .mapContainer {
+      & .mapContainer {
         width: 100%;
         height: 200px;
       }
 
-      .buttons {
+      & .buttons {
         display: flex;
         justify-content: space-between;
 
-        button {
+        & button {
           padding: 20px;
           display: flex;
           align-items: center;
@@ -239,7 +252,7 @@
           border-radius: 5px;
           cursor: pointer;
 
-          img {
+          & img {
             width: 16px;
             height: 16px;
           }
