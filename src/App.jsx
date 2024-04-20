@@ -4,7 +4,8 @@ import { profilePageLoader, singlePageLoader } from "./lib/loader";
 import BookingDetail from "./routes/bookingDetail/BookingDetail";
 import ForgotPassword from "./routes/forgotPassword/ForgotPassword";
 import HomePage from "./routes/homePage/homePage";
-import Layout from "./routes/layout/layout";
+import Layout from "./components/layout/userLayout/Layout";
+import BlankLayout from "./components/layout/blankLayout/BlankLayout";
 import ListPage from "./routes/listPage/listPage";
 import Login from "./routes/login/Login";
 import NewPostPage from "./routes/newPostPage/NewPostPage";
@@ -49,20 +50,26 @@ function App() {
       ],
     },
     {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/register",
-      element: <Register />,
-    },
-    {
-      path: "/return_url",
-      element: <PaymentPage />,
-    },
-    {
-      path: "/forgot-password",
-      element: <ForgotPassword />,
+      path: "/",
+      element: <BlankLayout />,
+      children: [
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/return_url",
+          element: <PaymentPage />,
+        },
+        {
+          path: "/forgot-password",
+          element: <ForgotPassword />,
+        },
+      ],
     },
   ]);
 
