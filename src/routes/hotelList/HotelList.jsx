@@ -1,15 +1,16 @@
-import { listData } from "../../lib/dummydata";
-import "./listPage.scss";
-import Filter from "../../components/filter/Filter";
-import Card from "../../components/card/Card";
-import Map from "../../components/map/Map";
-import { useLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getRoomByFilter, getRoomById } from "../../utils/api";
 
-function ListPage() {
+import Card from "../../components/card/Card";
+import Filter from "../../components/filter/Filter";
+import Map from "../../components/map/Map";
+import { listData } from "../../lib/dummydata";
+import { getRoomByFilter } from "../../utils/api";
+import "./hotelList.scss";
+
+function HotelList() {
   const [room, setRoom] = useState([]);
   console.log(room);
+
   useEffect(() => {
     const getRoomData = async () => {
       // const res = await getRoomById("65ba0bb2-c2a3-45d8-a283-320b4c5d130c");
@@ -19,9 +20,11 @@ function ListPage() {
     };
     getRoomData();
   }, []);
+
   const data = room;
+
   return (
-    <div className="listPage">
+    <div className="hotelList">
       <div className="listContainer">
         <div className="wrapper">
           <Filter />
@@ -37,4 +40,4 @@ function ListPage() {
   );
 }
 
-export default ListPage;
+export default HotelList;

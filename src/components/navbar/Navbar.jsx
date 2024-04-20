@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useRoutes } from "react-router-dom";
 
 import { fetchLogout } from "../../redux/apiCall";
 import { PATH_URL } from "../../utils/const/common";
 import "./navbar.scss";
+import Avatar from "../base/avatar/Avatar";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -20,26 +21,24 @@ function Navbar() {
   return (
     <nav>
       <div className="left">
-        <a href="/" className="logo">
+        <Link to={PATH_URL.HOME} className="logo">
           <img src="/logo.png" alt="" width={100} height={100} />
           <span>Travelago</span>
-        </a>
-        <a href="/">Home</a>
-        <a href="/">About</a>
-        <a href="/">Contact</a>
-        <a href="/list">Agents</a>
+        </Link>
+        <Link to={PATH_URL.HOME}>Home</Link>
+        <Link to={PATH_URL.ABOUT}>About</Link>
+        <Link to={PATH_URL.CONTACT}>Contact</Link>
+        <Link to={PATH_URL.HOTEL}>Agents</Link>
       </div>
       <div className="right">
         {user ? (
           <div className="user">
-            <img
-              src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt=""
-            />
-            <span>Zo Zo</span>
-            <Link to="/profile" className="profile">
-              <div className="notification">3</div>
-              <span>Profile</span>
+            <Link to={PATH_URL.PROFILE}>
+              <Avatar url={user.avatar} name={user.fullName} noti={3} />
+              <span>{user.fullName}</span>
+            </Link>
+            <Link to={PATH_URL.PROFILE_BOOKING} className="my-booking">
+              <span>My Booking</span>
             </Link>
             <Link to="" className="logout" onClick={handleLogout}>
               Log out
@@ -47,10 +46,10 @@ function Navbar() {
           </div>
         ) : (
           <>
-            <a href="/login">Sign in</a>
-            <a href="/register" className="register-btn">
+            <Link to={PATH_URL.LOGIN}>Sign in</Link>
+            <Link to={PATH_URL.REGISTER} className="register-btn">
               Sign up
-            </a>
+            </Link>
           </>
         )}
         <div className="menuIcon">
@@ -61,12 +60,12 @@ function Navbar() {
           />
         </div>
         <div className={open ? "menu active" : "menu"}>
-          <a href="/">Home</a>
-          <a href="/">About</a>
-          <a href="/">Contact</a>
-          <a href="/">Agents</a>
-          <a href="/">Sign in</a>
-          <a href="/">Sign up</a>
+          <Link to={PATH_URL.HOME}>Home</Link>
+          <Link to={PATH_URL.ABOUT}>About</Link>
+          <Link to={PATH_URL.CONTACT}>Contact</Link>
+          <Link to={PATH_URL.HOTEL}>Agents</Link>
+          <Link to={PATH_URL.LOGIN}>Sign in</Link>
+          <Link to={PATH_URL.REGISTER}>Sign up</Link>
         </div>
       </div>
     </nav>

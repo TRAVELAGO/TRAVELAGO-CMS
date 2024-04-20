@@ -1,16 +1,18 @@
 import { useContext, useState } from "react";
-import "./profileUpdatePage.scss";
+import { useNavigate } from "react-router-dom";
+
+import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
-import { useNavigate } from "react-router-dom";
-import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import { PATH_URL } from "../../utils/const/common";
+import "./profileUpdate.scss";
 
-function ProfileUpdatePage() {
+function ProfileUpdate() {
+  const navigate = useNavigate();
+
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [avatar, setAvatar] = useState([]);
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ function ProfileUpdatePage() {
         avatar: avatar[0],
       });
       updateUser(res.data);
-      navigate("/profile");
+      navigate(PATH_URL.PROFILE);
     } catch (err) {
       console.log(err);
       setError(err.response.data.message);
@@ -85,4 +87,4 @@ function ProfileUpdatePage() {
   );
 }
 
-export default ProfileUpdatePage;
+export default ProfileUpdate;
