@@ -93,7 +93,7 @@ const ForgotPassword = () => {
                 id="passwordConfirm"
                 name="passwordConfirm"
                 type="password"
-                placeholder="Password"
+                placeholder="Confirm password"
                 value={formik.values.passwordConfirm}
                 onChange={formik.handleChange}
               />

@@ -1,6 +1,8 @@
 import { useState } from "react";
-import "./searchBar.scss";
 import { useNavigate } from "react-router-dom";
+
+import { PATH_URL } from "../../utils/const/common";
+import "./searchBar.scss";
 
 const types = ["buy", "rent"];
 
@@ -14,8 +16,9 @@ function SearchBar() {
     const location = formData.get("location");
     const queryParams = new URLSearchParams();
     queryParams.append("location", location);
-    navigate(`/list?${queryParams.toString()}`);
+    navigate(`${PATH_URL.HOTEL}?${queryParams.toString()}`);
   };
+
   const [query, setQuery] = useState({
     type: "buy",
     location: "",

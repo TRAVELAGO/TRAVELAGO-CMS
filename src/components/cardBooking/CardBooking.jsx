@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./cardBooking.scss";
 import { format } from "date-fns";
 import { updateBookingCancel } from "../../utils/api";
+import { PATH_URL } from "../../utils/const/common";
 
 function CardBooking({ item, setBooking }) {
   console.log(item);
@@ -10,17 +11,24 @@ function CardBooking({ item, setBooking }) {
     updateBookingCancel(item.id);
     // setBooking((prev) => prev.filter((i) => i.id !== item.id));
   };
+
   const handleUpdate = () => {
-    navigate("/bookingDetail/" + item.id);
+    navigate(PATH_URL.HOTEL_DETAIL.replace(":id", item.room.id));
   };
+
   return (
     <div className="card">
-      <Link to={`/${item.room.id}`} className="imageContainer">
+      <Link
+        to={PATH_URL.HOTEL_DETAIL.replace(":id", item.room.id)}
+        className="imageContainer"
+      >
         <img src={item.room.images[0].url} alt="" />
       </Link>
       <div className="textContainer">
         <h2 className="title">
-          <Link to={`/${item.room.id}`}>{`HOTEL ${item.room.hotel.name}`}</Link>
+          <Link
+            to={PATH_URL.HOTEL_DETAIL.replace(":id", item.room.id)}
+          >{`HOTEL ${item.room.hotel.name}`}</Link>
         </h2>
         <p className="address">
           <img src="/pin.png" alt="" />

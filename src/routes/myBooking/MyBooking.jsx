@@ -1,28 +1,26 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLoaderData, useNavigate } from "react-router-dom";
+
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
-import { makeRequest } from "../../utils/axios";
-import "./profilePage.scss";
-import { useSelector } from "react-redux";
 import ListBooking from "../../components/listBooking/ListBooking";
-import { useEffect, useState } from "react";
 import { getBooking } from "../../utils/api";
+import { PATH_URL, ROLE } from "../../utils/const/common";
+import "./myBooking.scss";
 
-function ProfilePage() {
-  const { currentUser, error } = useSelector((state) => state.user);
-  const role = currentUser.user.role;
+function MyBooking() {
   const navigate = useNavigate();
   const room = useLoaderData();
-  const data = [room, room];
+  const { currentUser } = useSelector((state) => state.user);
+
   const [booking, setBooking] = useState([]);
+  const role = currentUser.role;
+  const data = [room, room];
+
   useEffect(() => {
     const getData = async () => {
-      if (role === "USER") {
-        const accessToken = currentUser.accessToken;
-        makeRequest.defaults.headers.common = {
-          Authorization: `bearer ${accessToken}`,
-        };
-
+      if (role === ROLE.USER) {
         const res = await getBooking();
         console.log(res.data);
         setBooking(res.data.data);
@@ -30,34 +28,16 @@ function ProfilePage() {
     };
     getData();
   }, []);
-  console.log(booking);
+
   const handleCreateRoom = async () => {
-    navigate("/newPost");
+    navigate(PATH_URL.HOTEL_NEW);
   };
+
   return (
-    <div className="profilePage">
+    <div className="myBookking">
       <div className="details">
         <div className="wrapper">
-          <div className="title">
-            <h1>User Information</h1>
-            <button>Update Profile</button>
-          </div>
-          <div className="info">
-            <span>
-              Avatar:
-              <img
-                src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt=""
-              />
-            </span>
-            <span>
-              Username: <b>John Doe</b>
-            </span>
-            <span>
-              E-mail: <b>john@gmail.com</b>
-            </span>
-          </div>
-          {role === "HOTEL" ? (
+          {role === ROLE.HOTEL ? (
             <>
               <div className="title">
                 <h1>My List</h1>
@@ -88,4 +68,4 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default MyBooking;

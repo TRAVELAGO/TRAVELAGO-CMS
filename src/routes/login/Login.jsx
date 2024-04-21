@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
+import Loading from "../../components/base/loading/Loading";
 import { fetchLogin } from "../../redux/apiCall";
 import { PATH_URL, passwordRegex } from "../../utils/const/common";
 import "./login.scss";
@@ -23,7 +24,7 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, isFetching } = useSelector((state) => state.user);
   const [error, setError] = useState("");
 
   const formik = useFormik({
@@ -51,6 +52,7 @@ const Login = () => {
 
   return (
     <div className="login">
+      {isFetching && <Loading />}
       <div className="card">
         <div className="left">
           <h1>Hello World.</h1>
