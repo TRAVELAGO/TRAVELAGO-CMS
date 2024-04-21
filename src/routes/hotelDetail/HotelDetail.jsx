@@ -11,13 +11,12 @@ import Map from "../../components/map/Map";
 import Slider from "../../components/slider/Slider";
 import { singlePostData, userData } from "../../lib/dummydata";
 import { createBookingOnline } from "../../utils/api";
-import { makeRequest } from "../../utils/axios";
 import { PATH_URL, ROLE } from "../../utils/const/common";
 import "./hotelDetail.scss";
 
 function HotelDetail() {
   const navigate = useNavigate();
-  const { token, currentUser, error } = useSelector((state) => state.user);
+  const { currentUser, error } = useSelector((state) => state.user);
   const role = currentUser.role;
   const room = useLoaderData();
   console.log(room);
@@ -36,10 +35,6 @@ function HotelDetail() {
         dateFrom: format(date[0].startDate, "yyyy-MM-dd"),
         dateTo: format(date[0].endDate, "yyyy-MM-dd"),
         roomId: room.id,
-      };
-      const accessToken = token.accessToken;
-      makeRequest.defaults.headers.common = {
-        Authorization: `bearer ${accessToken}`,
       };
       const res = await createBookingOnline(newBooking);
       console.log(res.data);

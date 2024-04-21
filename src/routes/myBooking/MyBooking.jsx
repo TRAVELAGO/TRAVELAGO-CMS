@@ -6,14 +6,13 @@ import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import ListBooking from "../../components/listBooking/ListBooking";
 import { getBooking } from "../../utils/api";
-import { makeRequest } from "../../utils/axios";
 import { PATH_URL, ROLE } from "../../utils/const/common";
 import "./myBooking.scss";
 
 function MyBooking() {
   const navigate = useNavigate();
   const room = useLoaderData();
-  const { currentUser, token } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
   const [booking, setBooking] = useState([]);
   const role = currentUser.role;
@@ -22,11 +21,6 @@ function MyBooking() {
   useEffect(() => {
     const getData = async () => {
       if (role === ROLE.USER) {
-        const accessToken = token.accessToken;
-        makeRequest.defaults.headers.common = {
-          Authorization: `bearer ${accessToken}`,
-        };
-
         const res = await getBooking();
         console.log(res.data);
         setBooking(res.data.data);
