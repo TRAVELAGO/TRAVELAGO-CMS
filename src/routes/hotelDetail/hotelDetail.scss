@@ -6,13 +6,13 @@
 
   @include md {
     flex-direction: column;
-    overflow: scroll;
+    overflow: auto;
   }
 
   & .details {
     flex: 3;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     @include md {
       flex: none;
@@ -149,7 +149,7 @@
     flex: 2;
     background-color: #fcf5f3;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     @include md {
       flex: none;

@@ -39,7 +39,7 @@ function Map({ items }) {
                   {item.title}
                 </Link>
                 <span>{item.bedroom} bedroom</span>
-                <b>$ {item.price}</b>
+                <b>$ {item.price}</b>:
               </div>
             </div>
           </Tooltip>

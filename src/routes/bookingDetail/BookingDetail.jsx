@@ -9,12 +9,11 @@ import Map from "../../components/map/Map";
 import Slider from "../../components/slider/Slider";
 import { singlePostData, userData } from "../../lib/dummydata";
 import { getBookingById } from "../../utils/api";
-import { makeRequest } from "../../utils/axios";
 import { ROLE } from "../../utils/const/common";
 import "./bookingDetail.scss";
 
 function BookingDetail() {
-  const { token, currentUser, error } = useSelector((state) => state.user);
+  const { currentUser, error } = useSelector((state) => state.user);
   const role = currentUser.role;
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,10 +33,6 @@ function BookingDetail() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const accessToken = token.accessToken;
-        makeRequest.defaults.headers.common = {
-          Authorization: `bearer ${accessToken}`,
-        };
         const res = await getBookingById(bookingId);
         setBooking(res.data);
       } catch (error) {

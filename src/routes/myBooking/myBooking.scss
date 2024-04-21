@@ -6,12 +6,12 @@
 
   @include md {
     flex-direction: column;
-    overflow: scroll;
+    overflow: auto;
   }
 
   & .details {
     flex: 3;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-bottom: 50px;
 
     @include md {
