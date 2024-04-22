@@ -8,7 +8,7 @@ function CardBooking({ item, setBooking }) {
   const navigate = useNavigate();
   const handleDelete = async () => {
     updateBookingCancel(item.id);
-    // setBooking((prev) => prev.filter((i) => i.id !== item.id));
+    setBooking((prev) => prev.filter((i) => i.id !== item.id));
   };
   const handleUpdate = () => {
     navigate("/bookingDetail/" + item.id);

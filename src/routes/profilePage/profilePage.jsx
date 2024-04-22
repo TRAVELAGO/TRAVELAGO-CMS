@@ -80,9 +80,7 @@ function ProfilePage() {
         </div>
       </div>
       <div className="chatContainer">
-        <div className="wrapper">
-          <Chat />
-        </div>
+        <div className="wrapper">{/* <Chat /> */}</div>
       </div>
     </div>
   );
