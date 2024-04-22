@@ -40,12 +40,12 @@ function SinglePage() {
         Authorization: `bearer ${accessToken}`,
       };
       const res = await createBookingOnline(newBooking);
-      console.log(res.data);
+      console.log(res.data.booking.id);
       const paymentUrl = res.data.paymentUrl;
       if (paymentUrl) {
         window.open(paymentUrl, "_blank"); // Mở một cửa sổ mới với URL được trả về từ API
       }
-      navigate("/profile");
+      navigate("/bookingDetail/" + res.data.booking.id);
     } catch (error) {
       console.log(error);
     }

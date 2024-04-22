@@ -47,6 +47,7 @@ function BookingDetail() {
     getData();
   }, [bookingId]);
   let status = 0;
+  console.log(booking?.status);
   switch (booking?.status) {
     case 0:
       status = "Chưa thanh toán";
@@ -70,7 +71,7 @@ function BookingDetail() {
                 <h2>ID: {booking?.id}</h2>
                 <div className="address">
                   <img src="/pin.png" alt="" />
-                  <span>Hotel: {booking?.room.hotel.address}</span>
+                  <span>Hotel: {booking?.room.hotel.name}</span>
                 </div>
                 <div className="address">
                   <img src="/bed.png" alt="" />
@@ -100,10 +101,12 @@ function BookingDetail() {
               <div className="booking">
                 <h3>Ngày đã chọn đặt phòng:</h3>
                 <span className="date">
-                  {`${format(booking?.dateFrom, "MM/dd/yyyy")} to ${format(
-                    booking?.dateTo,
-                    "MM/dd/yyyy"
-                  )}`}
+                  {booking &&
+                    `${format(booking?.dateFrom, "dd/MM/yyyy")} to ${format(
+                      booking?.dateTo,
+                      "dd/MM/yyyy"
+                    )}`}
+                  {/* {`${booking?.dateFrom} to ${booking?.dateTo}`} */}
                   {openDate && (
                     <DateRange
                       editableDateInputs={true}

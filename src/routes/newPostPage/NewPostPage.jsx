@@ -5,8 +5,11 @@ import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
 import { makeRequest } from "../../utils/axios";
 import { createRoom } from "../../utils/api";
+import { useSelector } from "react-redux";
 
 function NewPostPage() {
+  const { currentUser } = useSelector((state) => state.user);
+
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [imagesFile, setImagesFile] = useState([]);
@@ -19,6 +22,10 @@ function NewPostPage() {
     const inputs = Object.fromEntries(formData);
 
     try {
+      const accessToken = currentUser.accessToken;
+      makeRequest.defaults.headers.common = {
+        Authorization: `bearer ${accessToken}`,
+      };
       const formData = new FormData();
       images.forEach((image) => {
         formData.append("images", image);
@@ -49,7 +56,7 @@ function NewPostPage() {
   return (
     <div className="newPostPage">
       <div className="formContainer">
-        <h1>Add New Post</h1>
+        <h1>Add New Room</h1>
         <div className="wrapper">
           <form onSubmit={handleSubmit}>
             <div className="item">
