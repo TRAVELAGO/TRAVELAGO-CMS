@@ -16,9 +16,11 @@ export const fetchLogin = async (dispatch, user) => {
     try {
         const res = await login(user);
         const accessToken = res.data.accessToken;
-        makeRequest.defaults.headers.common = { 'Authorization': `bearer ${accessToken}` }
+        makeRequest.defaults.headers.common = {
+            Authorization: `bearer ${accessToken}`,
+        };
 
-        dispatch(loginSuccess(res.data));
+        dispatch(loginSuccess({ token: res.data, user: res.data.user }));
         document.cookie = `session=${JSON.stringify(res.data)}; path=/;`;
     } catch (error) {
         dispatch(loginFailure(error.response.data.message));
@@ -30,7 +32,7 @@ export const fetchRegister = async (dispatch, user) => {
     dispatch(registerStart());
     try {
         const res = await register(user);
-        dispatch(registerSuccess(res.data));
+        dispatch(registerSuccess({ user: res.data }));
     } catch (error) {
         dispatch(registerFailure(error.response.data.message));
         throw new Error(error.response.data.message);
@@ -52,13 +54,13 @@ export const fetchForgotPassword = async (dispatch, user) => {
 export const updateUser = async (dispatch, user) => {
     try {
         const res = await makeRequest.put("users", user);
-        await dispatch(updateSuccess(res.data));
+        await dispatch(updateSuccess({ token: res.data, user: res.data.user }));
     } catch (error) {
         console.log(error);
     }
 };
 
 export const fetchLogout = async (dispatch) => {
-    document.cookie = "session=; path=/;"
-    dispatch(logoutSuccess());
+  document.cookie = "session=; path=/;";
+  dispatch(logoutSuccess());
 };

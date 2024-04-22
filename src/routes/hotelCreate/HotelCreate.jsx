@@ -1,15 +1,13 @@
 import { useState } from "react";
-import "./newPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
-import { makeRequest } from "../../utils/axios";
+
 import { createRoom } from "../../utils/api";
-import { useSelector } from "react-redux";
+import { PATH_URL } from "../../utils/const/common";
+import "./hotelCreate.scss";
 
-function NewPostPage() {
-  const { currentUser } = useSelector((state) => state.user);
-
+function HotelCreate() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [imagesFile, setImagesFile] = useState([]);
@@ -22,10 +20,6 @@ function NewPostPage() {
     const inputs = Object.fromEntries(formData);
 
     try {
-      const accessToken = currentUser.accessToken;
-      makeRequest.defaults.headers.common = {
-        Authorization: `bearer ${accessToken}`,
-      };
       const formData = new FormData();
       images.forEach((image) => {
         formData.append("images", image);
@@ -38,7 +32,7 @@ function NewPostPage() {
       formData.append("total", parseInt(inputs.total));
       formData.append("roomTypeId", 1);
       const res = await createRoom(1, formData);
-      navigate("/" + res.data.id);
+      navigate(PATH_URL.HOTEL_DETAIL.replace(":id", res.data.id));
     } catch (err) {
       console.log(err);
       setError(error);
@@ -56,7 +50,7 @@ function NewPostPage() {
   return (
     <div className="newPostPage">
       <div className="formContainer">
-        <h1>Add New Room</h1>
+        <h1>Add New Post</h1>
         <div className="wrapper">
           <form onSubmit={handleSubmit}>
             <div className="item">
@@ -127,4 +121,4 @@ function NewPostPage() {
   );
 }
 
-export default NewPostPage;
+export default HotelCreate;

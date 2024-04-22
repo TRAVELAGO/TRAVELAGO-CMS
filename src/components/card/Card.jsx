@@ -1,17 +1,23 @@
 import { Link } from "react-router-dom";
 import "./card.scss";
+import { PATH_URL } from "../../utils/const/common";
 
 function Card({ item }) {
   if (!item) return <></>;
   console.log(item);
   return (
     <div className="card">
-      <Link to={`/${item.id}`} className="imageContainer">
+      <Link
+        to={PATH_URL.HOTEL_DETAIL.replace(":id", item.id)}
+        className="imageContainer"
+      >
         {item.images?.length && <img src={item.images[0]?.url} alt="" />}
       </Link>
       <div className="textContainer">
         <h2 className="title">
-          <Link to={`/${item.id}`}>{item.name}</Link>
+          <Link to={PATH_URL.HOTEL_DETAIL.replace(":id", item.id)}>
+            {item.name}
+          </Link>
         </h2>
         <p className="address">
           <img src="/pin.png" alt="" />

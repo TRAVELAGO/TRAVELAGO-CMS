@@ -1,21 +1,20 @@
-import "./bookingDetail.scss";
-import Slider from "../../components/slider/Slider";
-import Map from "../../components/map/Map";
-import { singlePostData, userData } from "../../lib/dummydata";
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
-import DOMPurify from "dompurify";
-import { DateRange } from "react-date-range";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
+import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { format } from "date-fns";
-import { createBookingOnline, getBookingById } from "../../utils/api";
 import { useSelector } from "react-redux";
-import { makeRequest } from "../../utils/axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import Map from "../../components/map/Map";
+import Slider from "../../components/slider/Slider";
+import { singlePostData, userData } from "../../lib/dummydata";
+import { getBookingById } from "../../utils/api";
+import { ROLE } from "../../utils/const/common";
+import "./bookingDetail.scss";
 
 function BookingDetail() {
   const { currentUser, error } = useSelector((state) => state.user);
-  const role = currentUser.user.role;
+  const role = currentUser.role;
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -34,10 +33,6 @@ function BookingDetail() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const accessToken = currentUser.accessToken;
-        makeRequest.defaults.headers.common = {
-          Authorization: `bearer ${accessToken}`,
-        };
         const res = await getBookingById(bookingId);
         setBooking(res.data);
       } catch (error) {
@@ -97,7 +92,7 @@ function BookingDetail() {
                 __html: DOMPurify.sanitize(room.description),
               }}
             ></div> */}
-            {role === "USER" && (
+            {role === ROLE.USER && (
               <div className="booking">
                 <h3>Ngày đã chọn đặt phòng:</h3>
                 <span className="date">

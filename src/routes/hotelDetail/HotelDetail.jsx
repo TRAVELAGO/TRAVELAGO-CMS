@@ -1,22 +1,23 @@
-import "./singlePage.scss";
-import Slider from "../../components/slider/Slider";
-import Map from "../../components/map/Map";
-import { singlePostData, userData } from "../../lib/dummydata";
-import { useLoaderData, useNavigate } from "react-router-dom";
-import DOMPurify from "dompurify";
-import { DateRange } from "react-date-range";
-import { useState } from "react";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
-import { createBookingOnline } from "../../utils/api";
+import DOMPurify from "dompurify";
+import { useState } from "react";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import { useSelector } from "react-redux";
-import { makeRequest } from "../../utils/axios";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
-function SinglePage() {
-  const { currentUser, error } = useSelector((state) => state.user);
-  const role = currentUser.user.role;
+import Map from "../../components/map/Map";
+import Slider from "../../components/slider/Slider";
+import { singlePostData, userData } from "../../lib/dummydata";
+import { createBookingOnline } from "../../utils/api";
+import { PATH_URL, ROLE } from "../../utils/const/common";
+import "./hotelDetail.scss";
+
+function HotelDetail() {
   const navigate = useNavigate();
+  const { currentUser, error } = useSelector((state) => state.user);
+  const role = currentUser.role;
   const room = useLoaderData();
   console.log(room);
   const [openDate, setOpenDate] = useState(false);
@@ -35,23 +36,20 @@ function SinglePage() {
         dateTo: format(date[0].endDate, "yyyy-MM-dd"),
         roomId: room.id,
       };
-      const accessToken = currentUser.accessToken;
-      makeRequest.defaults.headers.common = {
-        Authorization: `bearer ${accessToken}`,
-      };
       const res = await createBookingOnline(newBooking);
-      console.log(res.data.booking.id);
+      console.log(res.data);
       const paymentUrl = res.data.paymentUrl;
       if (paymentUrl) {
         window.open(paymentUrl, "_blank"); // Mở một cửa sổ mới với URL được trả về từ API
       }
-      navigate("/bookingDetail/" + res.data.booking.id);
+      navigate(PATH_URL.PROFILE_BOOKING);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
-    <div className="singlePage">
+    <div className="hotelDetail">
       <div className="details">
         <div className="wrapper">
           <Slider images={room.images} />
@@ -77,7 +75,7 @@ function SinglePage() {
                 __html: DOMPurify.sanitize(room.description),
               }}
             ></div>
-            {role === "USER" && (
+            {role === ROLE.USER && (
               <div className="booking">
                 <h3>Chọn ngày đặt phòng:</h3>
                 <span onClick={() => setOpenDate(!openDate)} className="date">
@@ -191,4 +189,4 @@ function SinglePage() {
   );
 }
 
-export default SinglePage;
+export default HotelDetail;

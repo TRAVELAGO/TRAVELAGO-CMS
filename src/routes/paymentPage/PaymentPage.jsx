@@ -1,6 +1,7 @@
-import { useState } from "react";
-import "./paymentPage.scss";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import { PATH_URL } from "../../utils/const/common";
+import "./paymentPage.scss";
 
 function PaymentPage() {
   const location = useLocation();
@@ -9,9 +10,11 @@ function PaymentPage() {
   console.log(queryParams);
   const bookingId = queryParams.get("vnp_TxnRef");
   console.log(bookingId);
+
   const handleNavigate = () => {
-    navigate("/bookingDetail/" + bookingId);
+    navigate(PATH_URL.BOOKING_DETAIL.replace(":id", bookingId));
   };
+
   return (
     <div className="paymentPage">
       <div className="wrapper">

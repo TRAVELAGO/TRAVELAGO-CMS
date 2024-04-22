@@ -1,7 +1,8 @@
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, TileLayer, Popup, Tooltip } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, Tooltip } from "react-leaflet";
 import { Link } from "react-router-dom";
 
+import { PATH_URL } from "../../utils/const/common";
 import "./map.scss";
 
 function Map({ items }) {
@@ -22,7 +23,9 @@ function Map({ items }) {
             <div className="popupContainer">
               <img src={item.img} alt="" />
               <div className="textContainer">
-                <Link to={`/${item.id}`}>{item.title}</Link>
+                <Link to={PATH_URL.HOTEL_DETAIL.replace(":id", item.id)}>
+                  {item.title}
+                </Link>
                 <span>{item.bedroom} bedroom</span>
                 <b>$ {item.price}</b>
               </div>
@@ -32,9 +35,11 @@ function Map({ items }) {
             <div className="popupContainer">
               <img src={item.img} alt="" />
               <div className="textContainer">
-                <Link to={`/${item.id}`}>{item.title}</Link>
+                <Link to={PATH_URL.HOTEL_DETAIL.replace(":id", item.id)}>
+                  {item.title}
+                </Link>
                 <span>{item.bedroom} bedroom</span>
-                <b>$ {item.price}</b>
+                <b>$ {item.price}</b>:
               </div>
             </div>
           </Tooltip>
