@@ -4,7 +4,7 @@ import { PATH_URL } from "../../utils/const/common";
 
 function Card({ item }) {
   if (!item) return <></>;
-  console.log(item);
+
   return (
     <div className="card">
       <Link

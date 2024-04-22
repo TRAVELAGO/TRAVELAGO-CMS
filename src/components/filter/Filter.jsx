@@ -1,19 +1,31 @@
+import { useFormik } from "formik";
 import "./filter.scss";
 
-function Filter() {
+function Filter({ filters, onSubmit }) {
+  const formik = useFormik({
+    initialValues: {
+      ...filters,
+    },
+    onSubmit: async (values) => {
+      onSubmit(values);
+    },
+  });
+
   return (
     <div className="filter">
       <h1>
-        Search results for <b>Ha Noi</b>
+        Search results for <b>{filters.name}</b>
       </h1>
       <div className="top">
         <div className="item">
           <label htmlFor="city">Location</label>
           <input
-            type="text"
             id="city"
-            name="city"
+            name="name"
+            type="text"
             placeholder="City Location"
+            value={formik.values.name}
+            onChange={formik.handleChange}
           />
         </div>
       </div>
@@ -39,21 +51,30 @@ function Filter() {
         <div className="item">
           <label htmlFor="minPrice">Min Price</label>
           <input
-            type="number"
             id="minPrice"
-            name="minPrice"
+            name="priceFrom"
+            type="number"
             placeholder="any"
+            value={formik.values.priceFrom}
+            onChange={formik.handleChange}
           />
         </div>
         <div className="item">
           <label htmlFor="maxPrice">Max Price</label>
-          <input type="text" id="maxPrice" name="maxPrice" placeholder="any" />
+          <input
+            id="maxPrice"
+            name="priceTo"
+            type="number"
+            placeholder="any"
+            value={formik.values.priceTo}
+            onChange={formik.handleChange}
+          />
         </div>
-        <div className="item">
-          <label htmlFor="bedroom">Bedroom</label>
-          <input type="text" id="bedroom" name="bedroom" placeholder="any" />
-        </div>
-        <button>
+        <button
+          type="submit"
+          className="submitBtn"
+          onClick={formik.handleSubmit}
+        >
           <img src="/search.png" alt="" />
         </button>
       </div>

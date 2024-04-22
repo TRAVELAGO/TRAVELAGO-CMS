@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import Loading from "../../components/base/loading/Loading";
-import { fetchLogin } from "../../redux/apiCall";
+import { fetchLogin } from "../../redux/userAction";
 import { PATH_URL, passwordRegex } from "../../utils/const/common";
 import "./login.scss";
 
