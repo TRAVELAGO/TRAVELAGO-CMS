@@ -1,33 +1,42 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
-import { PATH_URL } from "../../utils/const/common";
+import { PATH_URL, getQueryParams } from "../../utils/const/common";
 import "./searchBar.scss";
 
 const types = ["buy", "rent"];
 
 function SearchBar() {
   const navigate = useNavigate();
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
-    const location = formData.get("location");
-    const queryParams = new URLSearchParams();
-    queryParams.append("location", location);
-    navigate(`${PATH_URL.HOTEL}?${queryParams.toString()}`);
-  };
-
+  const [queryType, setQueryType] = useState("buy");
   const [query, setQuery] = useState({
-    type: "buy",
-    location: "",
-    minPrice: 0,
-    maxPrice: 0,
+    name: "",
+    priceFrom: 0,
+    priceTo: 0,
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    setQuery((prev) => {
+      if (formData.get("location")) prev.name = formData.get("location");
+      if (formData.get("minPrice")) prev.priceFrom = formData.get("minPrice");
+      if (formData.get("maxPrice")) prev.priceTo = formData.get("maxPrice");
+      return prev;
+    });
+
+    const queryParams = getQueryParams(query);
+    navigate({
+      pathname: PATH_URL.HOTEL,
+      search: createSearchParams({
+        ...queryParams,
+      }).toString(),
+    });
+  };
+
   const switchType = (val) => {
-    setQuery((prev) => ({ ...prev, type: val }));
+    setQueryType(val);
   };
 
   return (
@@ -37,7 +46,7 @@ function SearchBar() {
           <button
             key={type}
             onClick={() => switchType(type)}
-            className={query.type === type ? "active" : ""}
+            className={queryType === type ? "active" : ""}
           >
             {type}
           </button>
@@ -59,7 +68,7 @@ function SearchBar() {
           max={10000000}
           placeholder="Max Price"
         />
-        <button>
+        <button type="submit">
           <img src="/search.png" alt="" />
         </button>
       </form>

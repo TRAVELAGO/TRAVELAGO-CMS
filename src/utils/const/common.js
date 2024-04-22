@@ -23,3 +23,14 @@ export const PATH_URL = {
   HOTEL_DETAIL: "/hotel/:id",
   BOOKING_DETAIL: "/booking/:id",
 };
+
+export const getQueryParams = (queryParams) => {
+  const query = {};
+  Object.entries(queryParams).forEach(([key, value]) => {
+    if (value) {
+      query[key] = value;
+    }
+  });
+
+  return query;
+};

@@ -37,8 +37,12 @@ export const getRoomById = async (id) => {
     const res = await makeRequest.get("rooms/" + id);
     return res
 }
-export const getRoomByFilter = async (filter) => {
-    const res = await makeRequest.get("rooms");
+export const getRoomByFilter = async (filters) => {
+    const res = await makeRequest.get("rooms", {
+        params: {
+          ...filters,
+        }
+    });
     return res
 }
 export const getRoomByHotelId = async (id) => {

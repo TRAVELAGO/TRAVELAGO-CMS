@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-import { fetchForgotPassword } from "../../redux/apiCall";
+import { fetchForgotPassword } from "../../redux/userAction";
 import { PATH_URL, passwordRegex } from "../../utils/const/common";
 import "./forgotPassword.scss";
 
