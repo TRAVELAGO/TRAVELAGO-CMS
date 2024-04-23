@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
-import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import ListBooking from "../../components/listBooking/ListBooking";
+import { withLoading } from "../../redux/appAction";
 import { getBooking } from "../../utils/api";
 import { PATH_URL, ROLE } from "../../utils/const/common";
 import "./myBooking.scss";
 
 function MyBooking() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const room = useLoaderData();
   const { currentUser } = useSelector((state) => state.user);
 
   const [booking, setBooking] = useState([]);
   const role = currentUser.role;
   const data = [room, room];
+
+  const handleCreateRoom = async () => {
+    navigate(PATH_URL.HOTEL_NEW);
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -26,12 +31,12 @@ function MyBooking() {
         setBooking(res.data.data);
       }
     };
-    getData();
+    dispatch(
+      withLoading(async () => {
+        await getData();
+      })
+    );
   }, []);
-
-  const handleCreateRoom = async () => {
-    navigate(PATH_URL.HOTEL_NEW);
-  };
 
   return (
     <div className="myBookking">

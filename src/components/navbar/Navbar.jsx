@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useRoutes } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { fetchLogout } from "../../redux/apiCall";
+import { fetchLogout } from "../../redux/userAction";
 import { PATH_URL } from "../../utils/const/common";
-import "./navbar.scss";
 import Avatar from "../base/avatar/Avatar";
+import "./navbar.scss";
 
 function Navbar() {
   const navigate = useNavigate();

@@ -62,4 +62,5 @@ export const {
     updateSuccess,
     logoutSuccess,
 } = userSlice.actions;
+
 export default userSlice.reducer;

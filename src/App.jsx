@@ -1,9 +1,10 @@
+import { useDispatch, useSelector } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import BlankLayout from "./components/layout/blankLayout/BlankLayout";
 import Layout from "./components/layout/userLayout/Layout";
 import { singlePageLoader } from "./lib/loader";
+import { resetFetch } from "./redux/appAction";
 import BookingDetail from "./routes/bookingDetail/BookingDetail";
 import ForgotPassword from "./routes/forgotPassword/ForgotPassword";
 import HomePage from "./routes/homePage/homePage";
@@ -102,6 +103,8 @@ const routes = [
 
 function App() {
   const { token } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  dispatch(resetFetch());
   const accessToken = token?.accessToken;
   if (accessToken) {
     makeRequest.defaults.headers.common = {

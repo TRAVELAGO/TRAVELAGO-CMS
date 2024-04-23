@@ -5,7 +5,8 @@ import Navbar from "../../navbar/Navbar";
 import "./layout.scss";
 
 function Layout() {
-  const { isFetching } = useSelector((state) => state.user);
+  const { isFetching } = useSelector((state) => state.app);
+
   return (
     <div className="layout">
       {isFetching && <Loading />}
