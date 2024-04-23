@@ -64,3 +64,5 @@ export const fetchLogout = async (dispatch) => {
   document.cookie = "session=; path=/;";
   dispatch(logoutSuccess());
 };
+
+
