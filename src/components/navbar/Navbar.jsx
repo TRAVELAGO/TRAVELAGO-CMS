@@ -55,7 +55,7 @@ function Navbar() {
   };
 
   return (
-    <nav>
+    <nav className="navbar-wrapper">
       <div className="left">
         <Link to={PATH_URL.HOME} className="logo">
           <img src="/logo.png" alt="" width={64} height={64} />
