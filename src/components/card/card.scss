@@ -86,7 +86,7 @@
 
         .icon {
           border: 1px solid #999;
-          padding: 2px 5px;
+          padding: 5px 8px;
           border-radius: 5px;
           cursor: pointer;
           display: flex;
@@ -94,7 +94,12 @@
           justify-content: center;
 
           &:hover {
+            scale: 1.05;
             background-color: lightgray;
+          }
+
+          &.active {
+            background-color: #fece51;
           }
         }
       }
