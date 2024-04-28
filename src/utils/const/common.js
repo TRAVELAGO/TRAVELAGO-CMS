@@ -12,6 +12,7 @@ export const PATH_URL = {
   HOME: "/",
   LOGIN: "/login",
   REGISTER: "/register",
+  HOTEL_REGISTER: "/hotel/register",
   FORGOT_PASSWORD: "/forgot-password",
   PROFILE: "/profile",
   PROFILE_UPDATE: "/profile/update",
