@@ -1,25 +1,33 @@
 import { format } from "date-fns";
 import DOMPurify from "dompurify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 import Map from "../../components/map/Map";
 import Slider from "../../components/slider/Slider";
 import { singlePostData, userData } from "../../lib/dummydata";
+import {
+  fetchRecentList,
+  fetchWishlist,
+  isInWishlist,
+} from "../../redux/wishlistAction";
 import { createBookingOnline } from "../../utils/api";
-import { PATH_URL, ROLE } from "../../utils/const/common";
+import { MAX_RECENT_LIST, PATH_URL, ROLE } from "../../utils/const/common";
 import "./hotelDetail.scss";
 
 function HotelDetail() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { wishlist, recentList } = useSelector((state) => state.wishlist);
   const { currentUser, error } = useSelector((state) => state.user);
   const role = currentUser.role;
   const room = useLoaderData();
   console.log(room);
+  const isSave = isInWishlist(wishlist, room);
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
     {
@@ -47,6 +55,25 @@ function HotelDetail() {
       console.log(error);
     }
   };
+
+  const handleClickSave = () => {
+    const existItem = wishlist.find((value) => value.id === room.id);
+    if (existItem) {
+      const _wishlist = wishlist.filter((value) => value.id !== room.id);
+      dispatch(fetchWishlist(_wishlist));
+    } else {
+      const _wishlist = [...wishlist, room];
+      dispatch(fetchWishlist(_wishlist));
+    }
+  };
+
+  useEffect(() => {
+    const _recent = recentList.filter(
+      (value, index) => value.id !== room.id && index < MAX_RECENT_LIST
+    );
+    _recent.shift(room);
+    dispatch(fetchRecentList(_recent));
+  }, [room]);
 
   return (
     <div className="hotelDetail">
@@ -178,9 +205,12 @@ function HotelDetail() {
               <img src="/chat.png" alt="" />
               Nhắn tin
             </button>
-            <button>
+            <button
+              className={isSave ? "save-btn active" : "save-btn"}
+              onClick={handleClickSave}
+            >
               <img src="/save.png" alt="" />
-              Lưu địa điểm
+              {isSave ? "Bỏ lưu địa điểm" : "Lưu địa điểm"}
             </button>
           </div>
         </div>

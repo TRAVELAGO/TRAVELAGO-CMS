@@ -1,8 +1,27 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import "./card.scss";
+
+import { fetchWishlist, isInWishlist } from "../../redux/wishlistAction";
 import { PATH_URL } from "../../utils/const/common";
+import "./card.scss";
 
 function Card({ item }) {
+  const { wishlist } = useSelector((state) => state.wishlist);
+  const dispatch = useDispatch();
+
+  const isSave = isInWishlist(wishlist, item);
+
+  const handleClickSave = () => {
+    const existItem = wishlist.find((value) => value.id === item.id);
+    if (existItem) {
+      const _wishlist = wishlist.filter((value) => value.id !== item.id);
+      dispatch(fetchWishlist(_wishlist));
+    } else {
+      const _wishlist = [...wishlist, item];
+      dispatch(fetchWishlist(_wishlist));
+    }
+  };
+
   if (!item) return <></>;
 
   return (
@@ -36,12 +55,15 @@ function Card({ item }) {
             </div>
           </div>
           <div className="icons">
-            <div className="icon">
+            <button
+              className={isSave ? "icon active" : "icon"}
+              onClick={handleClickSave}
+            >
               <img src="/save.png" alt="" />
-            </div>
-            <div className="icon">
+            </button>
+            {/* <button className="icon">
               <img src="/chat.png" alt="" />
-            </div>
+            </button> */}
           </div>
         </div>
       </div>
