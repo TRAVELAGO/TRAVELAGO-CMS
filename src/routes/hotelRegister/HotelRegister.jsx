@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-import { fetchLogin, fetchRegister } from "../../redux/userAction";
+import { fetchHotelRegister, fetchLogin } from "../../redux/userAction";
 import { PATH_URL, passwordRegex, phoneRegex } from "../../utils/const/common";
-import "./register.scss";
+import "./hotelRegister.scss";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -30,7 +30,7 @@ const validationSchema = Yup.object().shape({
   role: Yup.string().label("Role").required("Role required!"),
 });
 
-const Register = () => {
+const HotelRegister = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
@@ -43,13 +43,13 @@ const Register = () => {
       passwordConfirm: "",
       phoneNumber: "",
       fullName: "",
-      role: "USER",
+      role: "HOTEL",
     },
     validationSchema,
     onSubmit: async (values) => {
       setError("");
       try {
-        await fetchRegister(dispatch, values);
+        await fetchHotelRegister(dispatch, values);
         await fetchLogin(dispatch, {
           email: values.email,
           password: values.password,
@@ -68,10 +68,10 @@ const Register = () => {
   }, [currentUser]);
 
   return (
-    <div className="register">
+    <div className="hotel-register">
       <div className="card">
         <div className="left">
-          <h1>Register</h1>
+          <h1>Register as hotel</h1>
           <form onSubmit={formik.handleSubmit}>
             {error && <p className="error-message">{error}</p>}
             <label htmlFor="email">
@@ -159,4 +159,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default HotelRegister;
