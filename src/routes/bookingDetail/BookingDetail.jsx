@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Map from "../../components/map/Map";
 import Slider from "../../components/slider/Slider";
 import { singlePostData, userData } from "../../lib/dummydata";
+import { fetchWishlist } from "../../redux/wishlistAction";
 import { getBookingById } from "../../utils/api";
 import { ROLE } from "../../utils/const/common";
 import "./bookingDetail.scss";
@@ -17,6 +18,8 @@ function BookingDetail() {
   const role = currentUser.role;
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { wishlist } = useSelector((state) => state.wishlist);
 
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
@@ -56,6 +59,18 @@ function BookingDetail() {
     default:
       break;
   }
+
+  const handleClickSave = () => {
+    const existItem = wishlist.find((value) => value.id === room.id);
+    if (existItem) {
+      const _wishlist = wishlist.filter((value) => value.id !== room.id);
+      dispatch(fetchWishlist(_wishlist));
+    } else {
+      const _wishlist = [...wishlist, room];
+      dispatch(fetchWishlist(_wishlist));
+    }
+  };
+
   return (
     <div className="bookingDetail">
       <div className="details">
@@ -208,9 +223,12 @@ function BookingDetail() {
               <img src="/chat.png" alt="" />
               Nhắn tin
             </button>
-            <button>
+            <button
+              className={isSave ? "save-btn active" : "save-btn"}
+              onClick={handleClickSave}
+            >
               <img src="/save.png" alt="" />
-              Lưu địa điểm
+              {isSave ? "Bỏ lưu địa điểm" : "Lưu địa điểm"}
             </button>
           </div>
         </div>

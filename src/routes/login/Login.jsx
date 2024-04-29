@@ -61,6 +61,10 @@ const Login = () => {
           <Link to={PATH_URL.REGISTER}>
             <button>Register</button>
           </Link>
+          <span>{`Become a host?`}</span>
+          <Link to={PATH_URL.HOTEL_REGISTER}>
+            <button>Register as hotel</button>
+          </Link>
         </div>
         <div className="right">
           <h1>Login</h1>

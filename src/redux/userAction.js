@@ -1,4 +1,4 @@
-import { login, register } from "../utils/api";
+import { hotelRegister, login, register } from "../utils/api";
 import { makeRequest } from "../utils/axios";
 import {
     loginFailure,
@@ -32,6 +32,17 @@ export const fetchRegister = async (dispatch, user) => {
     dispatch(registerStart());
     try {
         const res = await register(user);
+        dispatch(registerSuccess({ user: res.data }));
+    } catch (error) {
+        dispatch(registerFailure(error.response.data.message));
+        throw new Error(error.response.data.message);
+    }
+};
+
+export const fetchHotelRegister = async (dispatch, user) => {
+    dispatch(registerStart());
+    try {
+        const res = await hotelRegister(user);
         dispatch(registerSuccess({ user: res.data }));
     } catch (error) {
         dispatch(registerFailure(error.response.data.message));

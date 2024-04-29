@@ -37,6 +37,9 @@ function Navbar() {
               <Avatar url={user.avatar} name={user.fullName} noti={3} />
               <span>{user.fullName}</span>
             </Link>
+            <Link to={PATH_URL.WISHLIST} className="my-booking">
+              <span>Wishlist</span>
+            </Link>
             <Link to={PATH_URL.PROFILE_BOOKING} className="my-booking">
               <span>My Booking</span>
             </Link>
@@ -46,7 +49,12 @@ function Navbar() {
           </div>
         ) : (
           <>
-            <Link to={PATH_URL.LOGIN}>Sign in</Link>
+            <Link to={PATH_URL.HOTEL_REGISTER} className="host-btn">
+              Become a Hosts
+            </Link>
+            <Link to={PATH_URL.LOGIN} className="login-btn">
+              Sign in
+            </Link>
             <Link to={PATH_URL.REGISTER} className="register-btn">
               Sign up
             </Link>

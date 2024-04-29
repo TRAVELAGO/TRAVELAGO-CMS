@@ -94,11 +94,21 @@ nav {
       }
     }
 
+    & .login-btn {
+      background-color: white;
+      border: 1px solid #fece51;
+      height: 50px;
+      padding: 5px 16px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     & .register-btn {
       background-color: #fece51;
       height: 50px;
-      width: 100px;
-      padding: 5px;
+      padding: 5px 16px;
       border-radius: 5px;
       display: flex;
       align-items: center;

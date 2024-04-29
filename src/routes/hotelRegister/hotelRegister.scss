@@ -1,0 +1,96 @@
+.hotel-register {
+  height: 100vh;
+  background-color: #b6b3eb;
+  background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+    url("https://www.desktopbackground.org/download/2000x1500/2014/05/29/770082_page-4-ultra-hd-4k-city-wallpapers-desktop-backgrounds-hd_3840x2400_h.jpg")
+      center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .card {
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    min-height: 600px;
+    overflow: hidden;
+
+    & .left {
+      flex: 1;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      justify-content: center;
+
+      & h1 {
+        color: #555;
+      }
+
+      & form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        & input {
+          width: 100%;
+          border: none;
+          border-bottom: 1px solid lightgray;
+          padding: 20px 10px;
+        }
+        & .error-message {
+          margin-top: 4px;
+          font-size: 14px;
+          color: red;
+        }
+
+        & button {
+          width: 50%;
+          padding: 10px;
+          margin: auto;
+          border: none;
+          background-color: rebeccapurple;
+          color: #fff;
+          border-radius: 5px;
+          font-weight: bold;
+          cursor: pointer;
+        }
+      }
+    }
+
+    & .right {
+      flex: 1;
+      background: 
+      // -gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+        url("https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D")
+        center;
+      background-size: cover;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      color: #fff;
+
+      & h1 {
+        font-size: 100px;
+        line-height: 100px;
+      }
+
+      & span {
+        font-size: 14px;
+      }
+
+      & button {
+        width: 50%;
+        padding: 10px;
+        margin: auto;
+        border: none;
+        background-color: #fff;
+        color: rebeccapurple;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+  }
+}

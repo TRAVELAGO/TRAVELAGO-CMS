@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+
 import Card from "../../components/card/Card";
 import Filter from "../../components/filter/Filter";
 import Map from "../../components/map/Map";

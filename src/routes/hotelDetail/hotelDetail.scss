@@ -252,6 +252,10 @@
           border-radius: 5px;
           cursor: pointer;
 
+          &.active {
+            background-color: #fece51;
+          }
+
           & img {
             width: 16px;
             height: 16px;
