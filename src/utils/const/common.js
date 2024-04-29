@@ -26,6 +26,7 @@ export const PATH_URL = {
   HOTEL_NEW: "/hotel/new",
   HOTEL_DETAIL: "/hotel/:id",
   BOOKING_DETAIL: "/booking/:id",
+  NOT_FOUND: "/not-found",
 };
 
 export const getQueryParams = (queryParams) => {
