@@ -11,6 +11,12 @@ export default {
       primary: {
         100: "#FECE51",
       },
+      dark: {
+        100: "#0E1317",
+      },
+      gray: {
+        100: "#EDECE7",
+      },
     },
   },
   plugins: [],
