@@ -8,6 +8,10 @@ export const register = async (user) => {
     const res = await makeRequest.post("auth/register", user);
     return res
 }
+export const hotelRegister = async (user) => {
+    const res = await makeRequest.post("auth/registerHotel", user);
+    return res
+}
 //thêm refreshtoken sau
 
 //hotel

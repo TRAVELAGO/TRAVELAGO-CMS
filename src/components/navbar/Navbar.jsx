@@ -46,7 +46,8 @@ function Navbar() {
           </div>
         ) : (
           <>
-            <Link to={PATH_URL.LOGIN}>Sign in</Link>
+            <Link to={PATH_URL.HOTEL_REGISTER} className="host-btn">Become a Hosts</Link>
+            <Link to={PATH_URL.LOGIN} className="login-btn">Sign in</Link>
             <Link to={PATH_URL.REGISTER} className="register-btn">
               Sign up
             </Link>

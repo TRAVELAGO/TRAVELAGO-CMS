@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import BlankLayout from "./components/layout/blankLayout/BlankLayout";
 import Layout from "./components/layout/userLayout/Layout";
@@ -11,6 +11,7 @@ import HomePage from "./routes/homePage/homePage";
 import HotelCreate from "./routes/hotelCreate/HotelCreate";
 import HotelDetail from "./routes/hotelDetail/HotelDetail";
 import HotelList from "./routes/hotelList/HotelList";
+import HotelRegister from "./routes/hotelRegister/HotelRegister";
 import Login from "./routes/login/Login";
 import MyBooking from "./routes/myBooking/MyBooking";
 import PaymentPage from "./routes/paymentPage/PaymentPage";
@@ -88,6 +89,10 @@ const routes = [
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/hotel/register",
+        element: <HotelRegister />,
       },
       {
         path: "/return_url",
