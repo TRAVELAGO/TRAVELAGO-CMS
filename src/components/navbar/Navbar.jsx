@@ -68,10 +68,11 @@ function Navbar() {
                     <li
                       key={menu.name}
                       className="relative block hover:border-l-2 hover:border-primary-100"
+                      onClick={() => setOpenProfileMenu(false)}
                     >
                       <Link
                         to={menu.link}
-                        className="inline-block w-full text-dark-100 border-b border-gray-100 px-5 py-3 hover:text-primary-100 hover:pl-6"
+                        className="inline-block w-full text-dark-1300 border-b border-dark-500 px-5 py-3 hover:text-primary-100 hover:pl-6"
                       >
                         <span className="text-base font-bold capitalize">
                           {menu.name}
@@ -84,7 +85,7 @@ function Navbar() {
                     className="relative block hover:border-l-2 hover:border-primary-100"
                   >
                     <Link
-                      className="inline-block w-full text-dark-100 px-5 py-3 hover:text-primary-100 hover:pl-6"
+                      className="inline-block w-full text-dark-1300 px-5 py-3 hover:text-primary-100 hover:pl-6"
                       onClick={handleLogout}
                     >
                       <span className="text-base font-bold capitalize">
