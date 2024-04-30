@@ -45,18 +45,21 @@ function Card2({ item }) {
 
   return (
     <div className="relative block md:flex items-center border border-gray-200 p-0">
-      <Link to={getTargetUrl()}>
-        {item.images?.length && (
+      {item.images?.length && (
+        <Link
+          to={getTargetUrl()}
+          className="relative w-full md:w-[200px] xl:w-[300px] overflow-hidden"
+        >
           <img
             src={item.images[0]?.url}
-            alt=""
-            className="w-full aspect-[5/4] object-cover md:w-[200px] xl:w-[300px]"
+            alt="Main Image"
+            className="w-full aspect-[5/4] object-cover transition-transform hover:scale-125"
           />
-        )}
-      </Link>
+        </Link>
+      )}
       <div className="block md:flex w-full items-center justify-between px-5 pt-6 pb-[30px] md:py-0 xl:px-[50px]">
         <div className="grow md:border-r border-gray-200 pr-0 md:pr-5 xl:pr-[50px]">
-          <h2 className="text-2xl font-medium leading-normal mb-2 md:mb-0 hover:scale-105 transition-all">
+          <h2 className="text-2xl font-medium leading-normal mb-2 md:mb-0 hover:text-primary-100 transition-colors">
             <Link to={getTargetUrl()}>{item.name}</Link>
           </h2>
           {item.description && (
@@ -92,17 +95,20 @@ function Card2({ item }) {
           </div>
           <Link
             to={getTargetUrl()}
-            className="inline-flex items-center transition-all space-x-1"
+            className="inline-flex items-center space-x-1 transition-all hover:text-primary-100"
           >
             <KeyboardArrowRightOutlinedIcon className="text-primary-100" />
-            <span className="text-sm font-bold leading-6 uppercase hover:text-primary-100">
+            <span className="text-sm font-bold leading-6 uppercase">
               READ MORE
             </span>
           </Link>
         </div>
       </div>
       <div className="absolute top-0 right-0 p-2">
-        <button onClick={handleClickSave}>
+        <button
+          onClick={handleClickSave}
+          className="transition-transform hover:scale-110"
+        >
           {isSave ? (
             <TurnedInOutlinedIcon className="text-primary-100" />
           ) : (
