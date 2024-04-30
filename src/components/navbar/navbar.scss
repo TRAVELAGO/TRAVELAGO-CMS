@@ -8,11 +8,7 @@ nav {
   z-index: 100;
 
   & a {
-    transition: all 0.4s ease;
-
-    @include sm {
-      display: none;
-    }
+    transition: scale 0.4s ease, padding 0.3s ease, color 0.2s linear;
 
     &:hover {
       scale: 1.05;
@@ -23,23 +19,22 @@ nav {
     flex: 3;
     display: flex;
     align-items: center;
-    gap: 50px;
 
     & .logo {
       font-weight: bold;
       font-size: 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      margin-right: 20px;
+    }
 
-      & span {
-        @include md {
-          display: none;
-        }
+    & a:not(:first-child) {
+      padding: 12px 24px;
+      border: 0;
 
-        @include sm {
-          display: initial;
-        }
+      &:hover:not(:first-child) {
+        color: #fece51;
+        border-bottom: 2px solid #fece51;
       }
     }
   }
@@ -52,10 +47,6 @@ nav {
     background-color: #fcf5f3;
     height: 100%;
 
-    @include md {
-      background-color: transparent;
-    }
-
     & a:not(:first-child) {
       padding: 12px 24px;
       margin: 20px;
@@ -65,68 +56,49 @@ nav {
       display: flex;
       align-items: center;
       font-weight: bold;
+      margin: 0 20px;
 
       & .avatar {
         margin-right: 20px;
       }
+    }
 
-      & span {
-        @include sm {
-          display: none;
-        }
+    & .auth {
+      & .host-btn {
+        margin-left: 20px;
       }
 
-      & .logout {
-        padding: 12px 24px;
-        background-color: rgb(255, 128, 0);
-        color: #fcf5f3;
-        cursor: pointer;
-        border: none;
-        position: relative;
+      & .login-btn {
+        background-color: white;
+        border: 1px solid #fece51;
+        height: 50px;
+        padding: 5px 16px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      & .my-booking {
-        padding: 12px 24px;
+      & .register-btn {
         background-color: #fece51;
-        cursor: pointer;
-        border: none;
-        position: relative;
+        height: 50px;
+        padding: 5px 16px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-    }
-
-    & .login-btn {
-      background-color: white;
-      border: 1px solid #fece51;
-      height: 50px;
-      padding: 5px 16px;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    & .register-btn {
-      background-color: #fece51;
-      height: 50px;
-      padding: 5px 16px;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     & .menuIcon {
       display: none;
+      flex-shrink: 0;
       z-index: 999;
 
       & img {
         width: 36px;
         height: 36px;
         cursor: pointer;
-      }
-
-      @include sm {
-        display: inline;
       }
     }
 
@@ -148,10 +120,75 @@ nav {
       &.active {
         right: 0;
       }
+    }
+  }
+}
 
-      @include sm {
-        a {
+@include md {
+  nav {
+    & .left {
+      & .logo {
+        & span {
+          display: none;
+        }
+      }
+
+      & a:not(:first-child) {
+        padding: 12px 16px;
+      }
+    }
+
+    & .right {
+      background-color: transparent;
+    }
+  }
+}
+
+@include sm {
+  nav {
+    & a {
+      display: none;
+    }
+
+    & .left {
+      gap: 0;
+
+      & .logo {
+        & span {
           display: initial;
+        }
+      }
+    }
+
+    & .right {
+      & a {
+        padding: 12px 24px;
+        margin: 0 !important;
+      }
+
+      & .user {
+        margin: 0 20px 0 0;
+
+        & a {
+          display: inline-block;
+        }
+      }
+
+      & .auth {
+        display: none;
+      }
+
+      & .menuIcon {
+        display: inline;
+      }
+
+      & .menu {
+        & a {
+          display: initial;
+
+          &:hover {
+            color: #fece51;
+          }
         }
       }
     }

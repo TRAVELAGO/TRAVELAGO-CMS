@@ -20,6 +20,7 @@ import Profile from "./routes/profile/Profile";
 import Register from "./routes/register/Register";
 import { makeRequest } from "./utils/axios";
 import Wishlist from "./routes/wishlist/Wishlist";
+import PageNotFound from "./routes/404/PageNotFound";
 
 const routes = [
   {
@@ -109,6 +110,10 @@ const routes = [
         element: <ForgotPassword />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
   },
 ];
 

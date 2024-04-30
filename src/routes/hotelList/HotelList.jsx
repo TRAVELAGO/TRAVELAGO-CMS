@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
-import Card from "../../components/card/Card";
+import Card2 from "../../components/card2/Card2";
 import Filter from "../../components/filter/Filter";
 import Map from "../../components/map/Map";
 import { listData } from "../../lib/dummydata";
@@ -70,7 +70,7 @@ function HotelList() {
         <div className="wrapper">
           <Filter filters={filters} onSubmit={handleSubmit} />
           {room?.map((item) => (
-            <Card key={item.id} item={item} />
+            <Card2 key={item.id} item={item} />
           ))}
         </div>
       </div>
