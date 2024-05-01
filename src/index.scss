@@ -23,3 +23,15 @@ img {
   height: auto;
   transition: all 0.4s ease-out 0s;
 }
+
+input {
+  transition: border 0.3s ease-out;
+
+  &:focus {
+    border-color: #fece51 !important;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
