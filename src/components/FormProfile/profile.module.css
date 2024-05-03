@@ -1,0 +1,53 @@
+form.profile {
+    margin-top: 20px;
+}
+
+.linkBtn {
+    padding: 0 !important;
+}
+
+.list {
+    overflow: hidden;
+}
+
+.list .infomationTitle {
+    margin-bottom: 0 !important;
+    min-width: 140px;
+    font-size: 14px;
+}
+
+.list li:first-child {
+    padding-top: 0;
+}
+
+.list li:last-child {
+    padding-bottom: 0;
+}
+
+.infomationValue {
+    margin-bottom: 0 !important;
+}
+
+
+.paragraph {
+    max-width: 300px; 
+    margin-bottom: 0px !important;
+}
+
+
+@media (min-width: 1024px) and (max-width: 1239px) {
+    .paragraph {
+        max-width: 280px; 
+    }    
+}
+
+@media (max-width: 769px) {
+    .paragraph {
+        max-width: 100%;
+    }
+}
+
+.avatar {
+    border: 0;
+    height: 100px
+}

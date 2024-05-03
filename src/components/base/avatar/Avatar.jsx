@@ -1,7 +1,7 @@
 import "./avatar.scss";
 
 function Avatar({ url, name, noti, width, height, color }) {
-  const firstChar = name.charAt(0).toUpperCase() || "";
+  const firstChar = name?.charAt(0).toUpperCase() || "";
 
   return (
     <div className="avatar" style={{ width: width, height: height }}>

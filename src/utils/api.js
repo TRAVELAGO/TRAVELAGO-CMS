@@ -5,11 +5,16 @@ export const login = async (user) => {
     return res
 }
 export const register = async (user) => {
-    const res = await makeRequest.post("auth/register", user);
+    const res = await makeRequest.post("auth/register-user", user);
+    return res
+}
+
+export const editUser = async (user) => {
+    const res = await makeRequest.patch("user", user);
     return res
 }
 export const hotelRegister = async (user) => {
-    const res = await makeRequest.post("auth/registerHotel", user);
+    const res = await makeRequest.post("auth/register-hotel", user);
     return res
 }
 //thêm refreshtoken sau
