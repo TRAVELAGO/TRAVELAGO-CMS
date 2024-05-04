@@ -43,7 +43,7 @@ function Navbar() {
     <nav>
       <div className="left">
         <Link to={PATH_URL.HOME} className="logo">
-          <img src="/logo.png" alt="" width={100} height={100} />
+          <img src="/logo.png" alt="" width={64} height={64} />
           <span>Travelago</span>
         </Link>
         <Link to={PATH_URL.HOME}>Home</Link>

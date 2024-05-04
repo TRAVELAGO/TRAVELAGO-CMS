@@ -115,7 +115,7 @@ function HotelCreate() {
         </div>
       </div>
       <div className="sideContainer">
-        {images.length > 0 ? (
+        {images?.length > 0 ? (
           images.map((image, index) => (
             <img src={URL.createObjectURL(image)} key={index} alt="" />
           ))
