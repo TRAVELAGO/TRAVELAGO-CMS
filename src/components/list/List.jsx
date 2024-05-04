@@ -5,7 +5,7 @@ function List({ data }) {
   return (
     <div className="list">
       {data?.map((item) => (
-        <Card key={item.id} item={item} />
+        <Card key={item?.id} item={item} />
       ))}
     </div>
   );

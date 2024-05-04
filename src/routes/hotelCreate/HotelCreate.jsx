@@ -54,7 +54,7 @@ function HotelCreate() {
   };
 
   return (
-    <div className="newPostPage">
+    <div className="hotelCreate">
       <div className="formContainer">
         <h1>Add New Room</h1>
         <div className="wrapper">
