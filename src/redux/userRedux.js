@@ -5,6 +5,7 @@ const userSlice = createSlice({
     initialState: {
         token: null,
         currentUser: null,
+        hotel: null,
         isFetching: false,
         error: "",
     },
@@ -17,6 +18,7 @@ const userSlice = createSlice({
             state.isFetching = false;
             state.token = action.payload.token;
             state.currentUser = action.payload.user;
+            state.hotel = action.payload.hotel;
             state.error = "";
         },
         loginFailure: (state, action) => {

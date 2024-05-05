@@ -30,7 +30,8 @@ function BookingDetail() {
     },
   ]);
   const [booking, setBooking] = useState();
-
+  const paymentUrl =
+    "https://sandbox.vnpayment.vn/paymentv2/Transaction/PaymentMethod.html?token=7877504f8d8747109d9eb0765d7647b0";
   const bookingId = location.pathname.split("/")[2];
   console.log(bookingId);
   useEffect(() => {
@@ -69,6 +70,10 @@ function BookingDetail() {
       const _wishlist = [...wishlist, room];
       dispatch(fetchWishlist(_wishlist));
     }
+  };
+
+  const handlePayment = () => {
+    window.open(paymentUrl, "_blank");
   };
 
   return (
@@ -129,11 +134,11 @@ function BookingDetail() {
                   )}
                 </span>
                 {booking?.status === 0 ? (
-                  <button className="booking-btn">Thanh toán</button>
-                ) : booking?.status === 3 ? (
-                  <button className="booking-btn success">
-                    Đã thanh toán thành công
+                  <button className="booking-btn" onClick={handlePayment}>
+                    Thanh toán
                   </button>
+                ) : booking?.status === 3 ? (
+                  <button className="booking-btn success">Đã thanh toán</button>
                 ) : (
                   booking?.status === 4 && (
                     <button className="booking-btn cancel">Đã hủy</button>
