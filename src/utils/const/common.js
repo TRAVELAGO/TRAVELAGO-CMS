@@ -19,6 +19,7 @@ export const PATH_URL = {
   PROFILE: "/profile",
   PROFILE_UPDATE: "/profile/update",
   PROFILE_BOOKING: "/profile/booking",
+  CHOOSE_HOTEL: "/chooseHotel",
   WISHLIST: "/wishlist",
   ABOUT: "/about",
   CONTACT: "/contact",

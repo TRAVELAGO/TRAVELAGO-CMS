@@ -37,7 +37,7 @@ const Login = () => {
       setError("");
       try {
         await fetchLogin(dispatch, values);
-        navigate(PATH_URL.HOME);
+        navigate(PATH_URL.CHOOSE_HOTEL);
       } catch (error) {
         setError(error.message);
       }
@@ -52,7 +52,6 @@ const Login = () => {
 
   return (
     <div className="login">
-      {isFetching && <Loading />}
       <div className="card">
         <div className="left">
           <h1>Hello World.</h1>

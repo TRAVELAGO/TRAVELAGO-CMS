@@ -13,7 +13,7 @@ function CardBooking({ item, setBooking }) {
   };
 
   const handleUpdate = () => {
-    navigate(PATH_URL.HOTEL_DETAIL.replace(":id", item.room.id));
+    navigate(PATH_URL.BOOKING_DETAIL.replace(":id", item.id));
   };
 
   return (

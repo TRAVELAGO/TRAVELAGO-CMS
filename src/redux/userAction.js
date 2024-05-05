@@ -19,8 +19,8 @@ export const fetchLogin = async (dispatch, user) => {
         makeRequest.defaults.headers.common = {
             Authorization: `bearer ${accessToken}`,
         };
-
-        dispatch(loginSuccess({ token: res.data, user: res.data.user }));
+        console.log(res.data);
+        dispatch(loginSuccess({ token: res.data, user: res.data.user, hotel: res.data.hotel }));
         document.cookie = `session=${JSON.stringify(res.data)}; path=/;`;
     } catch (error) {
         dispatch(loginFailure(error.response.data.message));
@@ -72,8 +72,6 @@ export const updateUser = async (dispatch, user) => {
 };
 
 export const fetchLogout = async (dispatch) => {
-  document.cookie = "session=; path=/;";
-  dispatch(logoutSuccess());
+    document.cookie = "session=; path=/;";
+    dispatch(logoutSuccess());
 };
-
-

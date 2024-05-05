@@ -128,3 +128,9 @@ export const updateBookingCancel = async (id) => {
     const res = await makeRequest.patch("bookings/" + id + "/cancel");
     return res
 }
+
+//payment
+export const createPayment = async (data) => {
+    const res = await makeRequest.post("payments", data);
+    return res
+}

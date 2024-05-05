@@ -6,7 +6,9 @@ import Layout from "./components/layout/userLayout/Layout";
 import { singlePageLoader } from "./lib/loader";
 import { resetFetch } from "./redux/appAction";
 import { fetchInitRecentList, fetchInitWishlist } from "./redux/wishlistAction";
+import PageNotFound from "./routes/404/PageNotFound";
 import BookingDetail from "./routes/bookingDetail/BookingDetail";
+import ChooseHotel from "./routes/chooseHotel/ChooseHotel";
 import ForgotPassword from "./routes/forgotPassword/ForgotPassword";
 import HomePage from "./routes/homePage/homePage";
 import HotelCreate from "./routes/hotelCreate/HotelCreate";
@@ -18,9 +20,8 @@ import MyBooking from "./routes/myBooking/MyBooking";
 import PaymentPage from "./routes/paymentPage/PaymentPage";
 import Profile from "./routes/profile/Profile";
 import Register from "./routes/register/Register";
-import { makeRequest } from "./utils/axios";
 import Wishlist from "./routes/wishlist/Wishlist";
-import PageNotFound from "./routes/404/PageNotFound";
+import { makeRequest } from "./utils/axios";
 
 const routes = [
   {
@@ -108,6 +109,10 @@ const routes = [
       {
         path: "/forgot-password",
         element: <ForgotPassword />,
+      },
+      {
+        path: "/chooseHotel",
+        element: <ChooseHotel />,
       },
     ],
   },

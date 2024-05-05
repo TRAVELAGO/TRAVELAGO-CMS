@@ -1,6 +1,5 @@
 import { LinkOutlined, PlusOutlined } from "@ant-design/icons";
 import {
-  Alert,
   Button,
   Card,
   Col,
@@ -9,21 +8,18 @@ import {
   Form,
   Input,
   List,
-  Modal,
   Row,
   Space,
   Typography,
-  Upload,
   message,
 } from "antd";
-import { useCallback, useState, Suspense } from "react";
-import styles from "./profile.module.css";
-import dayjs from "dayjs";
-import Loading from "./Loading";
-import convertArrayToObject from "../../helpers/convertArrayToObject";
+import { Suspense, useCallback, useState } from "react";
+
 import MessageAPIHelper from "../../helpers/toast-message.helper";
-import Avatar from "../base/avatar/Avatar";
 import { editUser } from "../../utils/api";
+import Avatar from "../base/avatar/Avatar";
+import Loading from "./Loading";
+import styles from "./profile.module.css";
 
 const userRepository = "";
 
@@ -101,7 +97,13 @@ async function sendOTP(email, action) {
   return await userRepository.sendOTP(email, action);
 }
 
-function MainCard({ isEditable, generalInfo, toggleEditable, handleToast, userData }) {
+function MainCard({
+  isEditable,
+  generalInfo,
+  toggleEditable,
+  handleToast,
+  userData,
+}) {
   const [previewInfo, setPreviewInfo] = useState({
     openModal: false,
     src: generalInfo.avatar || "./image/doge.jpg",
@@ -116,7 +118,10 @@ function MainCard({ isEditable, generalInfo, toggleEditable, handleToast, userDa
     },
   ]);
 
-  const handleClosePreview = useCallback(() => setPreviewInfo((pre) => ({ ...pre, openModal: false })), []);
+  const handleClosePreview = useCallback(
+    () => setPreviewInfo((pre) => ({ ...pre, openModal: false })),
+    []
+  );
 
   const handlePreview = useCallback((file) => {
     setPreviewInfo({
@@ -132,7 +137,8 @@ function MainCard({ isEditable, generalInfo, toggleEditable, handleToast, userDa
 
       if (file) generalInfo.avatarFile = file;
 
-      const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+      const isJpgOrPng =
+        file.type === "image/jpeg" || file.type === "image/png";
       if (!isJpgOrPng) {
         handleToast(MessageAPIHelper.error("Đừng có mà upload linh tinh"));
         return;
@@ -140,7 +146,9 @@ function MainCard({ isEditable, generalInfo, toggleEditable, handleToast, userDa
 
       const isLt2M = file.size / 1024 / 1024 < 10;
       if (!isLt2M) {
-        handleToast(MessageAPIHelper.error("Không upload được ảnh lớn hơn 10MB!"));
+        handleToast(
+          MessageAPIHelper.error("Không upload được ảnh lớn hơn 10MB!")
+        );
         return;
       }
 
@@ -183,7 +191,11 @@ function MainCard({ isEditable, generalInfo, toggleEditable, handleToast, userDa
           }
         </Upload> */}
 
-        <Avatar name={userData?.fullName ? userData?.fullName : ""} width={64} height={64}></Avatar>
+        <Avatar
+          name={userData?.fullName ? userData?.fullName : ""}
+          width={64}
+          height={64}
+        ></Avatar>
 
         <Typography.Title level={4}>{generalInfo.fullName}</Typography.Title>
         {isEditable ? (
@@ -208,12 +220,18 @@ function SocialCard({ socialLinks, isEditable, onAddSocialLinks, userData }) {
         className={styles.list}
         dataSource={socialLinks}
         renderItem={(item, index) => {
-          return <SocialLinkItem isEditable={isEditable} item={item} index={index} />;
+          return (
+            <SocialLinkItem isEditable={isEditable} item={item} index={index} />
+          );
         }}
       />
       {isEditable && socialLinks.length < 20 ? (
         <Flex justify="center">
-          <Button type="link" icon={<PlusOutlined />} onClick={onAddSocialLinks}>
+          <Button
+            type="link"
+            icon={<PlusOutlined />}
+            onClick={onAddSocialLinks}
+          >
             Thêm liên kết
           </Button>
         </Flex>
@@ -253,7 +271,9 @@ function SocialLinkItem({ isEditable, item, index }) {
                   ) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error("Yêu cầu nhập đúng định dạng url"));
+                  return Promise.reject(
+                    new Error("Yêu cầu nhập đúng định dạng url")
+                  );
                 },
               }),
               {
@@ -296,7 +316,12 @@ function InformationCard({ generalInfo, isEditable }) {
           if (field.type === "date") {
             FieldComponent = <DatePicker />;
           } else {
-            FieldComponent = <Input addonBefore={key === "phone" ? "+84" : ""} {...field.fieldProps} />;
+            FieldComponent = (
+              <Input
+                addonBefore={key === "phone" ? "+84" : ""}
+                {...field.fieldProps}
+              />
+            );
           }
 
           return (
@@ -317,10 +342,17 @@ function InformationCard({ generalInfo, isEditable }) {
                 </>
               ) : (
                 <Space size={"middle"}>
-                  <Typography.Title level={5} className={styles.infomationTitle}>
+                  <Typography.Title
+                    level={5}
+                    className={styles.infomationTitle}
+                  >
                     {field.label}
                   </Typography.Title>
-                  <Typography.Paragraph ellipsis={true} className={styles.infomationValue} type="secondary">
+                  <Typography.Paragraph
+                    ellipsis={true}
+                    className={styles.infomationValue}
+                    type="secondary"
+                  >
                     {value ? value : "Chưa có"}
                   </Typography.Paragraph>
                 </Space>
@@ -347,16 +379,24 @@ export default function FormProfile({ userData }) {
     avatar: userData.avatar ?? "",
     avatarFile: undefined,
   });
-  const [socialLinks, setSocialLinks] = useState(userData.socials?.length ? userData.socials : [""]);
+  const [socialLinks, setSocialLinks] = useState(
+    userData.socials?.length ? userData.socials : [""]
+  );
   const [verifyEmail, setVerifyEmail] = useState(userData.verifyEmail ?? false);
   const [openModalOTP, setOpenModalOTP] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
 
-  const handleToast = useCallback((value) => messageApi.open({ ...value }), [messageApi]);
+  const handleToast = useCallback(
+    (value) => messageApi.open({ ...value }),
+    [messageApi]
+  );
 
   const toggleEditable = useCallback(() => setIsEditable((prev) => !prev), []);
 
-  const handleAddSocialLinks = useCallback(() => setSocialLinks((prev) => [...prev, ""]), []);
+  const handleAddSocialLinks = useCallback(
+    () => setSocialLinks((prev) => [...prev, ""]),
+    []
+  );
 
   const handleVerifyEmail = useCallback(async (email, action, otp) => {
     return await userRepository.verifyEmail(email, action, otp);
@@ -367,11 +407,15 @@ export default function FormProfile({ userData }) {
     const resSendOTP = await sendOTP(generalInfo.email, ACTIONS.VERIFY_EMAIL);
     if (resSendOTP.statusCode !== 200 || !resSendOTP.success) {
       setIsFetching(false);
-      handleToast(MessageAPIHelper.error("Đang xảy ra lỗi. Hãy thử lại sau nhé!"));
+      handleToast(
+        MessageAPIHelper.error("Đang xảy ra lỗi. Hãy thử lại sau nhé!")
+      );
       return;
     }
 
-    handleToast(MessageAPIHelper.success("Mã xác thực đã được gửi. Check mail nha!"));
+    handleToast(
+      MessageAPIHelper.success("Mã xác thực đã được gửi. Check mail nha!")
+    );
     setOpenModalOTP(true);
     setIsFetching(false);
   }, [generalInfo, handleToast]);
@@ -386,7 +430,9 @@ export default function FormProfile({ userData }) {
         return;
       }
 
-      handleToast(MessageAPIHelper.success("Mã xác thực đã được gửi lại. Check mail nha!"));
+      handleToast(
+        MessageAPIHelper.success("Mã xác thực đã được gửi lại. Check mail nha!")
+      );
     },
     [handleToast]
   );
@@ -450,9 +496,13 @@ export default function FormProfile({ userData }) {
         });
         toggleEditable();
       }
-      handleToast(MessageAPIHelper.success("Cập nhật thông tin cá nhân thành công!"));
+      handleToast(
+        MessageAPIHelper.success("Cập nhật thông tin cá nhân thành công!")
+      );
     } catch (e) {
-      handleToast(MessageAPIHelper.error("Cập nhật thông tin cá nhân thất bại!"));
+      handleToast(
+        MessageAPIHelper.error("Cập nhật thông tin cá nhân thất bại!")
+      );
       console.log(e);
     }
   };
@@ -521,7 +571,10 @@ export default function FormProfile({ userData }) {
           </Col>
           <Col xs={24} md={15}>
             <Flex vertical gap={16}>
-              <InformationCard generalInfo={generalInfo} isEditable={isEditable} />
+              <InformationCard
+                generalInfo={generalInfo}
+                isEditable={isEditable}
+              />
               {/* <Card title="Các hoạt động gần đây">
                 <Typography.Text>Chưa có hoạt động nào gần đây</Typography.Text>
               </Card> */}
