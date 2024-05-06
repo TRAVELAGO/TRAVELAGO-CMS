@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { fetchLogout } from "../../redux/userAction";
-import { PATH_URL, ROLE } from "../../utils/const/common";
+import { PATH_URL, ROLE, TRAVELAGO } from "../../utils/const/common";
 import Avatar from "../base/avatar/Avatar";
 import Menu from "../base/menu/Menu";
 import "./navbar.scss";
@@ -59,7 +59,7 @@ function Navbar() {
       <div className="left">
         <Link to={PATH_URL.HOME} className="logo">
           <img src="/logo.png" alt="" width={64} height={64} />
-          <span>Travelago</span>
+          <span>{TRAVELAGO}</span>
         </Link>
         <Link to={PATH_URL.HOME}>Home</Link>
         <Link to={PATH_URL.ABOUT}>About</Link>

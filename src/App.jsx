@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
@@ -5,6 +6,7 @@ import BlankLayout from "./components/layout/blankLayout/BlankLayout";
 import Layout from "./components/layout/userLayout/Layout";
 import { singlePageLoader } from "./lib/loader";
 import { resetFetch } from "./redux/appAction";
+import { loginFailure } from "./redux/userRedux";
 import { fetchInitRecentList, fetchInitWishlist } from "./redux/wishlistAction";
 import PageNotFound from "./routes/404/PageNotFound";
 import BookingDetail from "./routes/bookingDetail/BookingDetail";
@@ -18,8 +20,10 @@ import HotelRegister from "./routes/hotelRegister/HotelRegister";
 import Login from "./routes/login/Login";
 import MyBooking from "./routes/myBooking/MyBooking";
 import PaymentPage from "./routes/paymentPage/PaymentPage";
+import PrivacyPolicy from "./routes/privacyPolicy/PrivacyPolicy";
 import Profile from "./routes/profile/Profile";
 import Register from "./routes/register/Register";
+import TermsAndConditions from "./routes/termsAndConditions/TermsAndConditons";
 import Wishlist from "./routes/wishlist/Wishlist";
 import { makeRequest } from "./utils/axios";
 
@@ -39,6 +43,14 @@ const routes = [
       {
         path: "/contact",
         element: <HomePage />,
+      },
+      {
+        path: "/terms-and-conditions",
+        element: <TermsAndConditions />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
       },
       {
         path: "/booking/:id",
@@ -132,9 +144,12 @@ function App() {
   }
 
   const dispatch = useDispatch();
-  dispatch(resetFetch());
-  dispatch(fetchInitWishlist());
-  dispatch(fetchInitRecentList());
+  useEffect(() => {
+    dispatch(resetFetch());
+    dispatch(loginFailure(""));
+    dispatch(fetchInitWishlist());
+    dispatch(fetchInitRecentList());
+  }, []);
 
   const router = createBrowserRouter(routes);
 

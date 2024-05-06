@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import { fetchForgotPassword } from "../../redux/userAction";
-import { PATH_URL, passwordRegex } from "../../utils/const/common";
+import { PATH_URL } from "../../utils/const/common";
+import { passwordRegex } from "../../utils/const/regex";
 import "./forgotPassword.scss";
 
 const validationSchema = Yup.object().shape({

@@ -6,7 +6,8 @@ import * as Yup from "yup";
 
 import Loading from "../../components/base/loading/Loading";
 import { fetchLogin } from "../../redux/userAction";
-import { PATH_URL, passwordRegex } from "../../utils/const/common";
+import { PATH_URL } from "../../utils/const/common";
+import { passwordRegex } from "../../utils/const/regex";
 import "./login.scss";
 
 const validationSchema = Yup.object().shape({

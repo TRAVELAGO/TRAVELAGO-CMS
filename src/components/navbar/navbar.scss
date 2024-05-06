@@ -8,7 +8,7 @@
   z-index: 100;
 
   & a {
-    transition: scale 0.4s ease, padding 0.3s ease, color 0.2s linear;
+    transition: transform 0.4s ease-out, padding 0.3s ease, color 0.2s ease-in-out;
 
     &:hover {
       scale: 1.05;
@@ -75,6 +75,9 @@
     }
 
     & .auth {
+      display: flex;
+      align-items: center;
+
       & .host-btn {
         margin-left: 20px;
       }
