@@ -24,5 +24,5 @@ export default function Loading() {
         </Flex>
       </Col>
     </Row>
-  )
+  );
 }

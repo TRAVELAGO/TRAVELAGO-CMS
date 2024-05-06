@@ -1,6 +1,6 @@
 @import "../../responsive.scss";
 
-nav {
+.navbar-wrapper {
   height: 100px;
   display: flex;
   justify-content: space-between;
@@ -8,7 +8,8 @@ nav {
   z-index: 100;
 
   & a {
-    transition: scale 0.4s ease, padding 0.3s ease, color 0.2s linear;
+    transition: transform 0.4s ease-out, padding 0.3s ease,
+      color 0.2s ease-in-out;
 
     &:hover {
       scale: 1.05;
@@ -61,9 +62,23 @@ nav {
       & .avatar {
         margin-right: 20px;
       }
+
+      & .hotel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        img {
+          width: 30px;
+          height: 30px;
+        }
+      }
     }
 
     & .auth {
+      display: flex;
+      align-items: center;
+
       & .host-btn {
         margin-left: 20px;
       }
@@ -74,7 +89,7 @@ nav {
         height: 50px;
         padding: 5px 16px;
         border-radius: 5px;
-        display: inline-block;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
       }
@@ -84,7 +99,7 @@ nav {
         height: 50px;
         padding: 5px 16px;
         border-radius: 5px;
-        display: inline-block;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
       }

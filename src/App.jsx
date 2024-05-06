@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
@@ -6,7 +7,9 @@ import Layout from "./components/layout/userLayout/Layout";
 import { singlePageLoader } from "./lib/loader";
 import { resetFetch } from "./redux/appAction";
 import { fetchInitRecentList, fetchInitWishlist } from "./redux/wishlistAction";
+import PageNotFound from "./routes/404/PageNotFound";
 import BookingDetail from "./routes/bookingDetail/BookingDetail";
+import ChooseHotel from "./routes/chooseHotel/ChooseHotel";
 import ForgotPassword from "./routes/forgotPassword/ForgotPassword";
 import HomePage from "./routes/homePage/homePage";
 import HotelCreate from "./routes/hotelCreate/HotelCreate";
@@ -16,11 +19,12 @@ import HotelRegister from "./routes/hotelRegister/HotelRegister";
 import Login from "./routes/login/Login";
 import MyBooking from "./routes/myBooking/MyBooking";
 import PaymentPage from "./routes/paymentPage/PaymentPage";
+import PrivacyPolicy from "./routes/privacyPolicy/PrivacyPolicy";
 import Profile from "./routes/profile/Profile";
 import Register from "./routes/register/Register";
-import { makeRequest } from "./utils/axios";
+import TermsAndConditions from "./routes/termsAndConditions/TermsAndConditons";
 import Wishlist from "./routes/wishlist/Wishlist";
-import PageNotFound from "./routes/404/PageNotFound";
+import { makeRequest } from "./utils/axios";
 
 const routes = [
   {
@@ -38,6 +42,14 @@ const routes = [
       {
         path: "/contact",
         element: <HomePage />,
+      },
+      {
+        path: "/terms-and-conditions",
+        element: <TermsAndConditions />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
       },
       {
         path: "/booking/:id",
@@ -109,6 +121,10 @@ const routes = [
         path: "/forgot-password",
         element: <ForgotPassword />,
       },
+      {
+        path: "/chooseHotel",
+        element: <ChooseHotel />,
+      },
     ],
   },
   {
@@ -127,9 +143,11 @@ function App() {
   }
 
   const dispatch = useDispatch();
-  dispatch(resetFetch());
-  dispatch(fetchInitWishlist());
-  dispatch(fetchInitRecentList());
+  useEffect(() => {
+    dispatch(resetFetch());
+    dispatch(fetchInitWishlist());
+    dispatch(fetchInitRecentList());
+  }, []);
 
   const router = createBrowserRouter(routes);
 

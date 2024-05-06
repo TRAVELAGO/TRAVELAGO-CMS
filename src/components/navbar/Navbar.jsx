@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { fetchLogout } from "../../redux/userAction";
-import { PATH_URL } from "../../utils/const/common";
+import { PATH_URL, ROLE, TRAVELAGO } from "../../utils/const/common";
 import Avatar from "../base/avatar/Avatar";
-import "./navbar.scss";
 import Menu from "../base/menu/Menu";
+import "./navbar.scss";
 
-const PROFILE_MENU = [
+const USER_PROFILE_MENU = [
   {
     name: "Profile",
     link: PATH_URL.PROFILE,
@@ -23,12 +23,27 @@ const PROFILE_MENU = [
   },
 ];
 
+const HOTEL_PROFILE_MENU = [
+  {
+    name: "Profile",
+    link: PATH_URL.PROFILE,
+  },
+  {
+    name: "Wishlist",
+    link: PATH_URL.WISHLIST,
+  },
+];
+
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
+  const { currentHotel } = useSelector((state) => state.hotel);
   const [open, setOpen] = useState(false);
   const [openProfileMenu, setOpenProfileMenu] = useState(false);
+
+  const profileMenu =
+    user?.role === ROLE.USER ? USER_PROFILE_MENU : HOTEL_PROFILE_MENU;
 
   const handleOpenMenu = () => {
     setOpenProfileMenu(true);
@@ -40,11 +55,11 @@ function Navbar() {
   };
 
   return (
-    <nav>
+    <nav className="navbar-wrapper">
       <div className="left">
         <Link to={PATH_URL.HOME} className="logo">
           <img src="/logo.png" alt="" width={64} height={64} />
-          <span>Travelago</span>
+          <span>{TRAVELAGO}</span>
         </Link>
         <Link to={PATH_URL.HOME}>Home</Link>
         <Link to={PATH_URL.ABOUT}>About</Link>
@@ -55,6 +70,12 @@ function Navbar() {
         {user ? (
           <div className="user h-full">
             <div className="relative flex items-center h-full">
+              {currentHotel && (
+                <Link className="hotel" to={PATH_URL.CHOOSE_HOTEL}>
+                  <img src="/bed.png" alt="" />
+                  <span>{currentHotel.name}</span>
+                </Link>
+              )}
               <div className="cursor-pointer" onClick={handleOpenMenu}>
                 <Avatar url={user.avatar} name={user.fullName} noti={3} />
                 <span>{user.fullName}</span>
@@ -64,7 +85,7 @@ function Navbar() {
                 onClose={() => setOpenProfileMenu(false)}
               >
                 <ul>
-                  {PROFILE_MENU.map((menu) => (
+                  {profileMenu.map((menu) => (
                     <li
                       key={menu.name}
                       className="relative block hover:border-l-2 hover:border-primary-100"

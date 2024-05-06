@@ -2,6 +2,8 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userRedux";
 import appReducer from "./appRedux";
 import wishlistReducer from "./wishlistRedux";
+import hotelReducer from "./hotelRedux";
+
 
 import {
     persistStore,
@@ -22,9 +24,11 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-    user: userReducer,
     app: appReducer,
-    wishlist: wishlistReducer});
+    user: userReducer,
+    hotel: hotelReducer,
+    wishlist: wishlistReducer
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

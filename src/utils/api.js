@@ -1,4 +1,5 @@
-import { makeRequest } from "./axios"
+import { makeRequest } from "./axios";
+
 //auth
 export const login = async (user) => {
     const res = await makeRequest.post("auth/login", user);
@@ -15,6 +16,14 @@ export const editUser = async (user) => {
 }
 export const hotelRegister = async (user) => {
     const res = await makeRequest.post("auth/register-hotel", user);
+    return res
+}
+export const sendEmail = async (email) => {
+    const res = await makeRequest.post("auth/forgot-password", email);
+    return res
+}
+export const resetPassword = async (user) => {
+    const res = await makeRequest.post("auth/checkCodeOtp", user);
     return res
 }
 //thêm refreshtoken sau
@@ -126,5 +135,11 @@ export const updateBookingCheckIn = async (id) => {
 }
 export const updateBookingCancel = async (id) => {
     const res = await makeRequest.patch("bookings/" + id + "/cancel");
+    return res
+}
+
+//payment
+export const createPayment = async (data) => {
+    const res = await makeRequest.post("payments", data);
     return res
 }

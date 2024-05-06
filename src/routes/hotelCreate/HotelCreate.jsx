@@ -9,12 +9,13 @@ import { PATH_URL } from "../../utils/const/common";
 import "./hotelCreate.scss";
 
 function HotelCreate() {
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
+  const { currentHotel } = useSelector((state) => state.hotel);
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [imagesFile, setImagesFile] = useState([]);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ function HotelCreate() {
       formData.append("currentAvailable", parseInt(inputs.currentAvailable)); //bỏ
       formData.append("total", parseInt(inputs.total));
       formData.append("roomTypeId", 1);
-      const res = await createRoom(1, formData);
+      const res = await createRoom(currentHotel.id, formData);
       navigate(PATH_URL.HOTEL_DETAIL.replace(":id", res.data.id));
     } catch (err) {
       console.log(err);
