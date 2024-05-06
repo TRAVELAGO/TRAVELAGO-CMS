@@ -6,7 +6,6 @@ import BlankLayout from "./components/layout/blankLayout/BlankLayout";
 import Layout from "./components/layout/userLayout/Layout";
 import { singlePageLoader } from "./lib/loader";
 import { resetFetch } from "./redux/appAction";
-import { loginFailure } from "./redux/userRedux";
 import { fetchInitRecentList, fetchInitWishlist } from "./redux/wishlistAction";
 import PageNotFound from "./routes/404/PageNotFound";
 import BookingDetail from "./routes/bookingDetail/BookingDetail";
@@ -146,7 +145,6 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetFetch());
-    dispatch(loginFailure(""));
     dispatch(fetchInitWishlist());
     dispatch(fetchInitRecentList());
   }, []);

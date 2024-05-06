@@ -2,15 +2,13 @@
 
 .searchBar {
   .type {
-
-
     button {
       padding: 16px 36px;
       border: 1px solid #999;
       border-bottom: none;
-      cursor: pointer;
       background-color: white;
       text-transform: capitalize;
+      cursor: pointer;
 
       &.active {
         background-color: black;
@@ -33,7 +31,6 @@
     display: flex;
     justify-content: space-between;
     height: 64px;
-    gap: 5px;
 
     @include sm {
       flex-direction: column;
@@ -41,9 +38,9 @@
     }
 
     input {
-      border: none;
+      width: 206px;
+      border-right: 1px solid #999;
       padding: 0px 10px;
-      width: 200px;
 
       @include lg {
         padding: 0px 5px;
@@ -61,7 +58,7 @@
         }
       }
 
-      @include sm{
+      @include sm {
         width: auto;
         &:nth-child(2),
         &:nth-child(3) {
@@ -73,12 +70,12 @@
     }
 
     button {
+      flex: 1;
+      background-color: #fece51;
       border: none;
       cursor: pointer;
-      background-color: #fece51;
-      flex: 1;
 
-      @include sm{
+      @include sm {
         padding: 10px;
       }
 

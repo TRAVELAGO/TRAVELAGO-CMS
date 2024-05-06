@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-import Loading from "../../components/base/loading/Loading";
 import { fetchLogin } from "../../redux/userAction";
 import { PATH_URL } from "../../utils/const/common";
 import { passwordRegex } from "../../utils/const/regex";
@@ -68,7 +67,7 @@ const Login = () => {
         </div>
         <div className="right">
           <h1>Login</h1>
-          <form onSubmit={formik.handleSubmit}>
+          <form>
             {error && <p className="error-message">{error}</p>}
             <label htmlFor="email">
               <input
@@ -97,7 +96,9 @@ const Login = () => {
               )}
             </label>
             <Link to={PATH_URL.FORGOT_PASSWORD}>Forgot your password?</Link>
-            <button type="submit">Login</button>
+            <button type="submit" onClick={formik.handleSubmit}>
+              Login
+            </button>
           </form>
         </div>
       </div>
