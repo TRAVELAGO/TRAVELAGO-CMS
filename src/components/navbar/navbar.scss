@@ -8,7 +8,8 @@
   z-index: 100;
 
   & a {
-    transition: transform 0.4s ease-out, padding 0.3s ease, color 0.2s ease-in-out;
+    transition: transform 0.4s ease-out, padding 0.3s ease,
+      color 0.2s ease-in-out;
 
     &:hover {
       scale: 1.05;
@@ -88,7 +89,7 @@
         height: 50px;
         padding: 5px 16px;
         border-radius: 5px;
-        display: inline-block;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
       }
@@ -98,7 +99,7 @@
         height: 50px;
         padding: 5px 16px;
         border-radius: 5px;
-        display: inline-block;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
       }

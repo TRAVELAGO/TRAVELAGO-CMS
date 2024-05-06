@@ -43,7 +43,7 @@ function Navbar() {
   const [openProfileMenu, setOpenProfileMenu] = useState(false);
 
   const profileMenu =
-    user.role === ROLE.USER ? USER_PROFILE_MENU : HOTEL_PROFILE_MENU;
+    user?.role === ROLE.USER ? USER_PROFILE_MENU : HOTEL_PROFILE_MENU;
 
   const handleOpenMenu = () => {
     setOpenProfileMenu(true);

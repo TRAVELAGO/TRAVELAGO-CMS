@@ -1,4 +1,5 @@
 import { onFailure, onStart, onSuccess } from "./appRedux";
+import { onReset } from "./userRedux";
 
 export const setFetchStart = () => async (dispatch) => {
   dispatch(onStart());
@@ -14,6 +15,7 @@ export const setFetchFailure = (error) => async (dispatch) => {
 
 export const resetFetch = () => async (dispatch) => {
   dispatch(onSuccess());
+  dispatch(onReset());
 };
 
 export const withLoading = (func) => async (dispatch) => {
