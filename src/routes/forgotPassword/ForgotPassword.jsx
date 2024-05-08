@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-import { fetchForgotPassword } from "../../redux/userAction";
-import { PATH_URL, passwordRegex } from "../../utils/const/common";
+import { fetchSendEmail } from "../../redux/userAction";
+import { PATH_URL } from "../../utils/const/common";
+import { passwordRegex } from "../../utils/const/regex";
 import "./forgotPassword.scss";
 
 const validationSchema = Yup.object().shape({
@@ -30,6 +31,8 @@ const ForgotPassword = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [error, setError] = useState("");
 
+  const [isSendOtp, setIsSendOtp] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -40,13 +43,28 @@ const ForgotPassword = () => {
     onSubmit: async (values) => {
       setError("");
       try {
-        await fetchForgotPassword(dispatch, values);
-        navigate(PATH_URL.LOGIN);
+        // await fetchForgotPassword(dispatch, values);
+        // navigate(PATH_URL.LOGIN);
       } catch (error) {
         setError(error.message);
       }
     },
   });
+
+  const handleSendEmail = async () => {
+    setError("");
+    if (!formik.values.email || formik.errors.email) {
+      setError(formik.errors.email || "Email required!");
+      return;
+    }
+    try {
+      const _payload = { email: formik.values.email };
+      await fetchSendEmail(dispatch, _payload);
+      setIsSendOtp(true);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
     if (currentUser) {
@@ -59,7 +77,7 @@ const ForgotPassword = () => {
       <div className="card">
         <div className="left">
           <h1>Forgot Password</h1>
-          <form onSubmit={formik.handleSubmit}>
+          <form>
             {error && <p className="error-message">{error}</p>}
             <label htmlFor="email">
               <input
@@ -75,36 +93,46 @@ const ForgotPassword = () => {
               )}
             </label>
 
-            <label htmlFor="password">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-              />
-              {formik.errors?.password && formik.touched.password && (
-                <p className="error-message">{formik.errors?.password}</p>
-              )}
-            </label>
-            <label htmlFor="passwordConfirm">
-              <input
-                id="passwordConfirm"
-                name="passwordConfirm"
-                type="password"
-                placeholder="Confirm password"
-                value={formik.values.passwordConfirm}
-                onChange={formik.handleChange}
-              />
-              {formik.errors?.passwordConfirm &&
-                formik.touched.passwordConfirm && (
-                  <p className="error-message">
-                    {formik.errors?.passwordConfirm}
-                  </p>
-                )}
-            </label>
-            <button type="submit">Submit</button>
+            {!isSendOtp ? (
+              <button type="button" onClick={handleSendEmail}>
+                Send Otp
+              </button>
+            ) : (
+              <>
+                <label htmlFor="password">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.errors?.password && formik.touched.password && (
+                    <p className="error-message">{formik.errors?.password}</p>
+                  )}
+                </label>
+                <label htmlFor="passwordConfirm">
+                  <input
+                    id="passwordConfirm"
+                    name="passwordConfirm"
+                    type="password"
+                    placeholder="Confirm password"
+                    value={formik.values.passwordConfirm}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.errors?.passwordConfirm &&
+                    formik.touched.passwordConfirm && (
+                      <p className="error-message">
+                        {formik.errors?.passwordConfirm}
+                      </p>
+                    )}
+                </label>
+                <button type="button" onClick={formik.handleSubmit}>
+                  Submit
+                </button>
+              </>
+            )}
           </form>
         </div>
         <div className="right">

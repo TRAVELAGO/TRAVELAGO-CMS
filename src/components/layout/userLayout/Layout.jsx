@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Loading from "../../base/loading/Loading";
+import Footer from "../../footer/Footer";
 import Navbar from "../../navbar/Navbar";
-import Footer from "../../footer_v2/Footer";
 import "./layout.scss";
 
 function Layout() {

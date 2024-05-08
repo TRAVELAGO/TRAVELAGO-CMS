@@ -1,0 +1,150 @@
+@import "@/responsive.scss";
+
+.footer-wrapper {
+  & .footer {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 60px 0;
+    z-index: 100;
+
+    & .footer-widget-sm {
+      flex: 3;
+    }
+
+    & .footer-widget-lg {
+      flex: 4;
+    }
+
+    & .footer-widget-lg,
+    & .footer-widget-sm {
+      padding-x: 12px;
+      min-width: 200px;
+
+      & .widget-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 25px;
+
+        & img {
+          border-radius: 10px;
+        }
+
+        & span {
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+
+      & p {
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 25px;
+      }
+
+      & .widget-social {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        & li {
+          width: 40px;
+          height: 40px;
+
+          & a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            transition: all 0.4s ease;
+            border-radius: 50%;
+            background-color: $white;
+
+            &:hover {
+              scale: 1.1;
+              background-color: $primary;
+            }
+
+            & .icons {
+              color: $dark-variant;
+              width: 24px;
+              height: 24px;
+
+              &:hover {
+                color: $white;
+              }
+            }
+          }
+        }
+      }
+
+      & h3 {
+        font-size: 20px;
+        font-weight: 500;
+        color: $black;
+        padding: 0;
+        margin: 0;
+      }
+
+      & .widget-menu {
+        margin-top: 30px;
+
+        & li {
+          transition: all 0.4s ease;
+          list-style: none;
+          margin-bottom: 10px;
+
+          &:hover {
+            scale: 1.05;
+          }
+        }
+      }
+
+      & .widget-hours {
+        margin-top: 30px;
+        max-width: 300px;
+
+        & p {
+          margin: 0;
+          border-bottom: 1px dashed $dark;
+          padding-bottom: 12px;
+          margin-bottom: 12px;
+
+          & span {
+            float: right;
+          }
+        }
+      }
+    }
+  }
+
+  & .copyright {
+    padding: 40px 0;
+    border-top: 1px solid $border;
+
+    & .copyright-title {
+      text-align: center;
+
+      & p {
+        color: $black;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+
+        & a {
+          display: inline-block;
+          transition: all 0.4s ease;
+          color: $primary;
+          margin-right: 4px;
+
+          &:hover {
+            scale: 1.1;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,35 @@
+// Color
+$blue-light: #268fff;
+$blue: #007bff;
+$blue-dark: #0053ac;
+$blue-dark-2: #012f61;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e65078;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #17a2b8;
+$white: #fff;
+$gray: #f7f7f7;
+$gray-dark: #343a40;
+$gray-light: #adc1d4;
+
+$primary: #fece51;
+$secondary: #6c757d;
+$success: #28a745;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #ed4c78;
+$light: #f8fafd;
+$black: #0e1317;
+$dark: #666667;
+$dark-variant: #8a8a8a;
+$border: #e0e0e1;
+$disabled-color: #8c98a4;
+
 @mixin sm {
   @media (max-width: 738px) {
     @content;

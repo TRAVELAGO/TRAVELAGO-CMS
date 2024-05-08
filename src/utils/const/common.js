@@ -1,9 +1,4 @@
-export const phoneRegex = /((^(\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$/;
-
-export const passwordRegex =
-  /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-
-export const MAX_RECENT_LIST = 50;
+export const TRAVELAGO = "Travelago";
 
 export const ROLE = {
   USER: "USER",
@@ -29,6 +24,8 @@ export const PATH_URL = {
   BOOKING_DETAIL: "/booking/:id",
   NOT_FOUND: "/not-found",
 };
+
+export const MAX_RECENT_LIST = 50;
 
 export const getQueryParams = (queryParams) => {
   const query = {};

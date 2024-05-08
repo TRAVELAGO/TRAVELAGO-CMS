@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import { fetchHotelRegister, fetchLogin } from "../../redux/userAction";
-import { PATH_URL, passwordRegex, phoneRegex } from "../../utils/const/common";
+import { PATH_URL } from "../../utils/const/common";
+import { passwordRegex, phoneRegex } from "../../utils/const/regex";
 import "./hotelRegister.scss";
 
 const validationSchema = Yup.object().shape({
