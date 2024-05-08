@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { PATH_URL } from "../../utils/const/common";
+import { PATH_URL, TRAVELAGO } from "../../utils/const/common";
 import "./footer.scss";
 
 function FooterTemplate1() {
@@ -10,7 +10,7 @@ function FooterTemplate1() {
         <div className="footer-widget-lg">
           <Link to={PATH_URL.HOME} className="widget-logo">
             <img src="/logo.png" alt="" width={100} height={100} />
-            <span>Travelago</span>
+            <span className="capitalize">{TRAVELAGO}</span>
           </Link>
           <p>
             Nunc at lacus at nibh scelerisque scelerisque id vel metus. Vivamus
@@ -103,8 +103,10 @@ function FooterTemplate1() {
         <div className="copyright-title">
           <p>
             {"Copyright © 2024 "}
-            <Link to="https://github.com/TRAVELAGO">TRAVELAGO</Link>{" "}
-            {"Website by "}
+            <Link to="https://github.com/TRAVELAGO" className="uppercase">
+              {TRAVELAGO}
+            </Link>
+            {" Website by "}
             <Link to="https://www.facebook.com/100065533927607/">Bang, </Link>
             <Link to="https://www.facebook.com/100013170812020/">Dung, </Link>
             <Link to="https://www.facebook.com/minhduc.mll">Duc, </Link>

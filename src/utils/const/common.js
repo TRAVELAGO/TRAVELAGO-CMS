@@ -22,6 +22,8 @@ export const PATH_URL = {
   HOTEL_NEW: "/hotel/new",
   HOTEL_DETAIL: "/hotel/:id",
   BOOKING_DETAIL: "/booking/:id",
+  TERMS_AND_CONDITIONS: "/terms-and-conditions",
+  PRIVACY_POLICY: "/privacy-policy",
   NOT_FOUND: "/not-found",
 };
 

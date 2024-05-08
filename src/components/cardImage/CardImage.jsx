@@ -78,7 +78,7 @@ function CardImage({ item }) {
         leave="transition-all duration-[400ms]"
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 -translate-y-6"
-        className="absolute max-w-[80%] bottom-5 left-1/2 -translate-x-1/2 z-[1]"
+        className="absolute max-w-[90%] bottom-5 left-1/2 -translate-x-1/2 z-[1]"
       >
         <div className="bg-[#FFF] px-8 py-5">
           <h2 className="flex items-center justify-between gap-2 mb-1">
