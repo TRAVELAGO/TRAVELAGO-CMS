@@ -61,10 +61,10 @@ function Navbar() {
           <img src="/logo.png" alt="" width={64} height={64} />
           <span>{TRAVELAGO}</span>
         </Link>
-        <Link to={PATH_URL.HOME}>Home</Link>
-        <Link to={PATH_URL.ABOUT}>About</Link>
-        <Link to={PATH_URL.CONTACT}>Contact</Link>
-        <Link to={PATH_URL.HOTEL}>Agents</Link>
+        <Link to={PATH_URL.HOME}>Trang chủ</Link>
+        <Link to={PATH_URL.ABOUT}>Về chúng tôi</Link>
+        <Link to={PATH_URL.CONTACT}>Liên hệ chúng tôi</Link>
+        <Link to={PATH_URL.HOTEL}>Khách sạn</Link>
       </div>
       <div className="right">
         {user ? (
