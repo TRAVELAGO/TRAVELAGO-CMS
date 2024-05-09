@@ -1,13 +1,14 @@
 import HeadPage from "../../components/headPage/HeadPage";
 import { TRAVELAGO } from "../../utils/const/common";
+import "./termsAndConditions.scss";
 
 function TermsAndConditions() {
-  const travelago = TRAVELAGO.toLowerCase();
+  const travelago = TRAVELAGO;
   return (
     <main>
       <article>
         <HeadPage title={"Điều khoản và Điều kiện"} />
-        <div className="Content_staticContent__Qrmnz">
+        <div className="term">
           <p>
             {travelago} là một công cụ tìm kiếm khách sạn, cung cấp cho người
             dùng thông tin chỗ ở (khách sạn, nhà nghỉ, etc.), khu vực du lịch và

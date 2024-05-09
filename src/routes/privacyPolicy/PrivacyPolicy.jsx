@@ -1,14 +1,15 @@
 import HeadPage from "../../components/headPage/HeadPage";
 import { TRAVELAGO } from "../../utils/const/common";
+import "./privacyPolicy.scss";
 
 function PrivacyPolicy() {
-  const travelago = TRAVELAGO.toLowerCase();
+  const travelago = TRAVELAGO;
   return (
     <main>
       <article>
         <HeadPage title={`Chính sách bảo mật của ${TRAVELAGO}`} />
-        <div class="Content_staticContent__Qrmnz">
-          <h3>Cập nhật lần cuối: Tháng 12 năm 2022</h3>
+        <div class="policy">
+          <h3>Cập nhật lần cuối: Tháng 05 năm 2024</h3>
           <p>
             Thông báo bảo mật này có hiệu lực với tất cả trang web, ứng dụng
             hoặc dịch vụ và ưu đãi khác (gọi chung là "Dịch vụ") do {travelago}
@@ -568,14 +569,14 @@ function PrivacyPolicy() {
                 cách dùng link tương ứng ở cuối các trang web của chúng tôi hoặc
                 thiết lập cài đặt để trình duyệt web của bạn từ chối cookie bằng
                 cách vào phần “Trợ giúp” trong thanh công cụ trên trình duyệt
-                của bạn. Bạn cũng có thể truy cập
+                của bạn. Bạn cũng có thể truy cập{" "}
                 <a href="www.youronlinechoices.com" target="_blank">
                   www.youronlinechoices.com
-                </a>
-                hoặc
+                </a>{" "}
+                hoặc{" "}
                 <a href="www.youradchoices.com" target="_blank">
                   www.youradchoices.com
-                </a>
+                </a>{" "}
                 để tìm hiểu cách chọn không nhận quảng cáo được cá nhân hóa.
               </p>
               <p>
