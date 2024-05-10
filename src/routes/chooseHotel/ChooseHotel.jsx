@@ -1,10 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMapEvents,
+} from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { selectHotel } from "../../redux/hotelAction";
 import "./chooseHotel.scss";
+import { createHotel } from "../../utils/api";
 
 const ChooseHotel = () => {
   const [showMap, setShowMap] = useState(false);
@@ -13,6 +20,7 @@ const ChooseHotel = () => {
     setShowMap(!showMap);
   };
   const { hotel: hotelList } = useSelector((state) => state.user);
+  console.log(hotelList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -29,10 +37,7 @@ const ChooseHotel = () => {
       }
     };
   }, []);
-  console.log(position);
-  const handleMapClick = (e) => {
-    setPosition(e.latlng);
-  };
+
   const modalRef = useRef(null);
   const handleChooseHotel = (i) => {
     console.log(i);
@@ -51,6 +56,48 @@ const ChooseHotel = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const inputs = Object.fromEntries(formData);
+    try {
+      const formData = new FormData();
+      // images.forEach((image) => {
+      //   formData.append("images", image);
+      // });
+      formData.append("name", inputs.name);
+      formData.append("address", inputs.address);
+      formData.append("latitude", position.lat);
+      formData.append("longitude", position.lng);
+      formData.append("checkInTime", "14:00:00");
+      formData.append("checkOutTime", "12:00:00");
+      await createHotel(formData);
+      setOpen(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleChooseLocation = (e) => {
+    e.preventDefault();
+    const map = mapRef.current;
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setPosition({ lat: latitude, lng: longitude });
+          if (map) {
+            map.setView([latitude, longitude], map.getZoom());
+          }
+        },
+        (error) => {
+          console.error("Error getting current location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
   return (
     <div className="chooseHotel">
       <div className="list">
@@ -61,45 +108,69 @@ const ChooseHotel = () => {
           </div>
         ))}
       </div>
-      <div className="new" onClick={toggleMap}>
+      <div className="new" onClick={() => setOpen(true)}>
         Tạo khách sạn mới
       </div>
       {open && (
         <div className="container-full">
           <div className="temporary" ref={modalRef}>
             {/* <Close onClick={() => setOpen(false)} /> */}
-            <img
-              src={
-                "https://nhadepso.com/wp-content/uploads/2023/03/tron-bo-nhung-hinh-nen-dien-thoai-galaxy-dep-chat-luong-nhat_2.jpg"
-              }
-              alt=""
-            />
+            <form onSubmit={handleSubmit}>
+              <div className="item">
+                <label htmlFor="name">Name</label>
+                <input id="name" name="name" type="text" />
+              </div>
+              <div className="item">
+                <label htmlFor="address">Address</label>
+                <input id="address" name="address" type="text" />
+              </div>
+              <div className="item">
+                Chọn vị trí của bạn trên bản đồ hoặc
+                <button className="now-location" onClick={handleChooseLocation}>
+                  Chọn vị trí hiện tại của bạn
+                </button>
+              </div>
+              <button className="create" type="submit">
+                Tạo khách sạn mới
+              </button>
+            </form>
+            <MapContainer
+              center={[21.0285, 105.8542]}
+              zoom={12}
+              style={{ height: "100%", width: "100%", flex: "1" }}
+              ref={mapRef}
+            >
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              />
+              <LocationMarker position={position} setPosition={setPosition} />
+            </MapContainer>
           </div>
         </div>
-      )}
-      {showMap && (
-        <MapContainer
-          center={[21.0285, 105.8542]}
-          zoom={12}
-          style={{ height: "400px", width: "400px" }}
-          ref={mapRef}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {position && (
-            <Marker position={position}>
-              <Popup>
-                Vĩ độ: {position.lat.toFixed(4)}, Kinh độ:{" "}
-                {position.lng.toFixed(4)}
-              </Popup>
-            </Marker>
-          )}
-        </MapContainer>
       )}
     </div>
   );
 };
 
 export default ChooseHotel;
+
+function LocationMarker({ position, setPosition }) {
+  // const [position, setPosition] = useState(null);
+  const map = useMapEvents({
+    click(e) {
+      map.locate();
+      setPosition(e.latlng);
+    },
+    // locationfound(e) {
+    //   setPosition(e.latlng);
+    //   map.flyTo(e.latlng, map.getZoom());
+    // },
+  });
+  console.log(position);
+  return position === null ? null : (
+    <Marker position={position}>
+      <Popup>You are here</Popup>
+    </Marker>
+  );
+}

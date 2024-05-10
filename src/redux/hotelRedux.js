@@ -13,11 +13,15 @@ const hotelSlice = createSlice({
         updateHotel: (state, action) => {
             state.currentHotel = action.payload.hotel;
         },
+        logoutHotel: (state) => {
+            state.currentHotel = null;
+        },
     },
 });
 
 export const {
     chooseHotel,
     updateHotel,
+    logoutHotel
 } = hotelSlice.actions;
 export default hotelSlice.reducer;

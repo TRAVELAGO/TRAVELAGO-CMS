@@ -55,13 +55,42 @@
   z-index: 1000;
 
   .temporary {
-    width: 25%;
-    height: 80%;
-    background-color: themed("bg");
-    color: themed("textColor");
+    width: 60%;
+    height: 60%;
+    background-color: #fff;
+    color: #000;
     position: relative;
     border-radius: 10px;
     overflow: hidden;
+    display: flex;
+    form {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding: 20px;
+      input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid lightgray;
+        padding: 20px 10px;
+      }
+
+      & button {
+        width: 50%;
+        padding: 10px;
+        margin: auto;
+        border: none;
+        background-color: rebeccapurple;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .now-location {
+        margin-left: 10px;
+      }
+    }
 
     svg {
       position: absolute;

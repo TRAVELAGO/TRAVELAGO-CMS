@@ -29,6 +29,10 @@ const HOTEL_PROFILE_MENU = [
     link: PATH_URL.PROFILE,
   },
   {
+    name: "My List Room",
+    link: PATH_URL.PROFILE_BOOKING,
+  },
+  {
     name: "Wishlist",
     link: PATH_URL.WISHLIST,
   },
