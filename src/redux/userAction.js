@@ -6,6 +6,7 @@ import {
   sendEmail,
 } from "../utils/api";
 import { makeRequest } from "../utils/axios";
+import { logoutHotel } from "./hotelRedux";
 import {
   loginSuccess,
   logoutSuccess,
@@ -95,4 +96,5 @@ export const updateUser = async (dispatch, user) => {
 export const fetchLogout = async (dispatch) => {
   document.cookie = "session=; path=/;";
   dispatch(logoutSuccess());
+  dispatch(logoutHotel());
 };

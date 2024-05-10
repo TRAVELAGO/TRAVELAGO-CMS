@@ -24,7 +24,7 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { currentUser, isFetching } = useSelector((state) => state.user);
+  const { currentUser, isFetching, hotel } = useSelector((state) => state.user);
   const [error, setError] = useState("");
 
   const formik = useFormik({
@@ -37,7 +37,6 @@ const Login = () => {
       setError("");
       try {
         await fetchLogin(dispatch, values);
-        navigate(PATH_URL.CHOOSE_HOTEL);
       } catch (error) {
         setError(error.message);
       }
@@ -46,7 +45,11 @@ const Login = () => {
 
   useEffect(() => {
     if (currentUser) {
-      navigate(PATH_URL.HOME);
+      if (hotel) {
+        navigate(PATH_URL.CHOOSE_HOTEL);
+      } else {
+        navigate(PATH_URL.HOME);
+      }
     }
   }, [currentUser]);
 
