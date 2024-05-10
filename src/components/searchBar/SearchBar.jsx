@@ -4,7 +4,7 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 import { PATH_URL, getQueryParams } from "../../utils/const/common";
 import "./searchBar.scss";
 
-const types = ["buy", "rent"];
+const types = ["Mua", "Thuê"];
 
 function SearchBar() {
   const navigate = useNavigate();
