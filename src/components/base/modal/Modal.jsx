@@ -23,7 +23,7 @@ const Modal = ({ isOpen, onClose, children }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="absolute top-0 left-0 w-full h-full bg-[#FFF] opacity-40 z-[998]" />
+          <div className="absolute top-0 left-0 w-full h-full bg-white opacity-40 z-[998]" />
 
           <div
             className="flex items-center justify-center w-3/5 h-3/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[999]"
@@ -34,7 +34,7 @@ const Modal = ({ isOpen, onClose, children }) => {
           >
             <div
               ref={modalRef}
-              className="bg-[#FFF] border border-gray-200 rounded-lg shadow-[0px_7px_29px_0px_rgba(100,100,111,0.2)"
+              className="bg-white border border-gray-200 rounded-lg shadow-[0px_7px_29px_0px_rgba(100,100,111,0.2)"
             >
               {children}
             </div>

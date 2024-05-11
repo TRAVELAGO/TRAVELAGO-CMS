@@ -25,72 +25,72 @@ import Register from "./routes/register/Register";
 import TermsAndConditions from "./routes/termsAndConditions/TermsAndConditons";
 import Wishlist from "./routes/wishlist/Wishlist";
 import { makeRequest } from "./utils/axios";
+import { PATH_URL } from "./utils/const/common";
 
 const routes = [
   {
-    path: "/",
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: PATH_URL.HOME,
         element: <HomePage />,
       },
       {
-        path: "/about",
+        path: PATH_URL.ABOUT,
         element: <HomePage />,
       },
       {
-        path: "/contact",
+        path: PATH_URL.CONTACT,
         element: <HomePage />,
       },
       {
-        path: "/terms-and-conditions",
+        path: PATH_URL.TERMS_AND_CONDITIONS,
         element: <TermsAndConditions />,
       },
       {
-        path: "/privacy-policy",
+        path: PATH_URL.PRIVACY_POLICY,
         element: <PrivacyPolicy />,
       },
       {
-        path: "/booking/:id",
+        path: PATH_URL.BOOKING_DETAIL,
         element: <BookingDetail />,
       },
       {
-        path: "/hotel",
+        path: PATH_URL.HOTEL,
         children: [
           {
-            path: "/hotel",
+            path: PATH_URL.HOTEL,
             element: <HotelList />,
           },
           {
-            path: "/hotel/:id",
+            path: PATH_URL.HOTEL_DETAIL,
             element: <HotelDetail />,
             loader: singlePageLoader,
           },
           {
-            path: "/hotel/new",
+            path: PATH_URL.HOTEL_NEW,
             element: <HotelCreate />,
           },
         ],
       },
       {
-        path: "/wishlist",
+        path: PATH_URL.WISHLIST,
         element: <Wishlist />,
       },
       {
-        path: "/profile",
+        path: PATH_URL.PROFILE,
         children: [
           {
-            path: "/profile",
+            path: PATH_URL.PROFILE,
             element: <Profile />,
           },
           {
-            path: "/profile/update",
+            path: PATH_URL.PROFILE_UPDATE,
             element: <Profile />,
             // element: <ProfileUpdate />,
           },
           {
-            path: "/profile/booking",
+            path: PATH_URL.PROFILE_BOOKING,
             element: <MyBooking />,
           },
         ],
@@ -98,19 +98,18 @@ const routes = [
     ],
   },
   {
-    path: "/",
     element: <BlankLayout />,
     children: [
       {
-        path: "/login",
+        path: PATH_URL.LOGIN,
         element: <Login />,
       },
       {
-        path: "/register",
+        path: PATH_URL.REGISTER,
         element: <Register />,
       },
       {
-        path: "/hotel/register",
+        path: PATH_URL.HOTEL_REGISTER,
         element: <HotelRegister />,
       },
       {
@@ -118,11 +117,11 @@ const routes = [
         element: <PaymentPage />,
       },
       {
-        path: "/forgot-password",
+        path: PATH_URL.FORGOT_PASSWORD,
         element: <ForgotPassword />,
       },
       {
-        path: "/chooseHotel",
+        path: PATH_URL.CHOOSE_HOTEL,
         element: <ChooseHotel />,
       },
     ],

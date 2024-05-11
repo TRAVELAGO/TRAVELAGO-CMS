@@ -8,6 +8,8 @@ import Avatar from "../base/avatar/Avatar";
 import Menu from "../base/menu/Menu";
 import "./navbar.scss";
 
+import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
+
 const USER_PROFILE_MENU = [
   {
     name: "Profile",
@@ -75,8 +77,8 @@ function Navbar() {
           <div className="user h-full">
             <div className="relative flex items-center h-full">
               {currentHotel && (
-                <Link className="hotel" to={PATH_URL.CHOOSE_HOTEL}>
-                  <img src="/bed.png" alt="" />
+                <Link className="hotel mr-2" to={PATH_URL.CHOOSE_HOTEL}>
+                  <BedOutlinedIcon className="text-white" />
                   <span>{currentHotel.name}</span>
                 </Link>
               )}
