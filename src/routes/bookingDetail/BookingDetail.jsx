@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Map from "../../components/map/Map";
 import Slider from "../../components/slider/Slider";
 import { singlePostData, userData } from "../../lib/dummydata";
-import { fetchWishlist } from "../../redux/wishlistAction";
+import { fetchWishlist, isInWishlist } from "../../redux/wishlistAction";
 import { getBookingById } from "../../utils/api";
 import { ROLE } from "../../utils/const/common";
 import "./bookingDetail.scss";
@@ -61,13 +61,15 @@ function BookingDetail() {
       break;
   }
 
+  const isSave = isInWishlist(wishlist, booking);
+
   const handleClickSave = () => {
-    const existItem = wishlist.find((value) => value.id === room.id);
+    const existItem = wishlist.find((value) => value.id === booking?.id);
     if (existItem) {
-      const _wishlist = wishlist.filter((value) => value.id !== room.id);
+      const _wishlist = wishlist.filter((value) => value.id !== booking?.id);
       dispatch(fetchWishlist(_wishlist));
     } else {
-      const _wishlist = [...wishlist, room];
+      const _wishlist = [...wishlist, booking];
       dispatch(fetchWishlist(_wishlist));
     }
   };

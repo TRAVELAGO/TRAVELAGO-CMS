@@ -24,6 +24,6 @@ export const withLoading = (func) => async (dispatch) => {
     await func();
     dispatch(onSuccess());
   } catch (error) {
-    dispatch(onFailure(error.response.data.message));
+    dispatch(onFailure(error.response?.data.message || error.message));
   }
 };

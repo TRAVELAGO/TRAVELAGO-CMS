@@ -7,11 +7,14 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { selectHotel } from "../../redux/hotelAction";
-import "./chooseHotel.scss";
 import { createHotel } from "../../utils/api";
+import { PATH_URL } from "../../utils/const/common";
+import "./chooseHotel.scss";
+
+import CloseIcon from "@mui/icons-material/Close";
 
 const ChooseHotel = () => {
   const [showMap, setShowMap] = useState(false);
@@ -27,16 +30,16 @@ const ChooseHotel = () => {
   const [position, setPosition] = useState(null);
   const mapRef = useRef(null);
 
-  useEffect(() => {
-    if (mapRef.current) {
-      mapRef.current.addEventListener("click", handleMapClick);
-    }
-    return () => {
-      if (mapRef.current) {
-        mapRef.current.removeEventListener("click", handleMapClick);
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   if (mapRef.current) {
+  //     mapRef.current.addEventListener("click", handleMapClick);
+  //   }
+  //   return () => {
+  //     if (mapRef.current) {
+  //       mapRef.current.removeEventListener("click", handleMapClick);
+  //     }
+  //   };
+  // }, []);
 
   const modalRef = useRef(null);
   const handleChooseHotel = (i) => {
@@ -100,6 +103,12 @@ const ChooseHotel = () => {
   };
   return (
     <div className="chooseHotel">
+      <Link
+        to={PATH_URL.HOME}
+        className="absolute top-4 right-4 hover:scale-110"
+      >
+        <CloseIcon className="text-white" />
+      </Link>
       <div className="list">
         {hotelList.map((i) => (
           <div className="card" key={i.id} onClick={() => handleChooseHotel(i)}>

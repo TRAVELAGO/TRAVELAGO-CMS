@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "@/responsive.scss";
 
 * {
   padding: 0;
@@ -8,14 +9,15 @@
   box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 body {
   font-family: "Lato", sans-serif;
   overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
 }
 
 img {
@@ -28,7 +30,7 @@ input {
   transition: border 0.3s ease-out;
 
   &:focus {
-    border-color: #fece51 !important;
+    border-color: $primary !important;
   }
 
   &:focus-visible {

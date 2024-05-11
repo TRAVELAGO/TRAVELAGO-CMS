@@ -8,6 +8,7 @@ export default {
       },
     },
     colors: {
+      white: "#FFFFFF",
       primary: {
         100: "#B89146",
         200: "#FECE51",

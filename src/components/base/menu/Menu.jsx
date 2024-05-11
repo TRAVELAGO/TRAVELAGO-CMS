@@ -10,7 +10,7 @@ const Menu = ({ isOpen, onClose, children, classNames }) => {
 
   const positionClasses = "absolute top-full right-0 z-[99]";
   const layoutClasses =
-    "bg-[#FFF] min-w-60 shadow-[0px_10px_50px_rgba(0,0,0,0.05)]";
+    "bg-white min-w-60 shadow-[0px_10px_50px_rgba(0,0,0,0.05)]";
   const classes = [positionClasses, layoutClasses, classNames].join(" ");
 
   return (
