@@ -35,8 +35,8 @@ export const fetchLogin = async (dispatch, user) => {
     );
     document.cookie = `session=${JSON.stringify(res.data)}; path=/;`;
   } catch (error) {
-    dispatch(onFailure(error.response.data.message));
-    throw new Error(error.response.data.message);
+    dispatch(onFailure(error.response?.data.message));
+    throw new Error(error.response?.data.message);
   }
 };
 
@@ -46,8 +46,8 @@ export const fetchRegister = async (dispatch, user) => {
     const res = await register(user);
     dispatch(registerSuccess({ user: res.data }));
   } catch (error) {
-    dispatch(onFailure(error.response.data.message));
-    throw new Error(error.response.data.message);
+    dispatch(onFailure(error.response?.data.message));
+    throw new Error(error.response?.data.message);
   }
 };
 
@@ -57,8 +57,8 @@ export const fetchHotelRegister = async (dispatch, user) => {
     const res = await hotelRegister(user);
     dispatch(registerSuccess({ user: res.data }));
   } catch (error) {
-    dispatch(onFailure(error.response.data.message));
-    throw new Error(error.response.data.message);
+    dispatch(onFailure(error.response?.data.message));
+    throw new Error(error.response?.data.message);
   }
 };
 
@@ -68,8 +68,8 @@ export const fetchSendEmail = async (dispatch, email) => {
     await sendEmail(email);
     dispatch(sendEmailSuccess());
   } catch (error) {
-    dispatch(onFailure(error.response.data.message));
-    throw new Error(error.response.data.message);
+    dispatch(onFailure(error.response?.data.message));
+    throw new Error(error.response?.data.message);
   }
 };
 
@@ -79,8 +79,8 @@ export const fetchForgotPassword = async (dispatch, user) => {
     await resetPassword(user);
     dispatch(sendEmailSuccess());
   } catch (error) {
-    dispatch(onFailure(error.response.data.message));
-    throw new Error(error.response.data.message);
+    dispatch(onFailure(error.response?.data.message));
+    throw new Error(error.response?.data.message);
   }
 };
 

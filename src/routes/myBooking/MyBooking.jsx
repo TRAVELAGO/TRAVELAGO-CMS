@@ -24,7 +24,7 @@ function MyBooking() {
   };
 
   useEffect(() => {
-    if (!currentHotel) {
+    if (role === ROLE.HOTEL && !currentHotel) {
       navigate(PATH_URL.CHOOSE_HOTEL);
       return;
     }

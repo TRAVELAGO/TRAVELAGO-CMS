@@ -23,7 +23,7 @@ export const sendEmail = async (email) => {
     return res
 }
 export const resetPassword = async (user) => {
-    const res = await makeRequest.post("auth/checkCodeOtp", user);
+    const res = await makeRequest.post("auth/check-otp", user);
     return res
 }
 //thêm refreshtoken sau
