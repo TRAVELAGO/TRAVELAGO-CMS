@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
+import { withLoading } from "../../redux/appAction";
 import { selectHotel } from "../../redux/hotelAction";
 import { createHotel } from "../../utils/api";
 import { PATH_URL } from "../../utils/const/common";
@@ -60,25 +61,29 @@ const ChooseHotel = () => {
     };
   }, []);
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const inputs = Object.fromEntries(formData);
-    try {
-      const formData = new FormData();
-      // images.forEach((image) => {
-      //   formData.append("images", image);
-      // });
-      formData.append("name", inputs.name);
-      formData.append("address", inputs.address);
-      formData.append("latitude", position.lat);
-      formData.append("longitude", position.lng);
-      formData.append("checkInTime", "14:00:00");
-      formData.append("checkOutTime", "12:00:00");
-      await createHotel(formData);
-      setOpen(false);
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(
+      withLoading(async () => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const inputs = Object.fromEntries(formData);
+        try {
+          const formData = new FormData();
+          // images.forEach((image) => {
+          //   formData.append("images", image);
+          // });
+          formData.append("name", inputs.name);
+          formData.append("address", inputs.address);
+          formData.append("latitude", position.lat);
+          formData.append("longitude", position.lng);
+          formData.append("checkInTime", "14:00:00");
+          formData.append("checkOutTime", "12:00:00");
+          await createHotel(formData);
+          setOpen(false);
+        } catch (err) {
+          console.log(err);
+        }
+      })
+    );
   };
   const handleChooseLocation = (e) => {
     e.preventDefault();
@@ -124,7 +129,7 @@ const ChooseHotel = () => {
         <div className="container-full">
           <div className="temporary" ref={modalRef}>
             {/* <Close onClick={() => setOpen(false)} /> */}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="overflow-y-auto">
               <div className="item">
                 <label htmlFor="name">Name</label>
                 <input id="name" name="name" type="text" />

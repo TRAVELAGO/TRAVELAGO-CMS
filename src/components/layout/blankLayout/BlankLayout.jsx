@@ -5,11 +5,12 @@ import Loading from "../../base/loading/Loading";
 import "./blankLayout.scss";
 
 function BlankLayout() {
-  const { isFetching } = useSelector((state) => state.user);
+  const { isFetching: userFetching } = useSelector((state) => state.user);
+  const { isFetching: appFetching } = useSelector((state) => state.app);
 
   return (
     <div className="blank-layout">
-      {isFetching && <Loading />}
+      {(userFetching || appFetching) && <Loading />}
       <Outlet />
     </div>
   );
