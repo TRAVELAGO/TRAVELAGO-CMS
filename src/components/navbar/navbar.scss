@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@import "@/responsive.scss";
 
 .navbar-wrapper {
   height: 100px;
@@ -34,8 +34,8 @@
       border: 0;
 
       &:hover:not(:first-child) {
-        color: #fece51;
-        border-bottom: 2px solid #fece51;
+        color: $primary;
+        border-bottom: 2px solid $primary;
       }
     }
   }
@@ -83,8 +83,9 @@
       }
 
       & .login-btn {
-        background-color: white;
-        border: 1px solid #fece51;
+        color: $primary;
+        background-color: $white;
+        border: 1px solid $primary;
         height: 50px;
         padding: 5px 16px;
         border-radius: 5px;
@@ -94,7 +95,7 @@
       }
 
       & .register-btn {
-        background-color: #fece51;
+        background-color: $primary;
         height: 50px;
         padding: 5px 16px;
         border-radius: 5px;
@@ -120,8 +121,8 @@
       position: absolute;
       top: 0;
       right: -50%;
-      background-color: black;
-      color: white;
+      background-color: $black;
+      color: $white;
       height: 100vh;
       width: 50%;
       transition: all 1s ease;
@@ -201,7 +202,7 @@
           display: initial;
 
           &:hover {
-            color: #fece51;
+            color: $primary;
           }
         }
       }

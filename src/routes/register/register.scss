@@ -45,15 +45,20 @@
         }
 
         & button {
-          width: 50%;
+          width: 100%;
           padding: 10px;
-          margin: auto;
-          border: none;
-          background-color: rebeccapurple;
-          color: #fff;
+          color: rebeccapurple;
+          background-color: white;
+          border: 1px solid rebeccapurple;
           border-radius: 5px;
           font-weight: bold;
+          transition: all 300ms ease;
           cursor: pointer;
+
+          &:hover {
+            color: white;
+            background-color: rebeccapurple;
+          }
         }
       }
     }
@@ -85,11 +90,17 @@
         padding: 10px;
         margin: auto;
         border: none;
-        background-color: #fff;
         color: rebeccapurple;
+        background-color: #fff;
         border-radius: 5px;
         font-weight: bold;
+        transition: all 300ms ease;
         cursor: pointer;
+
+        &:hover {
+          color: white;
+          background-color: rebeccapurple;
+        }
       }
     }
   }

@@ -24,20 +24,20 @@ function MyBooking() {
   };
 
   useEffect(() => {
-    const getData = async () => {
-      if (role === ROLE.USER) {
-        const res = await getBooking();
-        console.log(res.data);
-        setBooking(res.data.data);
-      } else {
-        const res = await getRoomByHotelId(currentHotel.id);
-        console.log(res.data);
-        setRoom(res.data.data);
-      }
-    };
+    if (role === ROLE.HOTEL && !currentHotel) {
+      navigate(PATH_URL.CHOOSE_HOTEL);
+      return;
+    }
+
     dispatch(
       withLoading(async () => {
-        await getData();
+        if (role === ROLE.USER) {
+          const res = await getBooking();
+          setBooking(res.data.data);
+        } else {
+          const res = await getRoomByHotelId(currentHotel.id);
+          setRoom(res.data.data);
+        }
       })
     );
   }, []);
