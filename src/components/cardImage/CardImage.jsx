@@ -23,7 +23,7 @@ function CardImage({ item }) {
   const isSave = isInWishlist(wishlist, item);
 
   const getTargetUrl = () => {
-    return PATH_URL.HOTEL_DETAIL.replace(":id", item.id);
+    return PATH_URL.ROOM_DETAIL.replace(":id", item.id);
   };
 
   const getNumberOfBeds = () => {

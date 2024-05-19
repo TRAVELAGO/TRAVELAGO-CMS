@@ -70,7 +70,7 @@ function Navbar() {
         <Link to={PATH_URL.HOME}>Trang chủ</Link>
         <Link to={PATH_URL.ABOUT}>Về chúng tôi</Link>
         <Link to={PATH_URL.CONTACT}>Liên hệ chúng tôi</Link>
-        <Link to={PATH_URL.HOTEL}>Khách sạn</Link>
+        <Link to={PATH_URL.ROOM}>Khách sạn</Link>
       </div>
       <div className="right">
         {user ? (
@@ -148,7 +148,7 @@ function Navbar() {
           <Link to={PATH_URL.HOME}>Home</Link>
           <Link to={PATH_URL.ABOUT}>About</Link>
           <Link to={PATH_URL.CONTACT}>Contact</Link>
-          <Link to={PATH_URL.HOTEL}>Agents</Link>
+          <Link to={PATH_URL.ROOM}>Agents</Link>
           {!user && (
             <>
               <Link to={PATH_URL.HOTEL_REGISTER}>Become a Hosts</Link>
