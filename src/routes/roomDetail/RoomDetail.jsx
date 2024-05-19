@@ -17,9 +17,9 @@ import {
 } from "../../redux/wishlistAction";
 import { createBookingOnline } from "../../utils/api";
 import { MAX_RECENT_LIST, PATH_URL, ROLE } from "../../utils/const/common";
-import "./hotelDetail.scss";
+import "./roomDetail.scss";
 
-function HotelDetail() {
+function RoomDetail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { wishlist, recentList } = useSelector((state) => state.wishlist);
@@ -76,7 +76,7 @@ function HotelDetail() {
   }, [room]);
 
   return (
-    <div className="hotelDetail">
+    <div className="roomDetail">
       <div className="details">
         <div className="wrapper">
           <Slider images={room.images} />
@@ -219,4 +219,4 @@ function HotelDetail() {
   );
 }
 
-export default HotelDetail;
+export default RoomDetail;

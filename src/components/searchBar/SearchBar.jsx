@@ -4,11 +4,14 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 import { PATH_URL, getQueryParams } from "../../utils/const/common";
 import "./searchBar.scss";
 
-const types = ["Mua", "Thuê"];
+const Types = {
+  Room: "Room",
+  Hotel: "Hotel",
+};
 
 function SearchBar() {
   const navigate = useNavigate();
-  const [queryType, setQueryType] = useState("buy");
+  const [queryType, setQueryType] = useState(Types.Room);
   const [query, setQuery] = useState({
     name: "",
     priceFrom: 0,
@@ -27,12 +30,21 @@ function SearchBar() {
     });
 
     const queryParams = getQueryParams(query);
-    navigate({
-      pathname: PATH_URL.HOTEL,
-      search: createSearchParams({
-        ...queryParams,
-      }).toString(),
-    });
+    if (queryType === Types.Hotel)
+      navigate({
+        pathname: PATH_URL.HOTEL,
+        search: createSearchParams({
+          ...queryParams,
+        }).toString(),
+      });
+    else {
+      navigate({
+        pathname: PATH_URL.ROOM,
+        search: createSearchParams({
+          ...queryParams,
+        }).toString(),
+      });
+    }
   };
 
   const switchType = (val) => {
@@ -42,7 +54,7 @@ function SearchBar() {
   return (
     <div className="searchBar">
       <div className="type">
-        {types.map((type) => (
+        {Object.values(Types).map((type) => (
           <button
             key={type}
             onClick={() => switchType(type)}

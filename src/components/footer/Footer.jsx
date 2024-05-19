@@ -71,22 +71,22 @@ function Footer() {
     },
     {
       text: "TikTok",
-      img: "/tiktok.svg",
+      img: "/icons/tiktok.svg",
       link: "",
     },
     {
       text: "Facebook",
-      img: "/facebook.svg",
+      img: "/icons/facebook.svg",
       link: "",
     },
     {
       text: "Instagram",
-      img: "/instagram.svg",
+      img: "/icons/instagram.svg",
       link: "",
     },
     {
       text: "Youtube",
-      img: "/youtube.svg",
+      img: "/icons/youtube.svg",
       link: "",
     },
   ];

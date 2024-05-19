@@ -37,6 +37,18 @@ export const findHotelById = async (id) => {
     const res = await makeRequest.get("hotels/" + id);
     return res
 }
+export const searchHotel = async (filters) => {
+    const res = await makeRequest.get("hotels/search", {
+        params: {
+          ...filters,
+        }
+    });
+    return res
+}
+export const searchHotelByCity = async (cityId) => {
+    const res = await makeRequest.get("hotels/search/" + cityId);
+    return res
+}
 export const createHotel = async (hotel) => {
     const res = await makeRequest.post("hotels", hotel);
     return res
@@ -108,7 +120,6 @@ export const deleteRoomType = async (id) => {
 
 
 // booking
-
 export const getBookingById = async (id) => {
     const res = await makeRequest.get("bookings/" + id);
     return res

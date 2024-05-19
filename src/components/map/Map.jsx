@@ -23,7 +23,7 @@ function Map({ items }) {
             <div className="popupContainer">
               <img src={item.img} alt="" />
               <div className="textContainer">
-                <Link to={PATH_URL.HOTEL_DETAIL.replace(":id", item.id)}>
+                <Link to={PATH_URL.ROOM_DETAIL.replace(":id", item.id)}>
                   {item.title}
                 </Link>
                 <span>{item.bedroom} bedroom</span>
@@ -35,7 +35,7 @@ function Map({ items }) {
             <div className="popupContainer">
               <img src={item.img} alt="" />
               <div className="textContainer">
-                <Link to={PATH_URL.HOTEL_DETAIL.replace(":id", item.id)}>
+                <Link to={PATH_URL.ROOM_DETAIL.replace(":id", item.id)}>
                   {item.title}
                 </Link>
                 <span>{item.bedroom} bedroom</span>
