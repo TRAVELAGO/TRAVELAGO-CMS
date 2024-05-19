@@ -1,20 +1,20 @@
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createRoom } from "../../utils/api";
-import { makeRequest } from "../../utils/axios";
-import { PATH_URL } from "../../utils/const/common";
-import "./hotelCreate.scss";
 
-function HotelCreate() {
+import { withLoading } from "../../redux/appAction";
+import { createRoom } from "../../utils/api";
+import { PATH_URL } from "../../utils/const/common";
+import "./roomCreate.scss";
+
+function RoomCreate() {
   const navigate = useNavigate();
-  const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const { currentHotel } = useSelector((state) => state.hotel);
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
-  const [imagesFile, setImagesFile] = useState([]);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -23,10 +23,6 @@ function HotelCreate() {
     const inputs = Object.fromEntries(formData);
 
     try {
-      const accessToken = currentUser.accessToken;
-      makeRequest.defaults.headers.common = {
-        Authorization: `bearer ${accessToken}`,
-      };
       const formData = new FormData();
       images.forEach((image) => {
         formData.append("images", image);
@@ -38,10 +34,14 @@ function HotelCreate() {
       formData.append("currentAvailable", parseInt(inputs.currentAvailable)); //bỏ
       formData.append("total", parseInt(inputs.total));
       formData.append("roomTypeId", 1);
-      const res = await createRoom(currentHotel.id, formData);
-      navigate(PATH_URL.HOTEL_DETAIL.replace(":id", res.data.id));
+
+      dispatch(
+        withLoading(async () => {
+          const res = await createRoom(currentHotel.id, formData);
+          navigate(PATH_URL.ROOM_DETAIL.replace(":id", res.data.id));
+        })
+      );
     } catch (err) {
-      console.log(err);
       setError(error);
     }
   };
@@ -50,12 +50,10 @@ function HotelCreate() {
     let file = e.target.files[0];
     console.log(file);
     setImages((prev) => [...prev, file]);
-    console.log(formData);
-    setImagesFile((prev) => [...prev, formData]);
   };
 
   return (
-    <div className="hotelCreate">
+    <div className="roomCreate">
       <div className="formContainer">
         <h1>Add New Room</h1>
         <div className="wrapper">
@@ -128,4 +126,4 @@ function HotelCreate() {
   );
 }
 
-export default HotelCreate;
+export default RoomCreate;

@@ -60,7 +60,7 @@ function FooterTemplate1() {
               <Link to={PATH_URL.CONTACT}>Contact</Link>
             </li>
             <li>
-              <Link to={PATH_URL.HOTEL}>Agents</Link>
+              <Link to={PATH_URL.ROOM}>Agents</Link>
             </li>
           </ul>
         </div>
@@ -77,7 +77,7 @@ function FooterTemplate1() {
               <Link to={PATH_URL.CONTACT}>Contact</Link>
             </li>
             <li>
-              <Link to={PATH_URL.HOTEL}>Agents</Link>
+              <Link to={PATH_URL.ROOM}>Agents</Link>
             </li>
           </ul>
         </div>

@@ -27,14 +27,14 @@ function Card({ item }) {
   return (
     <div className="card">
       <Link
-        to={PATH_URL.HOTEL_DETAIL.replace(":id", item.id)}
+        to={PATH_URL.ROOM_DETAIL.replace(":id", item.id)}
         className="imageContainer"
       >
         {item.images?.length && <img src={item.images[0]?.url} alt="" />}
       </Link>
       <div className="textContainer">
         <h2 className="title">
-          <Link to={PATH_URL.HOTEL_DETAIL.replace(":id", item.id)}>
+          <Link to={PATH_URL.ROOM_DETAIL.replace(":id", item.id)}>
             {item.name}
           </Link>
         </h2>

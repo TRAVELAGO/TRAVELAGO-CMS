@@ -12,8 +12,6 @@ import BookingDetail from "./routes/bookingDetail/BookingDetail";
 import ChooseHotel from "./routes/chooseHotel/ChooseHotel";
 import ForgotPassword from "./routes/forgotPassword/ForgotPassword";
 import HomePage from "./routes/homePage/homePage";
-import HotelCreate from "./routes/hotelCreate/HotelCreate";
-import HotelDetail from "./routes/hotelDetail/HotelDetail";
 import HotelList from "./routes/hotelList/HotelList";
 import HotelRegister from "./routes/hotelRegister/HotelRegister";
 import Login from "./routes/login/Login";
@@ -22,6 +20,9 @@ import PaymentPage from "./routes/paymentPage/PaymentPage";
 import PrivacyPolicy from "./routes/privacyPolicy/PrivacyPolicy";
 import Profile from "./routes/profile/Profile";
 import Register from "./routes/register/Register";
+import RoomCreate from "./routes/roomCreate/RoomCreate";
+import RoomDetail from "./routes/roomDetail/RoomDetail";
+import RoomList from "./routes/roomList/RoomList";
 import TermsAndConditions from "./routes/termsAndConditions/TermsAndConditons";
 import Wishlist from "./routes/wishlist/Wishlist";
 import { makeRequest } from "./utils/axios";
@@ -62,14 +63,23 @@ const routes = [
             path: PATH_URL.HOTEL,
             element: <HotelList />,
           },
+        ],
+      },
+      {
+        path: PATH_URL.ROOM,
+        children: [
           {
-            path: PATH_URL.HOTEL_DETAIL,
-            element: <HotelDetail />,
+            path: PATH_URL.ROOM,
+            element: <RoomList />,
+          },
+          {
+            path: PATH_URL.ROOM_DETAIL,
+            element: <RoomDetail />,
             loader: singlePageLoader,
           },
           {
-            path: PATH_URL.HOTEL_NEW,
-            element: <HotelCreate />,
+            path: PATH_URL.ROOM_NEW,
+            element: <RoomCreate />,
           },
         ],
       },

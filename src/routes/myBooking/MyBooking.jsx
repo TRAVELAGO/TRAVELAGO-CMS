@@ -20,7 +20,7 @@ function MyBooking() {
   const role = currentUser.role;
 
   const handleCreateRoom = async () => {
-    navigate(PATH_URL.HOTEL_NEW);
+    navigate(PATH_URL.ROOM_NEW);
   };
 
   useEffect(() => {

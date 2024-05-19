@@ -39,23 +39,17 @@
     }
 
     input {
-      width: 206px;
-      border-right: 1px solid #999;
+      width: 100%;
+      flex: 2;
       padding: 0px 10px;
 
-      @include lg {
-        padding: 0px 5px;
-
-        &:nth-child(2),
-        &:nth-child(3) {
-          width: 140px;
-        }
+      &:nth-child(2),
+      &:nth-child(3) {
+        flex: 1;
       }
+
       @include md {
-        &:nth-child(2),
-        &:nth-child(3) {
-          width: 200px;
-        }
+        padding: 0px 5px;
       }
 
       @include sm {
@@ -72,7 +66,7 @@
 
     button {
       flex: 1;
-      background-color: #fece51;
+      background-color: $primary;
       border: none;
       padding: 10px;
       cursor: pointer;

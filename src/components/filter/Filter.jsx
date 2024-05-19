@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import "./filter.scss";
 
-function Filter({ filters, onSubmit }) {
+function Filter({ filters, roomTypes, onSubmit }) {
   const formik = useFormik({
     initialValues: {
       ...filters,
@@ -18,36 +18,52 @@ function Filter({ filters, onSubmit }) {
       </h1>
       <div className="top">
         <div className="item">
-          <label htmlFor="city">Location</label>
+          {/* <label htmlFor="name">Type any here</label> */}
           <input
-            id="city"
+            id="name"
             name="name"
             type="text"
-            placeholder="City Location"
+            placeholder="Type any here"
             value={formik.values.name}
             onChange={formik.handleChange}
           />
         </div>
       </div>
-      <div className="bottom">
+      <div className="middle">
         <div className="item">
           <label htmlFor="type">Type</label>
-          <select name="type" id="type">
-            <option value="">any</option>
-            <option value="buy">Buy</option>
-            <option value="rent">Rent</option>
+          <select
+            id="type"
+            name="roomTypeId"
+            value={formik.values.roomTypeId}
+            onChange={formik.handleChange}
+          >
+            <option value="">Any</option>
+            {roomTypes.map((value, index) => (
+              <option value={value.id} key={index}>
+                {value.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="item">
-          <label htmlFor="property">Property</label>
-          <select name="property" id="property">
-            <option value="">any</option>
-            <option value="apartment">Apartment</option>
-            <option value="house">House</option>
-            <option value="condo">Condo</option>
-            <option value="land">Land</option>
+          <label htmlFor="rate">Rate</label>
+          <select
+            id="rate"
+            name="rate"
+            value={formik.values.rate}
+            onChange={formik.handleChange}
+          >
+            <option value="">Any</option>
+            <option value="1">1*</option>
+            <option value="2">2*</option>
+            <option value="3">3*</option>
+            <option value="4">4*</option>
+            <option value="5">5*</option>
           </select>
         </div>
+      </div>
+      <div className="bottom">
         <div className="item">
           <label htmlFor="minPrice">Min Price</label>
           <input
@@ -67,6 +83,28 @@ function Filter({ filters, onSubmit }) {
             type="number"
             placeholder="any"
             value={formik.values.priceTo}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className="item">
+          <label htmlFor="minArea">Min Area</label>
+          <input
+            id="minArea"
+            name="areaFrom"
+            type="number"
+            placeholder="any"
+            value={formik.values.areaFrom}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className="item">
+          <label htmlFor="maxArea">Max Area</label>
+          <input
+            id="maxArea"
+            name="areaTo"
+            type="number"
+            placeholder="any"
+            value={formik.values.areaTo}
             onChange={formik.handleChange}
           />
         </div>

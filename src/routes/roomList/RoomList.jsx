@@ -7,24 +7,24 @@ import Filter from "../../components/filter/Filter";
 import Map from "../../components/map/Map";
 import { listData } from "../../lib/dummydata";
 import { withLoading } from "../../redux/appAction";
-import { getAllRoomType, searchHotel } from "../../utils/api";
+import { getAllRoomType, getRoomByFilter } from "../../utils/api";
 import { getQueryParams } from "../../utils/const/common";
-import "./hotelList.scss";
+import "./roomList.scss";
 
 const DEFAULT_ORDER = "id,ASC";
 const DEFAULT_PAGE_NUMBER = 1;
 const DEFAULT_PAGE_SIZE = 20;
 
-function HotelList() {
+function RoomList() {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [hotel, setHotel] = useState([]);
+  const [room, setRoom] = useState([]);
   const [roomTypes, setRoomTypes] = useState([]);
 
   const [filters, setFilters] = useState({
     name: "",
-    guestNumber: "1",
+    guestNumber: "",
     roomTypeId: "",
     priceFrom: "",
     priceTo: "",
@@ -32,11 +32,6 @@ function HotelList() {
     areaTo: "",
     rate: "",
     roomAmenities: "",
-    dateFrom: "2024-01-01",
-    dateTo: "2025-01-01",
-    longitude: "105.7373997",
-    latitude: "21.0054762",
-    maxDistance: "40",
     order: DEFAULT_ORDER,
     pageNumber: DEFAULT_PAGE_NUMBER,
     pageSize: DEFAULT_PAGE_SIZE,
@@ -46,17 +41,17 @@ function HotelList() {
     setFilters(data);
     const query = getQueryParams(data);
     setSearchParams(query);
-    fetchHotel(query);
+    fetchRoom(query);
   };
 
-  const fetchHotel = (filters) => {
+  const fetchRoom = (filters) => {
     dispatch(
       withLoading(async () => {
-        const [hotel, roomTypes] = await Promise.all([
-          searchHotel(filters),
+        const [room, roomTypes] = await Promise.all([
+          getRoomByFilter(filters),
           getAllRoomType(),
         ]);
-        setHotel(hotel.data.data);
+        setRoom(room.data.data);
         setRoomTypes(roomTypes.data);
       })
     );
@@ -71,11 +66,11 @@ function HotelList() {
     });
 
     const query = getQueryParams(filters);
-    fetchHotel(query);
+    fetchRoom(query);
   }, [filters, searchParams]);
 
   return (
-    <div className="hotelList">
+    <div className="roomList">
       <div className="listContainer">
         <div className="wrapper">
           <Filter
@@ -83,7 +78,7 @@ function HotelList() {
             roomTypes={roomTypes}
             onSubmit={handleSubmit}
           />
-          {hotel?.map((item) => (
+          {room?.map((item) => (
             <Card2 key={item.id} item={item} />
           ))}
         </div>
@@ -95,4 +90,4 @@ function HotelList() {
   );
 }
 
-export default HotelList;
+export default RoomList;

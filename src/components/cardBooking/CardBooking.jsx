@@ -19,7 +19,7 @@ function CardBooking({ item, setBooking }) {
   return (
     <div className="card">
       <Link
-        to={PATH_URL.HOTEL_DETAIL.replace(":id", item.room.id)}
+        to={PATH_URL.ROOM_DETAIL.replace(":id", item.room.id)}
         className="imageContainer"
       >
         <img src={item.room.images[0].url} alt="" />
@@ -27,7 +27,7 @@ function CardBooking({ item, setBooking }) {
       <div className="textContainer">
         <h2 className="title">
           <Link
-            to={PATH_URL.HOTEL_DETAIL.replace(":id", item.room.id)}
+            to={PATH_URL.ROOM_DETAIL.replace(":id", item.room.id)}
           >{`HOTEL ${item.room.hotel.name}`}</Link>
         </h2>
         <p className="address">
