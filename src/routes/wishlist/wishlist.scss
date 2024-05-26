@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@import "@/responsive.scss";
 
 .wishlist {
   display: flex;
@@ -37,7 +37,7 @@
 
         & button {
           padding: 12px 24px;
-          background-color: #fece51;
+          background-color: $primary;
           cursor: pointer;
           border: none;
         }

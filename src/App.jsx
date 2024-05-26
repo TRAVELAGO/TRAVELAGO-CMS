@@ -81,6 +81,10 @@ const routes = [
             path: PATH_URL.ROOM_NEW,
             element: <RoomCreate />,
           },
+          {
+            path: PATH_URL.ROOM_UPDATE,
+            element: <RoomCreate />,
+          },
         ],
       },
       {

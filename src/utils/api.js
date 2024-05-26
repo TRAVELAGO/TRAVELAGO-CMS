@@ -40,7 +40,7 @@ export const findHotelById = async (id) => {
 export const searchHotel = async (filters) => {
     const res = await makeRequest.get("hotels/search", {
         params: {
-          ...filters,
+            ...filters,
         }
     });
     return res
@@ -70,7 +70,7 @@ export const getRoomById = async (id) => {
 export const getRoomByFilter = async (filters) => {
     const res = await makeRequest.get("rooms", {
         params: {
-          ...filters,
+            ...filters,
         }
     });
     return res
@@ -152,5 +152,33 @@ export const updateBookingCancel = async (id) => {
 //payment
 export const createPayment = async (data) => {
     const res = await makeRequest.post("payments", data);
+    return res
+}
+
+
+
+//feedback
+export const createFeedback = async (data, id) => {
+    const res = await makeRequest.post("rooms/" + id + "/feedbacks", data);
+    return res
+}
+export const getFeedback = async (id) => {
+    const res = await makeRequest.get("rooms/" + id + "/feedbacks");
+    return res
+}
+export const getHotelFeedback = async (id) => {
+    const res = await makeRequest.get("hotels/" + id + "/feedbacks");
+    return res
+}
+export const updateFeedback = async (data, id) => {
+    const res = await makeRequest.patch("feedbacks/" + id, data);
+    return res
+}
+export const reportFeedback = async (id) => {
+    const res = await makeRequest.patch("feedbacks/" + id);
+    return res
+}
+export const deleteFeedback = async (id) => {
+    const res = await makeRequest.delete("feedbacks/" + id);
     return res
 }

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { fetchWishlist, isInWishlist } from "../../redux/wishlistAction";
-import { PATH_URL } from "../../utils/const/common";
+import { PATH_URL, formatPrice } from "../../utils/const/common";
 
 import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
@@ -63,9 +63,9 @@ function Card2({ item }) {
             <Link to={getTargetUrl()}>{item.name}</Link>
           </h2>
           {item.description && (
-            <p className="max-w-[330px] text-dark-100 mb-2 md:mb-4">
-              {item.description}
-            </p>
+            <div className="max-w-[330px] text-dark-100 mb-2 md:mb-4 line-clamp-2">
+              <p dangerouslySetInnerHTML={{ __html: item.description }}></p>
+            </div>
           )}
           <p className="inline-flex items-center text-dark-100 mb-2 md:mb-4">
             <PlaceOutlinedIcon className="text-primary-100" />
@@ -85,7 +85,9 @@ function Card2({ item }) {
         <div className="shrink-0 text-left md:text-center md:mx-5 xl:mr-0">
           <div className="flex md:flex-col items-center space-x-6 my-2.5 md:space-x-0 md:my-0">
             <p className="text-sm font-bold leading-6">
-              <span className="text-primary-100">${item.price}</span>
+              <span className="text-primary-100">
+                {formatPrice(item.price)} VND
+              </span>
               /Night
             </p>
             <p className="inline-flex items-center leading-6">

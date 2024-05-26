@@ -4,7 +4,6 @@ import CardBooking from "../cardBooking/CardBooking";
 
 function ListBooking({ data, setBooking }) {
   if (!data) return <></>;
-
   return (
     <div className="list">
       {data
