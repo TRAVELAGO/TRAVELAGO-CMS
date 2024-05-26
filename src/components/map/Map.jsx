@@ -2,7 +2,7 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, Marker, Popup, TileLayer, Tooltip } from "react-leaflet";
 import { Link } from "react-router-dom";
 
-import { PATH_URL } from "../../utils/const/common";
+import { PATH_URL, formatPrice } from "../../utils/const/common";
 import "./map.scss";
 
 function Map({ items }) {
@@ -27,7 +27,7 @@ function Map({ items }) {
                   {item.title}
                 </Link>
                 <span>{item.bedroom} bedroom</span>
-                <b>$ {item.price}</b>
+                <b>{formatPrice(item.price)} VND</b>
               </div>
             </div>
           </Popup>
@@ -39,7 +39,7 @@ function Map({ items }) {
                   {item.title}
                 </Link>
                 <span>{item.bedroom} bedroom</span>
-                <b>$ {item.price}</b>:
+                <b>{formatPrice(item.price)} VND</b>:
               </div>
             </div>
           </Tooltip>

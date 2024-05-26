@@ -41,7 +41,7 @@ function Filter({ filters, roomTypes, onSubmit }) {
             <option value="">Any</option>
             {roomTypes.map((value, index) => (
               <option value={value.id} key={index}>
-                {value.name}
+                {value.bedType1}
               </option>
             ))}
           </select>

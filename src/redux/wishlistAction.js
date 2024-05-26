@@ -12,6 +12,7 @@ export const fetchWishlist = (wishlist) => async (dispatch) => {
 };
 
 export const isInWishlist = (wishlist, item) => {
+  if (!item) return false
   const existItem = wishlist.find((value) => value.id === item.id);
   return !!existItem;
 };

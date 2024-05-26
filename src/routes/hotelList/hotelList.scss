@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@import "@/responsive.scss";
 
 .hotelList {
   display: flex;
@@ -23,7 +23,7 @@
     z-index: 1;
     flex: 2;
     height: 100%;
-    background-color: #fcf5f3;
+    background-color: $primary-bg;
 
     @include md {
       display: none;

@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
-import "./cardBooking.scss";
 import { format } from "date-fns";
+import { Link, useNavigate } from "react-router-dom";
 import { updateBookingCancel } from "../../utils/api";
-import { PATH_URL } from "../../utils/const/common";
+import { PATH_URL, formatPrice } from "../../utils/const/common";
+import "./cardBooking.scss";
 
 function CardBooking({ item, setBooking }) {
   console.log(item);
@@ -34,7 +34,7 @@ function CardBooking({ item, setBooking }) {
           <img src="/pin.png" alt="" />
           <span>{`${item.room.hotel.address}`}</span>
         </p>
-        <p className="price">{item.room.price} vnd</p>
+        <p className="price">{formatPrice(item.room.price)} VND</p>
         <div className="bottom">
           <div className="features">
             <div className="feature">

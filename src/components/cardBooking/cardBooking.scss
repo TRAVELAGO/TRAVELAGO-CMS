@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@import "@/responsive.scss";
 
 .card {
   display: flex;
@@ -99,7 +99,7 @@
         padding: 5px;
       }
       .update {
-        background-color: #fece51;
+        background-color: $primary;
         &:hover {
           background-color: #c19c3e;
         }

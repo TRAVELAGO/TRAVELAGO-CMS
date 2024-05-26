@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { fetchWishlist, isInWishlist } from "../../redux/wishlistAction";
-import { PATH_URL } from "../../utils/const/common";
+import { PATH_URL, formatPrice } from "../../utils/const/common";
 import "./card.scss";
 
 function Card({ item }) {
@@ -42,7 +42,7 @@ function Card({ item }) {
           <img src="/pin.png" alt="" />
           <span>{item.hotel?.address}</span>
         </p>
-        <p className="price">$ {item.price}</p>
+        <p className="price">{formatPrice(item.price)} VND</p>
         <div className="bottom">
           <div className="features">
             <div className="feature">

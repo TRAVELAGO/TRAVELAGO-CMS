@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { fetchWishlist, isInWishlist } from "../../redux/wishlistAction";
-import { PATH_URL } from "../../utils/const/common";
+import { PATH_URL, formatPrice } from "../../utils/const/common";
 
+import { Transition } from "@headlessui/react";
 import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
@@ -11,7 +12,6 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
 import TurnedInNotOutlinedIcon from "@mui/icons-material/TurnedInNotOutlined";
 import TurnedInOutlinedIcon from "@mui/icons-material/TurnedInOutlined";
-import { Transition } from "@headlessui/react";
 import { useState } from "react";
 
 function CardImage({ item }) {
@@ -92,11 +92,13 @@ function CardImage({ item }) {
               </span>
             </Link>
             <span className="shrink-0 text-primary-100 text-sm font-bold leading-6">
-              ${item.price}/Night
+              {formatPrice(item.price)} VND/Night
             </span>
           </h2>
           {item.description && (
-            <p className="text-dark-100 mb-4">{item.description}</p>
+            <div className="text-dark-100 mb-4 line-clamp-3">
+              <p dangerouslySetInnerHTML={{ __html: item.description }}></p>
+            </div>
           )}
           <p className="inline-flex items-center text-dark-100 mb-4">
             <PlaceOutlinedIcon className="text-primary-100" />

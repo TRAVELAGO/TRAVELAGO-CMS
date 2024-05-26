@@ -5,7 +5,7 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 
 import Map from "../../components/map/Map";
 import Slider from "../../components/slider/Slider";
@@ -16,7 +16,12 @@ import {
   isInWishlist,
 } from "../../redux/wishlistAction";
 import { createBookingOnline } from "../../utils/api";
-import { MAX_RECENT_LIST, PATH_URL, ROLE } from "../../utils/const/common";
+import {
+  MAX_RECENT_LIST,
+  PATH_URL,
+  ROLE,
+  formatPrice,
+} from "../../utils/const/common";
 import "./roomDetail.scss";
 
 function RoomDetail() {
@@ -24,11 +29,13 @@ function RoomDetail() {
   const dispatch = useDispatch();
   const { wishlist, recentList } = useSelector((state) => state.wishlist);
   const { currentUser, error } = useSelector((state) => state.user);
+  const { currentHotel } = useSelector((state) => state.hotel);
   const role = currentUser.role;
   const room = useLoaderData();
-  console.log(room);
+  console.log(room.hotel);
   const isSave = isInWishlist(wishlist, room);
   const [openDate, setOpenDate] = useState(false);
+  const [edit, setEdit] = useState(false);
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -45,7 +52,8 @@ function RoomDetail() {
         roomId: room.id,
       };
       const res = await createBookingOnline(newBooking);
-      console.log(res.data.booking.id);
+      console.log(res.data);
+      console.log(res.data.id);
       const paymentUrl = res.data.paymentUrl;
       if (paymentUrl) {
         window.open(paymentUrl, "_blank"); // Mở một cửa sổ mới với URL được trả về từ API
@@ -88,7 +96,7 @@ function RoomDetail() {
                   <img src="/pin.png" alt="" />
                   <span>{room.hotel.address}</span>
                 </div>
-                <div className="price">$ {room.price}</div>
+                <div className="price">{formatPrice(room.price)} VND</div>
               </div>
               <div className="user">
                 <img src={userData.img} alt="" />
@@ -102,6 +110,11 @@ function RoomDetail() {
                 __html: DOMPurify.sanitize(room.description),
               }}
             ></div>
+            {room.hotel.id === currentHotel?.id && (
+              <Link to={"/rooms/update/" + room.id} className="edit-btn">
+                Edit
+              </Link>
+            )}
             {role === ROLE.USER && (
               <div className="booking">
                 <h3>Chọn ngày đặt phòng:</h3>
