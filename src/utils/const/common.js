@@ -15,13 +15,14 @@ export const PATH_URL = {
   PROFILE_UPDATE: "/profile/update",
   PROFILE_BOOKING: "/profile/booking",
   CHOOSE_HOTEL: "/choose-hotel",
-  HOTEL: "/hotels",
+  HOTEL: "/hotel",
   WISHLIST: "/wishlist",
   ABOUT: "/about",
   CONTACT: "/contact",
   ROOM: "/rooms",
   ROOM_NEW: "/rooms/new",
   ROOM_DETAIL: "/rooms/:id",
+  ROOM_UPDATE: "/rooms/update/:id",
   BOOKING_DETAIL: "/booking/:id",
   TERMS_AND_CONDITIONS: "/terms-and-conditions",
   PRIVACY_POLICY: "/privacy-policy",
@@ -40,3 +41,8 @@ export const getQueryParams = (queryParams) => {
 
   return query;
 };
+
+export const formatPrice = (price) => {
+  if (!price || isNaN(Number(price))) return 0;
+  return Number(price).toLocaleString();
+}

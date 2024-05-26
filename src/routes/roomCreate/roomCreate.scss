@@ -1,3 +1,5 @@
+@import "@/responsive.scss";
+
 .roomCreate {
   height: 100%;
   display: flex;
@@ -15,13 +17,28 @@
         flex-wrap: wrap;
         gap: 20px;
 
+        & .chooseImage {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 20px;
+          transition: color ease 200ms;
+          cursor: pointer;
+
+          &:hover {
+            color: $primary;
+          }
+        }
+
         & .item {
           width: 30%;
           display: flex;
           flex-direction: column;
+          justify-content: space-between;
           gap: 5px;
 
           & label {
+            font-size: 18px;
           }
 
           & input {
@@ -31,30 +48,36 @@
           }
 
           & select {
-            padding: 19px;
+            padding: 20px;
           }
 
           &.description {
+            position: relative;
             width: 100%;
-            height: 320px;
+            height: 100%;
+            justify-content: center;
 
             & .quill > .ql-container > .ql-editor {
-              height: 200px;
+              min-height: 200px;
               font-size: 16px;
             }
           }
         }
 
         & .sendButton {
-          height: 30px;
-          width: 30%;
+          width: 100%;
           border-radius: 5px;
           border: none;
-          background-color: teal;
+          background-color: $primary;
           color: white;
           font-weight: bold;
-          cursor: pointer;
           text-align: center;
+          padding: 12px 24px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $primary-hover;
+          }
         }
       }
     }
@@ -62,18 +85,41 @@
 
   & .sideContainer {
     flex: 2;
-    background-color: #fcf5f3;
+    background-color: $primary-bg;
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
 
-    & img {
+    .image {
+      position: relative;
       width: 50%;
       height: 180px;
-      object-fit: cover;
-      border-radius: 5px;
+      .hover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff83;
+
+        button {
+          background-color: red;
+          color: #fff;
+          padding: 5px 10px;
+          border-radius: 5px;
+        }
+      }
+      & img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+      }
     }
   }
 }

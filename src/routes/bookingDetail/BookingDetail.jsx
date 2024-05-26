@@ -10,7 +10,7 @@ import Slider from "../../components/slider/Slider";
 import { singlePostData, userData } from "../../lib/dummydata";
 import { fetchWishlist, isInWishlist } from "../../redux/wishlistAction";
 import { getBookingById } from "../../utils/api";
-import { ROLE } from "../../utils/const/common";
+import { ROLE, formatPrice } from "../../utils/const/common";
 import "./bookingDetail.scss";
 
 function BookingDetail() {
@@ -30,8 +30,6 @@ function BookingDetail() {
     },
   ]);
   const [booking, setBooking] = useState();
-  const paymentUrl =
-    "https://sandbox.vnpayment.vn/paymentv2/Transaction/PaymentMethod.html?token=7877504f8d8747109d9eb0765d7647b0";
   const bookingId = location.pathname.split("/")[2];
   console.log(bookingId);
   useEffect(() => {
@@ -46,7 +44,8 @@ function BookingDetail() {
     getData();
   }, [bookingId]);
   let status = 0;
-  console.log(booking?.status);
+  console.log(booking);
+
   switch (booking?.status) {
     case 0:
       status = "Chưa thanh toán";
@@ -75,7 +74,7 @@ function BookingDetail() {
   };
 
   const handlePayment = () => {
-    window.open(paymentUrl, "_blank");
+    window.open(booking?.paymentUrl, "_blank");
   };
 
   return (
@@ -97,9 +96,11 @@ function BookingDetail() {
                     {booking?.room.roomType.bedType1}
                   </span>
                 </div>
-                <div className="price">
-                  Tổng thanh toán: {booking?.room.price} vnd
-                </div>
+                {booking?.room.price && (
+                  <div className="price">
+                    Tổng thanh toán: {formatPrice(booking?.room.price)} VND
+                  </div>
+                )}
                 <div className="price">Trạng thái: {status}</div>
               </div>
               <div className="user">
